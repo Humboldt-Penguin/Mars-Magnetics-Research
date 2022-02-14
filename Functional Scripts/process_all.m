@@ -6,7 +6,7 @@ Running some trials shows parallel processing adds a ~%30 improvement
 in processing time.
 %}
 
-clc
+% clc
 clear all
 close all
 
@@ -15,19 +15,14 @@ addpath("C:\Users\Zain\Documents\_Research\Mars\Slepian Libraries\slepian_golf-m
 addpath("C:\Users\Zain\Documents\_Research\Mars\Slepian Libraries\slepian_hotel-master");
 addpath("C:\Users\Zain\Documents\_Research\Mars\Slepian Libraries\slepian_hotel-master\MGS");
 
-myFolder = 'C:\Users\Zain\Documents\_Research\Mars\MAVEN_Tracks\2015\test\';
+myFolder = 'C:\Users\Zain\Documents\_Research\Mars\MAVEN_Tracks\2015\01\';
 addpath(myFolder);
 
 filePattern = fullfile(myFolder, '*.sts');
 jpegFiles = dir(filePattern);
 
-% h = 200;
-% downsample = 1;
-% clon = 137;
-% clat = -5;
-% Th = 50;
-
-h = 1000000;
+% Eridania basin:
+h = 200;
 downsample = 1;
 clon = 137;
 clat = -5;
@@ -35,10 +30,17 @@ Th = 50;
 
 % parpool(2) % run parpool in terminal and with some test files first to "warm up"
 
+len = length(jpegFiles);
+fprintf(1, 'Now reading %s\n', myFolder);
+
 tic
 % for k = 1:length(jpegFiles)
-parfor k = 1:length(jpegFiles)
+parfor k = 1:len
     baseFileName = jpegFiles(k).name;
+
+%     fprintf(1, 'Now reading %s\n\n', baseFileName);
+    fprintf(1, 'Progress: %u/%u \n', k, len);
+    
     writemagshape_v2(baseFileName,h,downsample,clon,clat,Th);
 end
 toc
