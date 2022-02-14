@@ -4,3 +4,5 @@ Some changes are necessary to make [the original loadpds.m](https://github.com/c
 * change line 65 from `if ~strcmp(cmdline{6},'-pc')` to `if ~strcmp(cmdline{7},'-pc')`
 * change line 79 from `for i=5:407%i=1:407` to `for i=1:141`
   * this is optional, but it prevents ~350 lines of data from being skipped
+
+The loadpds.m in this repository has those edits and comments explaining how stuff works.
