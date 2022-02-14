@@ -14,11 +14,11 @@ v2:
 %}
 
 % displays datapoints before/after filters, but this doesn't work with parallel processing
-verbose = true; 
+verbose = false; 
 
 %% Load data and downsample
 
-fprintf(1, 'Now reading %s\n\n', baseFileName);
+% fprintf(1, 'Now reading %s\n\n', baseFileName);
 
 [posX,posY,posZ,magX,magY,magZ,~,~,~,date] = loadpds(baseFileName);
 
@@ -62,6 +62,11 @@ end
 % and do a spherical cut around a cap specified by [clon clat Th]
     % Note: "indices" var represents the values not removed by the spherical
     % cut -- mag and hod must be filtered accordingly.
+    
+% if (isempty(magX) | isempty(magY) | isempty(magY)) % avoids an annoying error
+%     return
+% end
+
 [lon_rad,cola_rad,r,~,~,~,~,indices] = MAGcart2sph(...
     posX,posY,posZ,magX,magY,magZ,[],[],[],[],[],[],[],[],[],[clon clat Th]);
 
