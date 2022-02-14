@@ -85,8 +85,9 @@ end
 
 %% Skip the rest of the header and read raw data
 
-% Data begins on line 146, and we've already read 5 lines:
-for i=1:141
+% Data doesn't always begin at the same line, so just go really far in to
+% be safe. Any loss is negligible since there are ~3 million lines of data.
+for i=1:500
     line=fgets(fileID);
 end
 
