@@ -1,6 +1,6 @@
 Email: [z.kamal2021@gmail.com](mailto:z.kamal2021@gmail.com) or [zain.kamal@rutgers.edu](mailto:zain.kamal@rutgers.edu), I compulsively check both.
 
-Many thanks to Professor Lujendra Ojha from Rutgers for his mentorship throughout this research project.
+Huge thanks to Professor Lujendra Ojha from Rutgers for his mentorship throughout this research project.
 
 # Mars Magnetics Research (Ongoing)
 
