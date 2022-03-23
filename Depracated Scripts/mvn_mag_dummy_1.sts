@@ -1,0 +1,157 @@
+OBJECT      =  FILE
+OBJECT   =  HEADER
+  PROGRAM   =  /home/magdata/software/fortran/mvn_20150406/mvn                                 
+  CMD_LINE  =  -odl -mars -dz -sc -pc time dday ob_b posn ob_bdpl
+  DATE      =  Mon May  4 16:49:50 2015
+  HOST      =  gauss.gsfc.nasa.gov     
+  COMMENT   =  This version mvn compiled with gnu fortran and spicelib 
+               (GENERIC_TOOLKIT V.N0065)   on APR 1, 2015 by J. CONNERNEY
+               (NASA/GSFC).mitigates SOLAR ARRAY dynamic SPACECRAFT FIELD.
+  TITLE     =  MAVEN MAG
+OBJECT      =  KERNEL_LIST
+  META        2993  Thu Feb 19 11:46:11 2015  maven_rec_20150101_20150131_20150219a.tm
+  TEXT        4146  Tue Mar  4 16:19:23 2014  mission_maven.ker
+  TEXT        9497  Mon Apr  6 18:04:51 2015  sc_mod.ker
+  TEXT       10586  Tue May 27 17:37:33 2014  mv_mags.ker
+  TEXT        5086  Tue Jan 13 05:22:01 2015  naif0011.tls
+  TEXT      114011  Mon Nov  3 17:02:21 2014  pck00009.tpc
+  TEXT        6710  Tue Jan 20 05:21:04 2015  MVN_SCLKSCET.00015.tsc
+  TEXT       88692  Mon Nov  3 17:16:21 2014  maven_v03.tf
+  SPK      4364288  Tue Dec 10 05:21:08 2013  de430s.bsp
+  SPK     93998080  Tue Dec 10 05:21:38 2013  mar097s.bsp
+  SPK        17408  Wed Dec 11 05:21:05 2013  maven_struct_v00.bsp
+  SPK      3047424  Thu Jan  8 05:21:08 2015  trj_orb_00482-00523_rec_v1.bsp
+  SPK      1893376  Thu Jan 15 05:21:07 2015  trj_orb_00522-00544_rec_v1.bsp
+  SPK      4261888  Sat Jan 24 05:21:07 2015  trj_orb_00543-00595_rec_v1.bsp
+  SPK      3524608  Thu Jan 29 05:21:08 2015  trj_orb_00592-00637_rec_v1.bsp
+  SPK      2097152  Thu Feb  5 05:21:07 2015  trj_orb_00636-00665_rec_v1.bsp
+  CK      27935744  Sun Jan 11 05:21:21 2015  mvn_app_rel_141229_150104_v01.bc
+  CK      29088768  Sun Jan 11 05:21:31 2015  mvn_sc_rel_141229_150104_v01.bc
+  CK      27216896  Sun Jan 18 05:21:37 2015  mvn_app_rel_150105_150111_v01.bc
+  CK      28908544  Sun Jan 18 05:21:52 2015  mvn_sc_rel_150105_150111_v01.bc
+  CK      27891712  Sun Jan 25 05:21:31 2015  mvn_app_rel_150112_150118_v01.bc
+  CK      29087744  Sun Jan 25 05:21:53 2015  mvn_sc_rel_150112_150118_v01.bc
+  CK      27849728  Sun Feb  1 05:21:22 2015  mvn_app_rel_150119_150125_v01.bc
+  CK      29014016  Sun Feb  1 05:21:31 2015  mvn_sc_rel_150119_150125_v01.bc
+  CK      20487168  Sun Feb  8 05:21:46 2015  mvn_app_rel_150126_150201_v01.bc
+  CK      30235648  Sun Feb  8 05:22:16 2015  mvn_sc_rel_150126_150201_v01.bc
+END_OBJECT
+END_OBJECT
+OBJECT      =  RECORD
+OBJECT   =  VECTOR                                                              
+  NAME   =  TIME                                                                
+  ALIAS  =  TIME                                                                
+  TYPE   =  INTEGER                                                             
+  OBJECT   =  SCALAR                                                            
+    NAME   =  YEAR                                                              
+    FORMAT =  1X,I4                                                             
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  DOY                                                               
+    FORMAT =  1X,I3                                                             
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  HOUR                                                              
+    FORMAT =  1X,I2                                                             
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  MIN                                                               
+    FORMAT =  1X,I2                                                             
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  SEC                                                               
+    FORMAT =  1X,I2                                                             
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  MSEC                                                              
+    FORMAT =  1X,I3                                                             
+  END_OBJECT                                                                    
+END_OBJECT                                                                      
+OBJECT   =  SCALAR                                                              
+  NAME   =  DDAY                                                                
+  ALIAS  =  DECIMAL_DAY                                                         
+  TYPE   =  REAL                                                                
+  FORMAT =  F13.9                                                               
+END_OBJECT                                                                      
+OBJECT   =  VECTOR                                                              
+  NAME   =  OB_B                                                                
+  ALIAS  =  OUTBOARD_B_J2000                                                    
+  TYPE   =  REAL                                                                
+  OBJECT   =  SCALAR                                                            
+    NAME   =  X                                                                 
+    FORMAT =  1X,F9.2                                                           
+    UNITS  =  NT                                                                
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  Y                                                                 
+    FORMAT =  1X,F9.2                                                           
+    UNITS  =  NT                                                                
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  Z                                                                 
+    FORMAT =  1X,F9.2                                                           
+    UNITS  =  NT                                                                
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  RANGE                                                             
+    FORMAT =  1X,F3.0                                                           
+  END_OBJECT                                                                    
+END_OBJECT                                                                      
+OBJECT   =  VECTOR                                                              
+  NAME   =  POSN                                                                
+  ALIAS  =  SC_POSITION                                                         
+  TYPE   =  REAL                                                                
+  OBJECT   =  SCALAR                                                            
+    NAME   =  X                                                                 
+    FORMAT =  1X,F14.3                                                          
+    UNITS  =  KILOMETERS                                                        
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  Y                                                                 
+    FORMAT =  1X,F14.3                                                          
+    UNITS  =  KILOMETERS                                                        
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  Z                                                                 
+    FORMAT =  1X,F14.3                                                          
+    UNITS  =  KILOMETERS                                                        
+  END_OBJECT                                                                    
+END_OBJECT                                                                      
+OBJECT   =  VECTOR                                                              
+  NAME   =  OB_BDPL                                                             
+  ALIAS  =  OUTBOARD_BD_PAYLOAD                                                 
+  TYPE   =  REAL                                                                
+  OBJECT   =  SCALAR                                                            
+    NAME   =  X                                                                 
+    FORMAT =  1X,F7.3                                                           
+    UNITS  =  NT                                                                
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  Y                                                                 
+    FORMAT =  1X,F7.3                                                           
+    UNITS  =  NT                                                                
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  Z                                                                 
+    FORMAT =  1X,F7.3                                                           
+    UNITS  =  NT                                                                
+  END_OBJECT                                                                    
+  OBJECT   =  SCALAR                                                            
+    NAME   =  RANGE                                                             
+    FORMAT =  1X,F4.0                                                           
+  END_OBJECT                                                                    
+END_OBJECT                                                                      
+END_OBJECT
+END_OBJECT
+  2015   2  0  0  0 516   2.000005972      -5.32      0.31     -0.28  0.        3337.473        331.925      -9188.294    0.000  -0.196   0.539   0.
+  2015   1  0  0  2 846   1.000032940       3.08     -1.65      0.13  0.        4851.751      -4315.505      -4729.020    0.000  -0.196   0.539   0.
+  2015   1 10 40 36 556   1.444867546       4.83     -2.14      3.67  0.       -1083.903      -2375.169      -9203.502    0.000  -0.196   0.539   0.
+  2015   1 12 44 58 281   1.531230104     -19.88      7.32      1.06  0.        -175.245       2126.639       3197.000    0.000  -0.146   0.401   0.
+  2015   1 23 55  9 736   1.996640463      -5.48     -1.00     -0.76  0.        3615.707         81.549      -9074.128    0.000  -0.196   0.539   0.
+  2015   1 15 41 47  25   1.654016493      -0.28     -6.61     -0.01  0.       -2826.291      -2006.883      -8102.585    0.000  -0.196   0.539   0.
+  2015   1 22 58 46 591   1.957483692      -4.03      3.37      2.20  0.        6165.634      -1875.324      -5199.853    0.000  -0.196   0.539   0.
+  2015   1 10 40 36 556   1.444867546       5.83     -2.14      3.67  0.       -900.903      -2375.169      -9203.502    0.000  -0.196   0.539   0.
+  2015   1 23 37  7 146   1.984110486      -5.26      0.04      0.24  0.        4617.421       -747.348      -8341.074    0.000  -0.196   0.539   0.
+  2015   1 23 48 54 393   1.992296215      -4.41      1.99      1.82  0.        3971.072       -225.065      -8874.694    0.000  -0.196   0.539   0.
+  2015   1 19 22 45 229   1.807467928       0.35     -2.16      5.05  0.        1133.682       3271.919      -9143.148    0.000  -0.196   0.539   0.
+  2015   1 22  2  2 353   1.918082789      10.05     29.61     -1.18  0.        3133.313      -1648.680       2498.390    0.000  -0.154   0.423   0.
