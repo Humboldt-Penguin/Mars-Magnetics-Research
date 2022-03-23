@@ -3,9 +3,15 @@ function [posX,posY,posZ,magX,magY,magZ,sam,sap,sao,date,...
     BdynX,BdynY,BdynZ,alerttype]=loadpds(filename)
 
 %{
-WARNING: Edits made by Zain Kamal (zain.kamal@rutgers.edu), 2/13/22:
+WARNING: Edits made by Zain Kamal (zain.kamal@rutgers.edu)
+
+3/20/22:
+    - Instead of skipping 500 lines in, we skip 140 in and then look for
+    the first instance of "20" (year beginning)
+
+2/13/22:
     - Comments explaining what stuff is doing
-    - Not skipping the first few lines of data
+    - Not skipping the first few lines of data (skip 500 lines in)
 %}
 
 %{
@@ -47,6 +53,14 @@ filename = 'datadir/DATA/MARS/1999/060_090MAR/MAG_PCENTRIC/99060.STS';
 Last modified by plattner-at-alumni.ethz.ch, 02/26/2015
 %}
 
+
+% debugging
+verbose = false; 
+if verbose
+    fprintf(1, 'loadpds.m is verbose\n');
+end
+    
+
 %% Check for Mars and pc coordinate system in header -- if not, then alert
 
 fileID = fopen(filename,'r');
@@ -85,11 +99,23 @@ end
 
 %% Skip the rest of the header and read raw data
 
-% Data doesn't always begin at the same line, so just go really far in to
-% be safe. Any loss is negligible since there are ~3 million lines of data.
-for i=1:500
+linecount = 0;
+
+for i=1:140
     line=fgets(fileID);
+    linecount = linecount + 1;
 end
+
+while ~contains(line, "20")
+    line = fgets(fileID);
+    linecount = linecount + 1;
+end
+
+if verbose
+    fprintf(1, 'First start reading data at line: %u\n', linecount);
+end
+
+clear linecount;
 
 % note that we read 29 arguments, even though there are usually only 18
 C = textscan(fileID, '%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f'); 
