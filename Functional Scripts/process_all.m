@@ -6,7 +6,7 @@ Running some trials shows parallel processing adds a ~%30 improvement
 in processing time.
 %}
 
-% clc
+clc
 clear all
 close all
 
@@ -22,7 +22,7 @@ filePattern = fullfile(myFolder, '*.sts');
 jpegFiles = dir(filePattern);
 
 % Eridania basin:
-h = 200;
+h = 1000;
 downsample = 1;
 clon = 137;
 clat = -5;
@@ -34,7 +34,7 @@ len = length(jpegFiles);
 fprintf(1, 'Now reading %s\n', myFolder);
 
 tic
-% for k = 1:length(jpegFiles)
+% for k = 1:len
 parfor k = 1:len
     baseFileName = jpegFiles(k).name;
 
