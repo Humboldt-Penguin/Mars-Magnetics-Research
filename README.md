@@ -1,10 +1,14 @@
-Email: [z.kamal2021@gmail.com](mailto:z.kamal2021@gmail.com) or [zain.kamal@rutgers.edu](mailto:zain.kamal@rutgers.edu), I compulsively check both.
+Email: [zain.kamal@rutgers.edu](mailto:zain.kamal@rutgers.edu) and/or [z.kamal2021@gmail.com](mailto:z.kamal2021@gmail.com), I compulsively check both.
 
-Huge thanks to Professor Lujendra Ojha from Rutgers for his mentorship throughout this research project.
+I'd like to express my gratitude to my primary supervisor, Lujendra Ojha, who guided me throughout this project. I'd also like to thank the NASA New Jersey Space Grant Consortium for providing me a Summer Fellowship Grant for 2022.
 
-# Mars Magnetics Research (Ongoing)
+# High-Resolution Analysis of Martian Crustal Magnetization from the MAVEN Satellite in Relation to Hydrated Minerals
 
-## Background
+## Abstract (Incomplete)
+
+We're analyzing the high-resolution crustal magnetic field data from the Mars Atmosphere and Volatile Evolution (MAVEN) spacecraft to help better understand the geological history of Mars. The rocks of Mars were magnetized by an Earth-like dynamo more than 4 billion years ago. However, the geological conditions that enabled magnetization remain enigmatic. A plethora of evidence suggests the presence of substantial volumes of water in the Martian crust 4-billion years ago. Our hypothesis is that the chemical reactions associated with the interaction of voluminous water with the deep crust of Mars at elevated temperatures may have been a key process that magnetized the crust. If true, the deep rock-water reaction would not only have been notable for its role in the magnetic history of Mars but also for the biosphere and the contribution of key greenhouse gases to the atmosphere.
+
+## 1. Background (Martian Crustal Magnetization)
 
 There are two main ways in which we predict the crust of Mars was magnetized. 
 
@@ -12,11 +16,14 @@ The first starts with [dynamo theory](https://en.wikipedia.org/wiki/Dynamo_theor
 
 The second way is the concept of [chemical remanent magnetization (CRM)](https://doi.org/10.1016/B978-0-444-41084-9.50013-8), which is more complicated, but basically entails that water-rock interactions can magnetize rocks at temperatures below their Curie point. 
 
-**Our research seeks to better understand and possibly quantify the extent to which each of the above methods contributed to the magnetization of Mars's crust.**
+Our research seeks to better understand and possibly quantify the extent to which each of the above methods contributed to the magnetization of Mars's crust.
 
-## Methodology
 
-NASA's MAVEN satellite has a Fluxgate Magnetometer instrument that collected high resolution vector magnetic field track data from 2014-2021. Although there are already spherical harmonic models of the magnetic field of Mars's crust, the resolution is quite low because of interpolation and height variations in Maven's orbit. Still, the coarse spherical harmonic models suggest that areas that used to have lots of hydrothermal activity have higher magnetization than average. We will construct high-resolution, local spherical harmonic models in regions such as the Eridiania basin, and then do an inversion to pinpoint the depth of the source of the magnetic field. If the source is in the top-layer of the crust (<10 km), we can attribute the magnetization to CRM (water-rock interactions) since water can only penetrate so far due to the permeability of the crust. If the source is deeper in the crust (>10km, <100km), we can attribute the magnetization to dynamo theory.
+## 2. Methodology
+
+Pre-existing spherical harmonic models of Martian crustal magnetic fields suggest that regions with evidence of hydrothermal activity have higher magnetization than average. However, the resolution of these models isn't high enough to fully understand what's going on. I'll be using the high-resolution magnetic field tracks from the MAVEN spacecraft (2014-2021) to assess the relationship between crustal magnetic fields and geolgoical features of interest. 
+
+We will construct high-resolution, local spherical harmonic models around geological features of interest, and then do an inversion to pinpoint the depth of the source of the magnetic field. If the source is in the top-layer of the crust (<10 km), we can attribute the magnetization to CRM (water-rock interactions) since water can only penetrate so far due to the permeability of the crust. If the source is deeper in the crust (>10km, <100km), we can attribute the magnetization to dynamo theory.
 
 ### Libraries
 
