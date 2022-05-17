@@ -1,4 +1,4 @@
-Email: [zain.kamal@rutgers.edu](mailto:zain.kamal@rutgers.edu) and/or [z.kamal2021@gmail.com](mailto:z.kamal2021@gmail.com), I compulsively check both.
+Email: [zain.erin.kamal@rutgers.edu](mailto:zain.erin.kamal@rutgers.edu) and/or [zain.erin.kamal@gmail.com](mailto:zain.erin.kamal@gmail.com), I compulsively check both.
 
 I'd like to express my gratitude to my primary supervisor, Lujendra Ojha, who guided me throughout this project. I'd also like to thank the NASA New Jersey Space Grant Consortium for providing me a Summer Fellowship Grant for 2022.
 
