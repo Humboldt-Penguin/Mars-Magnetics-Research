@@ -1,6 +1,6 @@
 Email: [zain.erin.kamal@rutgers.edu](mailto:zain.erin.kamal@rutgers.edu) and/or [zain.erin.kamal@gmail.com](mailto:zain.erin.kamal@gmail.com), I compulsively check both.
 
-I'd like to express my gratitude to my primary supervisor, Lujendra Ojha, who guided me throughout this project. I'd also like to thank the NASA New Jersey Space Grant Consortium for providing me a Summer Fellowship Grant for 2022.
+I'd like to express my gratitude to my primary supervisor, Lujendra Ojha, who guided me throughout this project. I'd also like to thank the NASA New Jersey Space Grant Consortium for awarding me a Fellowship Grant to continue my work in Summer 2022.
 
 # High-Resolution Analysis of Martian Crustal Magnetization from the MAVEN Satellite in Relation to Hydrated Minerals
 
