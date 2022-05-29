@@ -24,9 +24,3 @@ Our research seeks to better understand and possibly quantify the extent to whic
 Pre-existing spherical harmonic models of Martian crustal magnetic fields suggest that regions with evidence of hydrothermal activity have higher magnetization than average. However, the resolution of these models isn't high enough to fully understand what's going on. I'll be using the high-resolution magnetic field tracks from the MAVEN spacecraft (2014-2021) to assess the relationship between crustal magnetic fields and geolgoical features of interest. 
 
 We will construct high-resolution, local spherical harmonic models around geological features of interest, and then do an inversion to pinpoint the depth of the source of the magnetic field. If the source is in the top-layer of the crust (<10 km), we can attribute the magnetization to CRM (water-rock interactions) since water can only penetrate so far due to the permeability of the crust. If the source is deeper in the crust (>10km, <100km), we can attribute the magnetization to dynamo theory.
-
-### Libraries
-
-* [Slepian Hotel](https://github.com/csdms-contrib/slepian_hotel): inversions using gradient vector Slepian functions
-* [Slepian Alpha](https://github.com/csdms-contrib/slepian_alpha)
-* [Slepian Golf](https://github.com/csdms-contrib/slepian_golf)

@@ -1,0 +1,12 @@
+METADATA:
+
+Format: 
+	name_of_location, altitude, downsample, clon, clat, theta
+
+Description:
+	This was created 4/1/22 for some purpose
+
+-------------------------------------
+START DATA:
+Eridania_Basin 1000 1 137 -5 50
+Testtest 100 1 137 -5 50
