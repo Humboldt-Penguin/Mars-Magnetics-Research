@@ -1,11 +1,11 @@
 clc
 clear
-fprintf('Started running at %s.\n\n', datestr(now,'HH:MM'));
 
 %%% INPUTS (see decription for more details)
 
 % inputfile_mavenFolders = "inputfile_allMavenFolders.txt";
-inputfile_mavenFolders = "inputfile_5-28-22_2014-2018.txt";
+% inputfile_mavenFolders = "inputfile_5-28-22_2014-2018.txt";
+inputfile_mavenFolders = "inputfile_5-31-22_2019-2021.txt";
 altitudeCutoff = 200;
 
 % verbose = true;
@@ -18,9 +18,10 @@ DESCRIPTION:
         https://pds-ppi.igpp.ucla.edu/search/view/?f=null&id=pds://PPI/
         maven.mag.calibrated/data/pc/highres
 
-    Takes MAVEN_MAG .sts files and removes all measurements taken at night
-    and measurements where the satellite is above a certain altitude. The
-    reduced versions are written to a new directory defined in getPaths.m.
+    Takes MAVEN_MAG .sts files and removes the heading, all daytime
+    measurements (20:00-08:00), and measurements where the satellite is
+    above a certain altitude (200 km). The reduced versions are written to
+    a new directory defined in `getPaths.m`.
 
     Note that the outputted time estimates for each file reduction are not
     accurate when using parallel processing ("parfor"). Although each file
@@ -37,8 +38,25 @@ INPUTS:
 OUTPUTS:
     A folder containing the reduced .sts files. The location of this folder
     is specified in `getPaths.m`.
+
+
+CHANGELOG:
+
+    2022-06-07
+        - Changed output folder to be just "<reducedMavenPath>/" instead of
+        "<`reducedMavenPath`>/<altitudeCutoff>km/" so that other scripts can
+        access it.
+
+    2022-05-28:
+        - First version completed, all files processed and uploaded to Box:
+            https://rutgers.box.com/s/o9nc40xrd4auip4fjokd3ntif3xg4n0z
+
 %}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+% Basic outputs
+fprintf('Input file = %s\n\n', inputfile_mavenFolders);
+fprintf('Started running at %s.\n\n', datestr(now,'HH:MM'));
 
 % Get full paths of all MAVEN .sts files
 
@@ -48,9 +66,9 @@ mavenFiles = convert_inputfile_to_fullpaths(inputfile_mavenFolders);
 % Creat directory for reduced files
 
 reducedMavenPath = getPaths('reducedMaven');
-altitudeSpecific_reducedMavenPath = fullfile(reducedMavenPath,strcat(num2str(altitudeCutoff),'km'));
-[~,~] = mkdir(altitudeSpecific_reducedMavenPath);
-
+% altitudeSpecific_reducedMavenPath = fullfile(reducedMavenPath,strcat(num2str(altitudeCutoff),'km'));
+% [~,~] = mkdir(altitudeSpecific_reducedMavenPath);
+[~,~] = mkdir(reducedMavenPath);
 
 % Traverse each file, look at each measurement, and cut it out if it's above the altitudeCutoff
 
@@ -64,7 +82,8 @@ parfor i=1 : length(mavenFiles(:,1))
     shortFn = shortenFilename(thisMavenFile);
 
     if percentReduction ~= 100
-        [t] = writeReducedMavenFile(raw_data, thisMavenFile, altitudeSpecific_reducedMavenPath);
+%         [t] = writeReducedMavenFile(raw_data, thisMavenFile, altitudeSpecific_reducedMavenPath);
+        [t] = writeReducedMavenFile(raw_data, thisMavenFile, reducedMavenPath);
         fprintf("%s was reduced by %.3f%% in %.2f seconds. \n", shortFn, percentReduction, t);
     else
         fprintf("%s had no data that fit criteria, so it will not be saved. \n", shortFn);
@@ -117,7 +136,7 @@ function [raw_data,percentReduction] = reduceData(thisMavenFile,altitudeCutoff)
     fclose(file);
 
 
-    %%% cut out nighttime and >altitudeCutoff data
+    %%% cut out daytime and >altitudeCutoff data
 
     raw_data = cell2mat(raw_data);
 
