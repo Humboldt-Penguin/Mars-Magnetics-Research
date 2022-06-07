@@ -4,8 +4,8 @@ function varargout = getPaths(varargin)
 % EDIT THIS STRUCT ACCORDING TO YOUR SYSTEM (see description)
 pathTo = struct( ...
 'repo',          'C:\Users\zk117\Documents\01.Research\Mars-Magnetics', ...
-'rawMaven',      'C:\Users\zk117\Documents\00.local_WL-202\Mars-Magnetics_Data\MAVEN_MAG\raw', ...
-'reducedMaven',  'C:\Users\zk117\Documents\00.local_WL-202\Mars-Magnetics_Data\MAVEN_MAG\reduced'...
+'rawMaven',      'C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\MAVEN_MAG\raw', ...
+'reducedMaven',  'C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\MAVEN_MAG\reduced'...
 );
 
 
@@ -31,8 +31,14 @@ INPUT:
 
     reducedMaven:
         Folder where 'reduced' files created from 'reduce_MAVEN_MAG.m'
-        will be stored (eg if reducedMavenPath='...\reduced', then one
-        sub-folder might bem '\reduced\200km\...').
+        will be stored.
+        These files can also be downloaded from here:
+            https://rutgers.box.com/s/o9nc40xrd4auip4fjokd3ntif3xg4n0z
+    
+CHANGELOG:
+
+    2022-05-28:
+        - First version completed.
 
 %}
 

@@ -1,23 +1,11 @@
-# ignore MAVEN files (they shouldn't be anywhere, but just in case)
+# ignore data files (they shouldn't be anywhere, but just in case)
 *.sts
-
-# ignore shapefiles and QGIS stuff
 *.dbf
 *.shp
 *.shx
 *.qgz
 *.tif
 
-# ignore .bak files
+# ignore backup files files
 *.bak
-
-# ignore files in data folder
-data/
-
-# ignore files in documents folder, but keep my harmonic analysis notes
-documents/
-!documents/Notes on Harmonic Analysis/**
-
-# never ignore README.md's and .gitkeep's
-!*README.md
-!*.gitkeep
+*.asv
