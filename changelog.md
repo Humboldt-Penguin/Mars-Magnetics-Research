@@ -2,6 +2,12 @@
 
 This is for my own reference to supplement tags, and because I cluttered my commit history.
 
+### v3.1 (2022-06-10)
+- Wrote first functional version of `generate_crater_locations.m` and documentation.
+	- Finalized format for verbose function (with saveLogs option) and location input files.
+- Small adjustments.
+
+
 ### v3.0 (2022-06-07)
 - Second major reorganization of repository. 
 - Fleshing out main scripts documentation.
