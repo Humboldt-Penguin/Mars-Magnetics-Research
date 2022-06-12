@@ -2,9 +2,9 @@ clc
 clear
 
 %%% INPUTS (see decription for more details)
-crater_database_path = 'C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\Crater database\Catalog_Mars_Release_2020_1kmPlus_FullMorphData.csv';
-minDiam = 30;
-maxDiam = 200;
+crater_database_path = 'C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\geological_features\crater_database\Catalog_Mars_Release_2020_1kmPlus_FullMorphData.csv';
+minDiam = 50;
+maxDiam = 100;
 
 saveLogs = false;
 
@@ -140,6 +140,10 @@ clear sorted_indices;
 assert(~isempty(id), 'No craters fit the given constraints.');
 
 verbose(sprintf("There are %0.f craters that fit these diameter constraints.", length(id)));
+
+abort = input("Enter \'y\' to write these to a file, or any other key to abort.\n", "s");
+assert(strcmp(abort,"y"), "Aborted.")
+clear abort
 
 
 

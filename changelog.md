@@ -18,7 +18,7 @@ This is for my own reference to supplement tags, and because I cluttered my comm
 
 ### v2.0 (2022-05-28)
 - First major reorganization of repository. Structure oriented towards git annex or rclone setup.
-- `redice_MAVEN_MAG.m`: Maven file reducing script
+- `reduce_MAVEN_MAG.m`: Maven file reducing script
 - Improved ability for any user to pull repository and run scripts on their machine:
 	- `startup.m` for Matlab search paths, mainly for inputfiles,
 	- `getPaths.m` for data input/output paths.

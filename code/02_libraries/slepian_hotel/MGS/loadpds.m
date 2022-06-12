@@ -3,7 +3,7 @@ function [posX,posY,posZ,magX,magY,magZ,sam,sap,sao,date,...
     BdynX,BdynY,BdynZ,alerttype]=loadpds(filename)
 
 %{
-WARNING: Edits made by Zain Kamal (zain.kamal@rutgers.edu)
+WARNING: Edits made by Zain Kamal (zain.eris.kamal@rutgers.edu)
 
 3/20/22:
     - Instead of skipping 500 lines in, we skip 140 in and then look for
