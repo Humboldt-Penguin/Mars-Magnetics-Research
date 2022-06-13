@@ -1,5 +1,5 @@
 craters_30km_to_200km.txt
-Generated on 06/10/2022 22:37
+Generated on 06/12/2022 02:42
 
 Minimum diameter = 30 km 
 Maximum diameter = 200 km

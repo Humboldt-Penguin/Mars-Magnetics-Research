@@ -2,13 +2,13 @@ clc
 clear
 
 %%% INPUTS (see decription for more details)
-infile_craters = 'craters_200km_to_300km.txt';
+infile_craters = 'hydrated_minerals_byhand.txt';
 infile_mavenFolders = 'inputfile_mavenReduced.txt';
 
 individual_folders = true;
 everything_in_one_folder = true;
 
-padding = 1.0; % eg "0.5" means the shapefiles extend beyond the crater rim by 50% of the radius
+padding = 2.0; % eg "0.5" means the shapefiles extend beyond the crater rim by 50% of the radius
 
 saveLogs = false;
 
@@ -79,7 +79,7 @@ for i_crater=1 : length(id)
         [~,~] = mkdir(folder_3_thisCrater);
 
     % write metadata
-        metadata = sprintf("CRATER_ID = %s \nLON = %f \nCLON = %f \nLAT = %f \nTheta = %f \nDIAMETER = %f \n\nGenerated on %s", ...
+        metadata = sprintf("CRATER_ID = %s \nLON = %f \nLON = %f \nLAT = %f \nTheta = %f \nDIAMETER = %f \n\nGenerated on %s", ...
                             id{i_crater},           lon(i_crater),    clon(i_crater),    lat(i_crater),    theta(i_crater),    diam(i_crater),          datestr(now,'mm/dd/yyyy HH:MM'));
         writeMetadata(folder_3_thisCrater, metadata)
 
@@ -91,8 +91,9 @@ for i_crater=1 : length(id)
     thisTheta = theta(i_crater);
 
     Br_combined = [];
-    clon_deg_combined = [];
-    cola_deg_combined = [];
+    Bmag_combined = [];
+    lon_deg_combined = [];
+    lat_deg_combined = [];
 
 
     parfor i_file=1 : length(mavenFiles) % loop over all maven files
@@ -121,11 +122,19 @@ for i_crater=1 : length(id)
         
         Bmag = sqrt(Blon.^2 + Bcola.^2 + Br.^2);
         altitude = r - 3390;
-        clon_deg = rad2deg(clon_rad);
-        cola_deg = 90 - rad2deg(cola_rad);
 
-        clon_deg = clon2lon(clon_deg); % CHEEKY ADDITION FOR MY SHITTY QGIS
-            
+        clon_deg = rad2deg(clon_rad);
+        lon_deg = clon2lon(clon_deg); % CHEEKY ADDITION FOR MY SHITTY QGIS
+
+        lat_deg = 90 - rad2deg(cola_rad);
+
+%         % debugging for checking values
+%             if ~isempty(clon_rad) 
+%                 x = 1; % set breakpoint here
+%             else
+%                 fprintf("no hits\n");
+%             end
+
 
 %             % I'm combining all outputs and writing a single shape file so i can better classify the min/max values 
 % 
@@ -156,28 +165,35 @@ for i_crater=1 : length(id)
 
         % add to combined array for writing at the end
         Br_combined = [Br_combined; Br];
-        clon_deg_combined = [clon_deg_combined; clon_deg];
-        cola_deg_combined = [cola_deg_combined; cola_deg];
+        Bmag_combined = [Bmag_combined; Bmag];
+        lon_deg_combined = [lon_deg_combined; lon_deg];
+        lat_deg_combined = [lat_deg_combined; lat_deg];
 
 
 
     end % end parfor for this crater
 
+    
 
-    shape_struct = struct...
-    ( ...
-        'Geometry', 'Multipoint', ...
-        'Br', num2cell(Br_combined), ...
-        'Lon', num2cell(clon_deg_combined), ...
-        'Lat',num2cell(cola_deg_combined) ...
-    );
 
-%     if numel(Bmag) > 1
+    if numel(Bmag_combined) > 1
+        shape_struct = struct...
+            ( ...
+                'Geometry', 'Multipoint', ...
+                'Br', num2cell(Br_combined), ...
+                'Bmag', num2cell(Bmag_combined), ...
+                'Lon', num2cell(lon_deg_combined), ...
+%                 all vector components + normalized Bmag + id
+                'Lat',num2cell(lat_deg_combined) ...
+            );
+  
         shapewrite(shape_struct, fullfile(folder_3_thisCrater, title));
-%     end
+        verbose(sprintf("Crater %.0f/%.0f was processed in %.2f seconds", i_crater, length(id), toc(thisCraterTimer)));
+    else
+        verbose(sprintf("Crater %.0f/%.0f has no data (%.2f sec).", i_crater, length(id), toc(thisCraterTimer)));
+    end
 
 
-    verbose(sprintf("Crater %.0f/%.0f was processed in %.2f seconds", i_crater, length(id), toc(thisCraterTimer)));
 
 
 end
@@ -185,8 +201,8 @@ end
 
 verbose(sprintf("\nScript finished runnning in %.2f seconds.\n", toc(fullTimer)));
 
-
-%% save logs
+%%
+% save logs
     metadata = strcat(sprintf("Generated on %s\n\n", datestr(now,'mm/dd/yyyy HH:MM')), logs);
     writeMetadata(folder_1_kmRange, metadata);
 
