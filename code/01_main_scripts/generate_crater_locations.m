@@ -4,7 +4,7 @@ clear
 %%% INPUTS (see decription for more details)
 crater_database_path = 'C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\geological_features\crater_database\Catalog_Mars_Release_2020_1kmPlus_FullMorphData.csv';
 minDiam = 70;
-maxDiam = 100;
+maxDiam = 150;
 
 saveLogs = false;
 
