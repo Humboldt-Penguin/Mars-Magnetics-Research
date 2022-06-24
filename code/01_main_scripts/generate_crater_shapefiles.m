@@ -5,7 +5,7 @@ clear
 infile_craters = 'craters_70km_to_150km.txt';
 infile_mavenFolders = 'inputfile_mavenReduced.txt';
 
-maxAlt = 150;
+maxAlt = 200;
 
 
 % individual_folders = true;
@@ -35,7 +35,7 @@ saveLogs = false;
     
     fullTimer = tic;
     verbose(sprintf("Started running at %s", datestr(now,'HH:MM')));
-    verbose(sprintf("Crater input file: %s\nMaven folders input file: %s\n", infile_craters, infile_mavenFolders));
+    verbose(sprintf("Crater input file: %s\n", infile_craters));
     
     % minDiam = str2double(infile_craters(9:strfind(infile_craters,'km_to_')-1));
     % maxDiam = str2double(infile_craters(strfind(infile_craters,'km_to_')+6:strfind(infile_craters,'km.txt')-1)); % lol
@@ -44,185 +44,146 @@ saveLogs = false;
     infile_mavenFolders = fullfile(getPaths('repo'), 'code', '03_input_files', 'maven_folders', infile_mavenFolders); % just to be safe
 
 
-% extract contents from inputfile
-    data = readData(infile_craters, "%s %f %f %f");
-    
-    id = data{1};
-    clon = data{2};
-    lon = clon2lon(clon);
-    lat = data{3};
-    diam = data{4};
-    clear data
-
+% read crater locations inputfile into table
+    crater = read_crater_file(infile_craters);
 
 % get angular radius of shapefile, including padding
-    theta = diameter2angular( (diam/2) );
-    theta_padded = diameter2angular( (diam/2) * (1+padding) );
+    theta = (diameter2angular( (crater.diam/2) ));
+    theta_padded = (diameter2angular( (crater.diam/2) * (1+padding) ));
+    thetas = table(theta, theta_padded);
+    crater = [crater, thetas];
+    clear theta theta_padded thetas
+    
+
+% load all maven data as a table (each line of each maven file) -- DO NOT MODIFY THIS ARRAY
+    % METHOD 1: manually loading reduced maven files
+%         [mavenFiles,~] = createFiles(getPaths('reducedMaven'), infile_mavenFolders);
+%         mvn = load_maven_data(mavenFiles); 
+%         clear mavenFiles
+    % METHOD 2: loading from matfile
+        preload_timer = tic;
+        mvnmat = matfile(fullfile(getPaths('matfiles'), 'mvn.mat'));
+        mvn = mvnmat.mvn;
+        clear mvnmat
+        verbose(sprintf("\nLoaded Maven data in %.2f seconds.\n", toc(preload_timer)));
 
 
-% get maven file paths
-    [mavenFiles,~] = createFiles(getPaths('reducedMaven'), infile_mavenFolders);
 
 
 % make folders (NOTE: in this folder naming scheme, the number refers to how far the child folder is from the main parent "folder_1"
     % baseOutputFolder = fullfile(getPaths('shapefiles'), 'craters', sprintf("%0.fkm_to_%0.fkm",minDiam,maxDiam)); 
-    folder_1_kmRange = fullfile(getPaths('shapefiles'), 'craters', infile_craters(strfind(infile_craters,'craters_')+8:strfind(infile_craters,'.txt'))); 
-    folder_2_individual = fullfile(folder_1_kmRange, 'individual');
-    [~,~] = mkdir(folder_2_individual);
+    folder_1_kmRange = fullfile(getPaths('shapefiles'), ...
+                                'craters', ...
+                                infile_craters(strfind(infile_craters,'craters_')+8:strfind(infile_craters,'.txt'))); 
+    % folder_2_individual = fullfile(folder_1_kmRange, 'individual');
+    [~,~] = mkdir(folder_1_kmRange);
 
 
-% make shapefiles for each crater
+%% make creater shapefiles
 
-for i_crater=1 : length(id)
+crater_shapefiles_timer = tic;
 
-    thisCraterTimer = tic;
+for i_crater=1 : length(crater.id)
 
-    % initialize shapefile parameters
-        Br_combined = [];
-        Blon_combined = [];
-        Bcola_combined = [];
-    
-        Bmag_combined = [];
+    % misc
+        verbose(sprintf("Now processing crater %s", crater.id{i_crater}));
+        thisCraterTimer = tic;
 
-        altitude_combined = [];
+    % see if  there are any tracks that actually pass through the crater (as opposed to being captured in the padded radius)
+        [TEST_clon_rad,~,~,~,~,~,~,~] = MAGcart2sph(...
+            mvn.posX,mvn.posY,mvn.posZ,mvn.magX,mvn.magY,mvn.magZ,[],[],[],[],[],[],[],[],[],[crater.clon(i_crater) crater.lat(i_crater) crater.theta(i_crater)]);
         
-        lon_deg_combined = [];
-        clon_deg_combined = [];
-        lat_deg_combined = [];
-
-
-    % loop over maven files
-
-    thisClon = clon(i_crater);
-    thisLat = lat(i_crater);
-    thisTheta = theta(i_crater);
-    thisTheta_padded = theta_padded(i_crater);
-
-
-    parfor i_file=1 : length(mavenFiles)
-
-        % extract position and magnitude of magnetic field
-            thisFile = fullfile(mavenFiles(i_file).folder, mavenFiles(i_file).name);
-            [posX,posY,posZ,magX,magY,magZ] = loadpds_reduced_lite(thisFile);
-
-
-        % see if  there are any tracks that actually pass through the
-        % crater (as opposed to being captured in the padded radius)
-            [TEST_clon_rad,~,~,~,~,~,~,~] = MAGcart2sph(...
-                posX,posY,posZ,magX,magY,magZ,[],[],[],[],[],[],[],[],[],[thisClon thisLat thisTheta]);
-
         if ~isempty(TEST_clon_rad)
-
-
-            % Convert position vector from cartesian to spherical
-            % coordinates, and do a spherical cut around a cap specified by
-            % [clon lat Th]
+    
+            % Convert position vector from cartesian to spherical coordinates, and do a spherical cut around a cap specified by [clon lat Th]
                 [clon_rad,cola_rad,r,~,~,~,~,indices_sph] = MAGcart2sph(...
-                    posX,posY,posZ,magX,magY,magZ,[],[],[],[],[],[],[],[],[],[thisClon thisLat thisTheta_padded]);
+                    mvn.posX,mvn.posY,mvn.posZ,mvn.magX,mvn.magY,mvn.magZ,[],[],[],[],[],[],[],[],[],[crater.clon(i_crater) crater.lat(i_crater) crater.theta_padded(i_crater)]);
                 
-                magX = magX(indices_sph);
-                magY = magY(indices_sph);
-                magZ = magZ(indices_sph);
+                magX = mvn.magX(indices_sph);
+                magY = mvn.magY(indices_sph);
+                magZ = mvn.magZ(indices_sph);
     
-    
-    
-            % filter by height
-                altitude = r - 3390;
+            % Altitude cut
+                altitude = r - 3390; 
                 indices_alt = find(altitude < maxAlt);
     
-                    altitude = altitude(indices_alt);
-
-                    magX = magX(indices_alt);
-                    magY = magY(indices_alt);
-                    magZ = magZ(indices_alt);
-        
-                    clon_rad = clon_rad(indices_alt);
-                    cola_rad = cola_rad(indices_alt);
-    
-                
+                altitude = altitude(indices_alt);
+                magX = magX(indices_alt);
+                magY = magY(indices_alt);
+                magZ = magZ(indices_alt);
+                clon_rad = clon_rad(indices_alt);
+                cola_rad = cola_rad(indices_alt);
     
             % Convert magnetic field vector from cartesian to spherical coordinates
                 [Blon,Bcola,Br] = dcart2dsph(clon_rad,cola_rad,magX,magY,magZ);
-    
-    
-            % Additional parameters/conversions
                 Bmag = sqrt(Blon.^2 + Bcola.^2 + Br.^2);
-        
+    
+            % Extra parameters
                 clon_deg = rad2deg(clon_rad);
                 lon_deg = clon2lon(clon_deg); % CHEEKY ADDITION FOR MY SHITTY QGIS
-        
                 lat_deg = 90 - rad2deg(cola_rad);
-    
-    
-            % add to combined array for writing at the end
-                Br_combined = [Br_combined; Br];
-                Blon_combined = [Blon_combined; Blon];
-                Bcola_combined = [Bcola_combined; Bcola];
-            
-                Bmag_combined = [Bmag_combined; Bmag];
-        
-                altitude_combined = [altitude_combined; altitude];
-                
-                lon_deg_combined = [lon_deg_combined; lon_deg];
-                clon_deg_combined = [clon_deg_combined; clon_deg];
-                lat_deg_combined = [lat_deg_combined; lat_deg];
 
+        
         end
 
 
+    % Write shapefile if there's data for this crater
+        if numel(Bmag) > 1
+            % Make folder
+                title = sprintf("lon=%.0f_lat=%.0f_diam=%.0f_id=%s", crater.lon(i_crater), crater.lat(i_crater), crater.diam(i_crater), crater.id{i_crater});
+                folder_2_thisCrater = fullfile(folder_1_kmRange, title);
+                [~,~] = mkdir(folder_2_thisCrater);
 
-    end % end parfor for this crater
+            % Write metadata
+                metadata = sprintf("CRATER_ID = %s \nLON = %f \nCLON = %f \nLAT = %f \nTHETA (crater) = %f \nTHETA (padded) = %f \nDIAMETER = %f \n\nGenerated on %s", ...
+                      crater.id{i_crater}, ...
+                      crater.lon(i_crater), ...
+                      crater.clon(i_crater), ...
+                      crater.lat(i_crater), ...
+                      crater.theta(i_crater), ...
+                      crater.theta_padded(i_crater), ...
+                      crater.diam(i_crater), ...
+                      datestr(now,'mm/dd/yyyy HH:MM'));
+                writeMetadata(folder_2_thisCrater, metadata);
 
-    
+            % Normalize Bmag
+                Bmag_norm = Bmag / max(Bmag);
 
+            % Write shapefile
+                shape_struct = struct...
+                    ( ...
+                        'Geometry', 'Multipoint', ...
+                        'CRATER_ID', crater.id{i_crater}, ...
+                        'Bmag', num2cell(Bmag), ...
+                        'Bmag_norm', num2cell(Bmag_norm), ...
+                        'Br', num2cell(Br), ...
+                        'Blon', num2cell(Blon), ...
+                        'Bcola', num2cell(Bcola), ...
+                        'Altitude', num2cell(altitude), ...
+                        'Lon', num2cell(lon_deg), ...
+                        'Clon', num2cell(clon_deg), ...
+                        'Lat',num2cell(lat_deg) ...
+                    );
+    %             folder_3_shapefiles = fullfile(folder_2_thisCrater, 'shapefiles');
+    %             [~,~] = mkdir(folder_3_shapefiles);
+                shapewrite(shape_struct, fullfile(folder_2_thisCrater, title));
+                verbose(sprintf("Crater %.0f/%.0f was processed in %.2f seconds", i_crater, length(crater.id), toc(thisCraterTimer)));
+        else
+            % if there are literally no maven measurements for this crater
+                verbose(sprintf("Crater %.0f/%.0f has no data (%.2f sec).", i_crater, length(crater.id), toc(thisCraterTimer)));
+        end
 
-    if numel(Bmag_combined) > 1 % if there's data for the crater
-
-        % makefolder
-            title = sprintf("lon=%.0f,lat=%.0f,diam=%.0f,id=%s", lon(i_crater), lat(i_crater), diam(i_crater), id{i_crater});
-            folder_3_thisCrater = fullfile(folder_2_individual, title);
-            [~,~] = mkdir(folder_3_thisCrater);
-    
-        % write metadata
-            metadata = sprintf("CRATER_ID = %s \nLON = %f \nLON = %f \nLAT = %f \nTheta = %f \nDIAMETER = %f \n\nGenerated on %s", ...
-                                id{i_crater},           lon(i_crater),    clon(i_crater),    lat(i_crater),    theta_padded(i_crater),    diam(i_crater),          datestr(now,'mm/dd/yyyy HH:MM'));
-            writeMetadata(folder_3_thisCrater, metadata)
-
-        % normalize Bmag
-            Bmag_norm = Bmag_combined / max(Bmag_combined);
-
-        % write shape file
-            shape_struct = struct...
-                ( ...
-                    'Geometry', 'Multipoint', ...
-                    'CRATER_ID', id{i_crater}, ...
-                    'Bmag', num2cell(Bmag_combined), ...
-                    'Bmag_norm', num2cell(Bmag_norm), ...
-                    'Br', num2cell(Br_combined), ...
-                    'Blon', num2cell(Blon_combined), ...
-                    'Bcola', num2cell(Bcola_combined), ...
-                    'Altitude', num2cell(altitude_combined), ...
-                    'Lon', num2cell(lon_deg_combined), ...
-                    'Clon', num2cell(clon_deg_combined), ...
-                    'Lat',num2cell(lat_deg_combined) ...
-                );
-      
-            shapewrite(shape_struct, fullfile(folder_3_thisCrater, title));
-            verbose(sprintf("Crater %.0f/%.0f was processed in %.2f seconds", i_crater, length(id), toc(thisCraterTimer)));
-    else
-        % if there are literally no maven measurements for this crater
-            verbose(sprintf("Crater %.0f/%.0f has no data (%.2f sec).", i_crater, length(id), toc(thisCraterTimer)));
-    end
 
 end
 
+verbose(sprintf("\n\nFinished generating crater shapfiles in %.2f seconds.\n", toc(crater_shapefiles_timer)));
 
 verbose(sprintf("\nScript finished runnning in %.2f seconds.\n", toc(fullTimer)));
 
 %%
 % save logs
-%     metadata = strcat(sprintf("Generated on %s\n\n", datestr(now,'mm/dd/yyyy HH:MM')), logs);
-%     writeMetadata(folder_1_kmRange, metadata);
+    metadata = strcat(sprintf("Generated on %s\n\n", datestr(now,'mm/dd/yyyy HH:MM')), logs);
+    writeMetadata(folder_1_kmRange, metadata);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -243,6 +204,15 @@ function [data] = readData(infile, formatSpec)
     data = textscan(fid, formatSpec);
     
     fclose(fid);
+end
+
+function [crater_data] = read_crater_file(infile_craters)
+    crater_data = readData(infile_craters, "%s %f %f %f");
+    crater_data = [crater_data{1}, num2cell(crater_data{2}), num2cell(crater_data{3}), num2cell(crater_data{4})];
+    crater_data = cell2table(crater_data, ...
+        'VariableNames', {'id', 'clon', 'lat', 'diam'});
+    lon = table(clon2lon(crater_data.clon), 'VariableNames', {'lon'});
+    crater_data = [crater_data, lon];
 end
 
 
@@ -289,15 +259,46 @@ function writeMetadata(folder, metadata)
     fclose(fid);
 end
 
+function [mvn_data] = load_maven_data(mavenFiles)
+    %{
+        reads the contents of many reduced maven files and returns a table
+        containing the posX, posY, posZ, magX, magY, magZ
+    %}
+    preload_timer = tic;
+    mvn_data = [];
 
-function [posX,posY,posZ,magX,magY,magZ] = loadpds_reduced_lite(fin)
+%     % unfortunately preallocation does not work with parfor
+%         num_measurements = 92825759; % the reduced maven files cumulatively have this many lines
+%         mvn_data = zeros(num_measurements,6); % columns will be posX, posY, posZ, magX, magY, magZ
+
+    parfor i_file=1 : length(mavenFiles)
+        thisFile = fullfile(mavenFiles(i_file).folder, mavenFiles(i_file).name);
+        this_mvn_data = loadpds_reduced_lite(thisFile);
+        mvn_data = [mvn_data; this_mvn_data];
+%         % unfortunately preallocation does not work with parfor
+%             first_line_of_zeros = find(mvn_data(:,6) == zeros(1,6), 1);
+%             mvn_data( first_line_of_zeros : first_line_of_zeros+size(this_mvn_data,1)-1 , : ) = this_mvn_data; 
+    end
+
+    mvn_data = array2table(mvn_data, ...
+        'VariableNames',{'magX', 'magY', 'magZ', 'posX', 'posY', 'posZ'});
+    
+    verbose(sprintf("\nLoaded Maven data in %.2f seconds.\n", toc(preload_timer)));
+end
+
+
+function [dataArr] = loadpds_reduced_lite(fin)
+    %{
+        reads the contents of a reduced maven file and returns an array
+        where the columsn are [posX, posY, posZ, magX, magY, magZ]
+    %}
+
     [fid,msg] = fopen(fin,'r');
         assert(fid>=3, msg)
         data = textscan(fid, '%*f %*f %*f %*f %*f %*f %*f %f %f %f %*f %f %f %f %*f %*f %*f %*f'); 
     fclose(fid);
 
-    posX = data{4}; posY = data{5}; posZ = data{6};
-    magX = data{1}; magY = data{2}; magZ = data{3};
+    dataArr = cell2mat(data); 
 end
 
 
