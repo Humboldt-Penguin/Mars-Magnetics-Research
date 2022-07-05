@@ -2,8 +2,8 @@ clc
 clear
 
 %%% INPUTS (see decription for more details)
-minDiam = 69.8;
-maxDiam = 69.9;
+minDiam = 44.59;
+maxDiam = 44.6;
 
 minAlt = 0;
 maxAlt = 200;
@@ -48,6 +48,7 @@ fullTimer = tic;
         lon = clon2lon(craters.clon);
         craters = [craters, table(lon)]; clear lon
         verbose(sprintf("\nLoaded crater data in %.2f seconds.", toc(cratersTimer)));
+        verbose(sprintf("There are %.0f craters that fit the diameter constraints.", height(craters)));
 
 
 % get angular radius (including padding) of shapefile surround crater
@@ -55,7 +56,6 @@ fullTimer = tic;
     theta_padded = (diameter2angular( (craters.diam/2) * (1+padding) ));
     craters = [craters, table(theta, theta_padded)];
     clear theta_padded theta
-
 
 
 % load all maven data as a table (each line of each maven file) -- DO NOT MODIFY THIS ARRAY
@@ -70,6 +70,7 @@ fullTimer = tic;
         clear mvnmat
         verbose(sprintf("\nLoaded Maven data in %.2f seconds.\n\n", toc(preload_timer)));
 
+%%%
 
 % initialize MinMaxStats table 
     components = ["Bmag", "Br", "Blon", "Bcola"];
@@ -262,12 +263,18 @@ for i_crater=1 : height(craters)
                 MinMaxStats(i_crater,:) = cell2table(thisMinMaxStats);
 
 
-            % Make and save plots
+            %{ 
+            Make and save plots
+                v1 makes 4 2x2 plots, each containing the 4 components but detrendeed to different degrees. The undetrended one is saved in _plots.
+                v2 makes 1 4x4 plot, where each row is the 4 components but each row has different detrending. This is also saved in _plots.
+                    edit: v2 sucks (this implementation doesn't work, but more importantly the plots are just far far too small)
+            %}
                 components = ["Bmag", "Br", "Blon", "Bcola"];
                 titles = ["$|\vec{B}| \ [\rm{nT}]$", "$B_r \ [\rm{nT}]$", "$B_\theta \ [\rm{nT}]$", "$B_\phi \ [\rm{nT}]$"];
                 orders = ["No", "Linear", "Quadratic", "Cubic"];
                 trackColors = distinguishable_colors(length(good_tracks));
-                
+
+                % v1 of making plots
                 for deg = 0:3
                     fig = figure('visible','off');
                     fig.Position = [0,0,1200,700];
@@ -295,19 +302,19 @@ for i_crater=1 : height(craters)
                             if deg > 0
                                 B_array = detrend(B_array, deg);
                             end
-                            scatter(thisTrack.lat_deg(~thisTrack.in_crater), B_array(~thisTrack.in_crater), 1, trackColors(i,:), '.');
-                            scatter(thisTrack.lat_deg(thisTrack.in_crater), B_array(thisTrack.in_crater), 50, trackColors(i,:), '.');
+                            scatter(thisTrack.lat_deg(~thisTrack.in_crater_150), B_array(~thisTrack.in_crater_150), 1, trackColors(i,:), '.');
+                            scatter(thisTrack.lat_deg(thisTrack.in_crater_150), B_array(thisTrack.in_crater_150), 50, trackColors(i,:), '.');
                         end
                         
                         hold off
-                    end
+                    end     % end component for loop
                 
                     sgtitle(sprintf('Crater #%03d (ID: %s) \nCoordinates = (%.1f, %.1f), Diameter = %.2fkm \n%s Detrending', ...
                                      i_crater, craters.id{i_crater}, ...
                                      craters.lon(i_crater), craters.lat(i_crater), craters.diam(i_crater), ...
                                      orders(deg+1)));
                 
-                    thisPlot_title = sprintf('%u__deg%u.png', i_crater, deg);
+                    thisPlot_title = sprintf('%03d__deg%u.png', i_crater, deg);
                     saveas(fig, fullfile(folder_2_thisCrater, thisPlot_title));
 
                     % option for saving the undetrended plots for individual inspection
@@ -318,11 +325,71 @@ for i_crater=1 : height(craters)
                         end
 
                     close(fig);
-                    verbose(sprintf("- Crater %.0f/%.0f (%s) was processed in %.2f seconds.", i_crater, height(craters), craters.id{i_crater}, toc(thisCraterTimer)));                
-                end
-        end
-    end
-end
+                end     % end degree for loop
+
+
+
+                % v2 of making plots
+                %{
+                fig = figure('visible','off');
+                fig.Position = [0,0,1200,700];
+
+                for deg = 0:3
+                    for comp = 1:4
+                        subplot(4,4, 3*deg + comp);
+                        hold on
+                        xlim('tight');
+                        ylim('padded');
+                        
+                        xline(craters.lat(i_crater) - craters.theta(i_crater));
+                        xline(craters.lat(i_crater) + craters.theta(i_crater));
+                        xline(craters.lat(i_crater) - 1.5*craters.theta(i_crater), '--black');
+                        xline(craters.lat(i_crater) + 1.5*craters.theta(i_crater), '--black');
+                
+                        xlabel('Latitude $[^\circ]$','Interpreter','latex','FontSize',14);
+                        ylabel(sprintf('%s (%s Detrend)', ...
+                            titles(comp), orders(comp)), ...
+                            'Interpreter','latex','FontSize',14);
+                %             hYLabel = get(gca,'YLabel');
+                %             set(hYLabel,'rotation',0,'VerticalAlignment','middle')
+                
+                        for i=1 : length(good_tracks)
+                            thisTrack = good_tracks{i}; 
+                            B_array = thisTrack.(components(comp));
+                            B_array = smoothdata(B_array, 'sgolay', 200);
+                            if deg > 0
+                                B_array = detrend(B_array, deg);
+                            end
+                            scatter(thisTrack.lat_deg(~thisTrack.in_crater), B_array(~thisTrack.in_crater), 1, trackColors(i,:), '.');
+                            scatter(thisTrack.lat_deg(thisTrack.in_crater), B_array(thisTrack.in_crater), 50, trackColors(i,:), '.');
+                        end
+                        
+                        hold off
+                    end     % end component for loop
+                end     % end degree for loop
+
+            
+                sgtitle(sprintf('Crater #%03d (ID: %s) \nCoordinates = (%.1f, %.1f), Diameter = %.2fkm', ...
+                                 i_crater, craters.id{i_crater}, ...
+                                 craters.lon(i_crater), craters.lat(i_crater), craters.diam(i_crater)));
+            
+                thisPlot_title = sprintf('%u.png', i_crater, deg);
+                saveas(fig, fullfile(folder_2_thisCrater, thisPlot_title));
+
+                % option for saving the undetrended plots for individual inspection
+                folder_3_plots = fullfile(folder_1_diamRange, '_plots');
+                [~,~] = mkdir(folder_3_plots);
+                saveas(fig, fullfile(folder_3_plots, thisPlot_title));
+
+                close(fig);
+                %}
+                
+
+            verbose(sprintf("- Crater %.0f/%.0f (%s) was processed in %.2f seconds.", i_crater, height(craters), craters.id{i_crater}, toc(thisCraterTimer)));                                
+
+        end     % end if statement for making shapefiles/plots
+    end     % end if statement for spherical cut to check if any data points in crater
+end     % end crater for loop
 
 % Save min/max stats table
     title = sprintf('MinMaxStats__diam=[%.0f,%.0f]_alt=[%.0f,%.0f].csv', minDiam, maxDiam, minAlt, maxAlt);
