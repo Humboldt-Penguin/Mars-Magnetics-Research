@@ -2,8 +2,8 @@ clc
 clear
 
 %%% INPUTS (see decription for more details)
-minDiam = 44.59;
-maxDiam = 44.6;
+minDiam = 60;
+maxDiam = 150;
 
 minAlt = 0;
 maxAlt = 200;
@@ -155,7 +155,7 @@ for i_crater=1 : height(craters)
             % Make folder
                 thisCrater_title = sprintf...
                     (...
-                        "%03d__(%.0f,%.0f)__%.0fkm", ...
+                        "%04d__(%.0f,%.0f)__%.0fkm", ...
                         i_crater, ...
                         craters.lon(i_crater), ...
                         craters.lat(i_crater), ...
@@ -309,12 +309,12 @@ for i_crater=1 : height(craters)
                         hold off
                     end     % end component for loop
                 
-                    sgtitle(sprintf('Crater #%03d (ID: %s) \nCoordinates = (%.1f, %.1f), Diameter = %.2fkm \n%s Detrending', ...
+                    sgtitle(sprintf('Crater #%04d (ID: %s) \nCoordinates = (%.1f, %.1f), Diameter = %.2fkm \n%s Detrending', ...
                                      i_crater, craters.id{i_crater}, ...
                                      craters.lon(i_crater), craters.lat(i_crater), craters.diam(i_crater), ...
                                      orders(deg+1)));
                 
-                    thisPlot_title = sprintf('%03d__deg%u.png', i_crater, deg);
+                    thisPlot_title = sprintf('%04d__deg%u.png', i_crater, deg);
                     saveas(fig, fullfile(folder_2_thisCrater, thisPlot_title));
 
                     % option for saving the undetrended plots for individual inspection
@@ -369,7 +369,7 @@ for i_crater=1 : height(craters)
                 end     % end degree for loop
 
             
-                sgtitle(sprintf('Crater #%03d (ID: %s) \nCoordinates = (%.1f, %.1f), Diameter = %.2fkm', ...
+                sgtitle(sprintf('Crater #%04d (ID: %s) \nCoordinates = (%.1f, %.1f), Diameter = %.2fkm', ...
                                  i_crater, craters.id{i_crater}, ...
                                  craters.lon(i_crater), craters.lat(i_crater), craters.diam(i_crater)));
             
@@ -391,9 +391,19 @@ for i_crater=1 : height(craters)
     end     % end if statement for spherical cut to check if any data points in crater
 end     % end crater for loop
 
-% Save min/max stats table
+% Save min/max stats table as csv
     title = sprintf('MinMaxStats__diam=[%.0f,%.0f]_alt=[%.0f,%.0f].csv', minDiam, maxDiam, minAlt, maxAlt);
     writetable(MinMaxStats, fullfile(folder_1_diamRange, title));
+
+    
+% Save crater stats table as csv
+    index = 1:height(craters);
+    index = index';
+    index = table(index);
+    craters_csv = [index, craters];
+    
+    title = sprintf('CraterStats__diam=[%.0f,%.0f]_alt=[%.0f,%.0f].csv', minDiam, maxDiam, minAlt, maxAlt);
+    writetable(craters_csv, fullfile(folder_1_diamRange, title));
 
 
 % Final times
@@ -411,7 +421,7 @@ end     % end crater for loop
     writeLogs(folder_1_diamRange, logs, saveLogs);
 
 
-    
+
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %% Functions
