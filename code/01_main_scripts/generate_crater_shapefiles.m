@@ -70,13 +70,13 @@ fullTimer = tic;
         clear mvnmat
         verbose(sprintf("\nLoaded Maven data in %.2f seconds.\n\n", toc(preload_timer)));
 
-%%
+%%%
 
 % initialize MinMaxStats table 
-    components = ["Bmag", "Br", "Blon", "Bcola"];
+    components_stats = ["Bmag", "Br", "Blon", "Bcola"];
     varNames = ["id_matlab", "id_Robbins2012"];
     varTypes = ["uint64", "string"];
-    for component=components
+    for component=components_stats
         for deg = 0:3
             base = sprintf('%s_deg%u_', component, deg);
             varNames = [varNames, strcat(base,'mins'), strcat(base,'maxs'), strcat(base,'either')]; %#ok<AGROW> 
@@ -95,12 +95,11 @@ fullTimer = tic;
     [~,~] = mkdir(folder_1_diamRange);
 
 
-
 % making crater shapefiles + plots of B-field cross-section
 
 allCratersTimer = tic;
 
-for i_crater=1 : 1%height(craters)
+for i_crater=1 : height(craters)
 
     thisCraterTimer = tic;
 
@@ -225,8 +224,8 @@ for i_crater=1 : 1%height(craters)
     % Find the percentage of tracks where the max/min B value within 200% radius occurs within 150% radius
         thisMinMaxStats = {i_crater, craters.id(i_crater)};
         
-        for i=1:length(components)
-            component = components(i);
+        for i=1:length(components_stats)
+            component = components_stats(i);
             for deg = 0:3
                 numMin = 0;
                 numMax = 0;
@@ -279,18 +278,22 @@ for i_crater=1 : 1%height(craters)
         v2 makes 1 4x4 plot, where each row is the 4 components but each row has different detrending. This is also saved in _plots.
             edit: v2 sucks (this implementation doesn't work, but more importantly the plots are just far far too small)
     %}
-        components = ["Bmag", "Br", "Blon", "Bcola"];
-        titles = ["$|B| \ [\rm{nT}]$", "$B_r \ [\rm{nT}]$", "$B_\theta \ [\rm{nT}]$", "$B_\phi \ [\rm{nT}]$"];
+        components_plots = ["Bmag", "Bmag_norm", "altitude", ...
+                      "Br", "Blon", "Bcola"];
+        
+        titles = ["$|B| \ [\rm{nT}]$", "$||B|| \ [\rm{nT}]$", "$\rm{Altitude} \ [\rm{km}]$"...
+                  "$B_r \ [\rm{nT}]$", "$B_\theta \ [\rm{nT}]$", "$B_\phi \ [\rm{nT}]$"];
+
         orders = ["No", "Linear", "Quadratic", "Cubic"];
         trackColors = distinguishable_colors(length(good_tracks));
 
         % v1 of making plots
         for deg = 0:3
             fig = figure('visible','off');
-            fig.Position = [0,0,1200,700];
+            fig.Position = [0,0,1700,700];
         
-            for comp = 1:4
-                subplot(2,2,comp);
+            for comp = 1:6
+                subplot(2,3,comp);
                 hold on
                 box on
                 xlim('tight');
@@ -309,11 +312,12 @@ for i_crater=1 : 1%height(craters)
         
                 for i=1 : length(good_tracks)
                     thisTrack = good_tracks{i}; 
-                    B_array = thisTrack.(components(comp));
+                    B_array = thisTrack.(components_plots(comp));
                     B_array = smoothdata(B_array, 'sgolay', 200);
-                    if deg > 0
+                    if deg > 0 && comp ~= 3
                         B_array = detrend(B_array, deg);
                     end
+
                     scatter(thisTrack.lat_deg(~thisTrack.in_crater_150), B_array(~thisTrack.in_crater_150), 1, trackColors(i,:), '.');
                     scatter(thisTrack.lat_deg(thisTrack.in_crater_150), B_array(thisTrack.in_crater_150), 50, trackColors(i,:), '.');
                 end
@@ -331,7 +335,11 @@ for i_crater=1 : 1%height(craters)
 
             % option for saving the undetrended plots for individual inspection
                 if deg == 0
-                    folder_3_plots = fullfile(folder_1_diamRange, '_plots');
+                    folder_3_plots = fullfile(folder_1_diamRange, '_plots_raw');
+                    [~,~] = mkdir(folder_3_plots);
+                    saveas(fig, fullfile(folder_3_plots, thisPlot_title));
+                elseif deg == 1
+                    folder_3_plots = fullfile(folder_1_diamRange, '_plots_linearDetrend');
                     [~,~] = mkdir(folder_3_plots);
                     saveas(fig, fullfile(folder_3_plots, thisPlot_title));
                 end
@@ -367,7 +375,7 @@ for i_crater=1 : 1%height(craters)
         
                 for i=1 : length(good_tracks)
                     thisTrack = good_tracks{i}; 
-                    B_array = thisTrack.(components(comp));
+                    B_array = thisTrack.(components_plots(comp));
                     B_array = smoothdata(B_array, 'sgolay', 200);
                     if deg > 0
                         B_array = detrend(B_array, deg);
