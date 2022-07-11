@@ -70,13 +70,12 @@ fullTimer = tic;
         clear mvnmat
         verbose(sprintf("\nLoaded Maven data in %.2f seconds.\n\n", toc(preload_timer)));
 
-%%%
+%%
 
 % initialize MinMaxStats table 
     components = ["Bmag", "Br", "Blon", "Bcola"];
     varNames = ["id_matlab", "id_Robbins2012"];
     varTypes = ["uint64", "string"];
-    
     for component=components
         for deg = 0:3
             base = sprintf('%s_deg%u_', component, deg);
@@ -84,7 +83,6 @@ fullTimer = tic;
             varTypes = [varTypes, "double", "double", "double"]; %#ok<AGROW> 
         end
     end
-    
     MinMaxStats = table('Size',[height(craters),length(varNames)],'VariableTypes',varTypes,'VariableNames',varNames);
     clear varNames varTypes;
     
@@ -102,7 +100,7 @@ fullTimer = tic;
 
 allCratersTimer = tic;
 
-for i_crater=1 : height(craters)
+for i_crater=1 : 1%height(craters)
 
     % misc
         thisCraterTimer = tic;
@@ -137,11 +135,11 @@ for i_crater=1 : height(craters)
             altitude = r - 3390; clear r
 
             Bmag = sqrt(Blon.^2 + Bcola.^2 + Br.^2);
-            Bmag_norm = Bmag / max(Bmag);
+%             Bmag_norm = Bmag / max(Bmag); % this is not the correct method
 
         % Collect variables into table for easy indexing
-            thisCrater = table(lon_deg, clon_deg, lat_deg, Bmag, Bmag_norm, Blon, Bcola, Br, altitude);
-            clear lon_deg clon_deg lat_deg Bmag Bmag_norm Blon Bcola Br altitude
+            thisCrater = table(lon_deg, clon_deg, lat_deg, Bmag, Blon, Bcola, Br, altitude);
+            clear lon_deg clon_deg lat_deg Bmag Blon Bcola Br altitude
             
         % Altitude cut
             indices_altCut = thisCrater.altitude < maxAlt;
@@ -151,7 +149,7 @@ for i_crater=1 : height(craters)
         % If there are still measurements within the altitude cut, write to shape file and do cross-sectional analysis
         if height(thisCrater) == 0
             verbose(sprintf("--- Skipping crater %.0f/%.0f -- no tracks fit within the altitude range (%.2f sec).", i_crater, length(craters.id), toc(thisCraterTimer)));
-        else % Write to shapefile
+        else % Write to shapefile and do cross-sectional track analysis
             % Make folder
                 thisCrater_title = sprintf...
                     (...
@@ -190,7 +188,17 @@ for i_crater=1 : height(craters)
                     );
                 writeMetadata(folder_2_thisCrater, metadata);                    
 
-            % Write shapefile
+
+
+
+            % Isolate tracks that pass through the crater and apply in_crater flags (converted to function bc costly)
+                % Addition 7/11/22: also create a Bmag_norm array to write to the shapefile
+                [good_tracks, Bmag_norm] = isolateGoodTracks(thisCrater, craters(i_crater,:));
+
+            % Add Bmag_norm to crater field
+                thisCrater = [thisCrater, table(Bmag_norm)]; %#ok<AGROW> 
+
+            % Quick detour now that we have Bmag_norm: write shapefile
                 shape_struct = struct...
                     ( ...
                         'Geometry', 'Multipoint', ...
@@ -207,10 +215,6 @@ for i_crater=1 : height(craters)
                     );
                 shapewrite(shape_struct, fullfile(folder_2_thisCrater, thisCrater_title));
 
-
-
-            % Isolate tracks that pass through the crater and apply in_crater flags (converted to function bc costly)
-                good_tracks = isolateGoodTracks(thisCrater, craters(i_crater,:));
 
             % Find the percentage of tracks where the max/min B value within 200% radius occurs within 150% radius
                 thisMinMaxStats = {i_crater, craters.id(i_crater)};
@@ -270,7 +274,7 @@ for i_crater=1 : height(craters)
                     edit: v2 sucks (this implementation doesn't work, but more importantly the plots are just far far too small)
             %}
                 components = ["Bmag", "Br", "Blon", "Bcola"];
-                titles = ["$|\vec{B}| \ [\rm{nT}]$", "$B_r \ [\rm{nT}]$", "$B_\theta \ [\rm{nT}]$", "$B_\phi \ [\rm{nT}]$"];
+                titles = ["$|B| \ [\rm{nT}]$", "$B_r \ [\rm{nT}]$", "$B_\theta \ [\rm{nT}]$", "$B_\phi \ [\rm{nT}]$"];
                 orders = ["No", "Linear", "Quadratic", "Cubic"];
                 trackColors = distinguishable_colors(length(good_tracks));
 
@@ -383,6 +387,10 @@ for i_crater=1 : height(craters)
 
                 close(fig);
                 %}
+
+
+
+
                 
 
             verbose(sprintf("- Crater %.0f/%.0f (%s) was processed in %.2f seconds.", i_crater, height(craters), craters.id{i_crater}, toc(thisCraterTimer)));                                
@@ -581,18 +589,20 @@ end
 %         hasMax = thisTrack.in_crater(maxIndex);
 % end
 
-function [good_tracks] = isolateGoodTracks(thisCrater, craterMetaData)
+function [good_tracks, Bmag_norm] = isolateGoodTracks(thisCrater, craterMetaData)
     
-    % Find the index where each track begins by searching for abrupt jumps in lat_deg
+    % Find the index where each track begins by searching for abrupt jumps in lat_deg and altitude
         epsilon_inCrater = 0.05;
         track_indices = 1;
         for ptr=1 : height(thisCrater)-1
-            if abs(thisCrater.lat_deg(ptr) - thisCrater.lat_deg(ptr+1)) > epsilon_inCrater
+            if abs(thisCrater.lat_deg(ptr) - thisCrater.lat_deg(ptr+1)) > epsilon_inCrater || abs(thisCrater.altitude(ptr) - thisCrater.altitude(ptr+1)) > 5
                 track_indices = [track_indices; ptr+1]; %#ok<AGROW> 
             end
         end
         num_tracks = length(track_indices);
+        
 
+        
     %{
 %     For each track, put its crater data into cell array
         tracks = cell(1,num_tracks);
@@ -609,6 +619,7 @@ function [good_tracks] = isolateGoodTracks(thisCrater, craterMetaData)
         % 'in_crater_plus100`: point is within 2.0*radius of crater
     
         good_tracks = {};
+        Bmag_norm = [];
     
         for i=1 : num_tracks
             % For a track, copy its information from `thisCrater` to `thisTrack`
@@ -618,6 +629,14 @@ function [good_tracks] = isolateGoodTracks(thisCrater, craterMetaData)
                     endIndex = track_indices(i+1)-1;
                 end    
                 thisTrack = thisCrater(track_indices(i):endIndex,:);
+
+
+            % Addition 7/11/22: also create a Bmag_norm array to write to the shapefile
+                this_Bmag_norm = thisTrack.Bmag / max(thisTrack.Bmag);
+                thisTrack = [thisTrack, table(this_Bmag_norm, 'VariableNames', "Bmag_norm")]; %#ok<AGROW> 
+                Bmag_norm = [Bmag_norm; this_Bmag_norm]; %#ok<AGROW> 
+
+
     
             % Loop over all points and check if in crater    
                 in_crater = false(height(thisTrack),1);
