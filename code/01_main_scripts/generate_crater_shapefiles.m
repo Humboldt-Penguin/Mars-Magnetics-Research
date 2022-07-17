@@ -2,8 +2,8 @@ clc
 clear
 
 %%% INPUTS (see decription for more details)
-minDiam = 36.34147853;
-maxDiam = 36.34147855;
+minDiam = 150;
+maxDiam = 999;
 
 minAlt = 0;
 maxAlt = 200;
@@ -331,10 +331,10 @@ for i_crater=1 : height(craters)
                 hold off
             end     % end component for loop
         
-            sgtitle(sprintf('Crater #%04d (ID: %s) \nCoordinates = (%.1f, %.1f), Diameter = %.2fkm \n%s Detrending', ...
+            sgtitle(sprintf('Crater #%04d (ID: %s) \nCoordinates = (%.1f, %.1f), Diameter = %.2fkm \n%s Detrending, %.0f Tracks', ...
                              i_crater, craters.id{i_crater}, ...
                              craters.lon(i_crater), craters.lat(i_crater), craters.diam(i_crater), ...
-                             orders(deg+1)));
+                             orders(deg+1), length(good_tracks)));
         
             thisPlot_title = sprintf('%04d__deg%u.png', i_crater, deg);
             saveas(fig, fullfile(folder_2_thisCrater, thisPlot_title));
