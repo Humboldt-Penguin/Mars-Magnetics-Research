@@ -2,8 +2,8 @@ clc
 clear
 
 %%% INPUTS (see decription for more details)
-minDiam = 60;
-maxDiam = 150;
+minDiam = 36.34147853;
+maxDiam = 36.34147855;
 
 minAlt = 0;
 maxAlt = 200;
@@ -14,7 +14,7 @@ crater_database_path = 'C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\
 
 saveLogs = true;
 
-% infile_mavenFolders = 'inputfile_mavenReduced.txt';
+infile_mavenFolders = 'inputfile_mavenReduced.txt';
 % infile_craters = 'craters_70km_to_150km.txt';
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -65,12 +65,18 @@ fullTimer = tic;
 %         clear mavenFiles
     % METHOD 2: loading from matfile
         preload_timer = tic;
-        mvnmat = matfile(fullfile(getPaths('matfiles'), 'mvn.mat'));
+        path = fullfile(getPaths('matfiles'), 'mvn.mat');
+        mvnmat = matfile(path); clear path
         mvn = mvnmat.mvn;
         clear mvnmat
         verbose(sprintf("\nLoaded Maven data in %.2f seconds.\n\n", toc(preload_timer)));
 
-%%%
+% %%
+% % if generating mvn for the first time, save it as a matfile
+%     path = fullfile(getPaths('matfiles'), 'mvn.mat');
+%     save(path, 'mvn');
+% %%
+
 
 % initialize MinMaxStats table 
     components_stats = ["Bmag", "Br", "Blon", "Bcola"];
@@ -288,7 +294,7 @@ for i_crater=1 : height(craters)
         trackColors = distinguishable_colors(length(good_tracks));
 
         % v1 of making plots
-        for deg = 0:3
+        for deg = 0:1
             fig = figure('visible','off');
             fig.Position = [0,0,1700,700];
         
