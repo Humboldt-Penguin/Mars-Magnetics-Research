@@ -8,13 +8,15 @@ maxDiam = 150;
 minAlt = 0;
 maxAlt = 200;
 
-padding = 4.0; % eg "0.5" means the shapefiles extend beyond the crater rim by 50% of the radius
+padding = 10.0; % eg "0.5" means the shapefiles extend beyond the crater rim by 0.5 times the radius
 
 crater_database_path = 'C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\geological_features\crater_database\Catalog_Mars_Release_2020_1kmPlus_FullMorphData.csv';
 
+write_shape = false;
+write_minmaxstats = false;
 saveLogs = true;
 
-infile_mavenFolders = 'inputfile_mavenReduced.txt';
+% infile_mavenFolders = 'inputfile_mavenReduced.txt';
 % infile_craters = 'craters_70km_to_150km.txt';
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -35,8 +37,8 @@ fullTimer = tic;
     global logs; %#ok<*GVMIS> 
     logs = "";
     verbose(sprintf("Started running at %s \n\n" + ...
-                    "* Minimum crater diameter = %.0f \n" + ...
-                    "* Maximum crater diameter = %.0f \n" + ...
+                    "* Minimum crater diameter = %f \n" + ...
+                    "* Maximum crater diameter = %f \n" + ...
                     "* Maximum satellite altitude = %.0f \n" + ...
                     "* Crater padding for shapefiles = %.2f", ...
                     datestr(now,'HH:MM'), minDiam, maxDiam, maxAlt, padding));
@@ -97,12 +99,21 @@ fullTimer = tic;
     clear varNames varTypes;
     
 
-
 % make folders (NOTE: in this folder naming scheme, the number refers to how far the child folder is from the main parent "folder_1"
     folder_1_diamRange = fullfile(getPaths('shapefiles'), ...
                                 'craters', ...
-                                sprintf('diam=[%.0f,%.0f]_alt=[%.0f,%.0f]', minDiam, maxDiam, minAlt, maxAlt)); 
+                                sprintf('diam=[%.0f,%.0f]_alt=[%.0f,%.0f]_pad=%.0f', minDiam, maxDiam, minAlt, maxAlt, padding)); 
     [~,~] = mkdir(folder_1_diamRange);
+
+
+% Save crater stats table as csv
+    index = 1:height(craters);
+    index = index';
+    index = table(index);
+    craters_csv = [index, craters];
+    
+    title = sprintf('CraterStats__diam=[%.0f,%.0f]_alt=[%.0f,%.0f].csv', minDiam, maxDiam, minAlt, maxAlt);
+    writetable(craters_csv, fullfile(folder_1_diamRange, title));
 
 
 % making crater shapefiles + plots of B-field cross-section
@@ -204,24 +215,29 @@ for i_crater=1 : height(craters)
         thisCrater = [thisCrater, table(Bmag_norm)]; %#ok<AGROW> 
 
     % Quick detour now that we have Bmag_norm: write shapefile
-        shape_struct = struct...
-            ( ...
-                'Geometry', 'Multipoint', ...
-                'CRATER_ID', craters.id{i_crater}, ...
-                'Bmag', num2cell(thisCrater.Bmag), ...
-                'Bmag_norm', num2cell(thisCrater.Bmag_norm), ...
-                'Br', num2cell(thisCrater.Br), ...
-                'Blon', num2cell(thisCrater.Blon), ...
-                'Bcola', num2cell(thisCrater.Bcola), ...
-                'Altitude', num2cell(thisCrater.altitude), ...
-                'Lon', num2cell(thisCrater.lon), ...
-                'Clon', num2cell(thisCrater.clon), ...
-                'Lat',num2cell(thisCrater.lat) ...
-            );
-        shapewrite(shape_struct, fullfile(folder_2_thisCrater, thisCrater_title));
+
+    if write_shape
+            shape_struct = struct...
+                ( ...
+                    'Geometry', 'Multipoint', ...
+                    'CRATER_ID', craters.id{i_crater}, ...
+                    'Bmag', num2cell(thisCrater.Bmag), ...
+                    'Bmag_norm', num2cell(thisCrater.Bmag_norm), ...
+                    'Br', num2cell(thisCrater.Br), ...
+                    'Blon', num2cell(thisCrater.Blon), ...
+                    'Bcola', num2cell(thisCrater.Bcola), ...
+                    'Altitude', num2cell(thisCrater.altitude), ...
+                    'Lon', num2cell(thisCrater.lon), ...
+                    'Clon', num2cell(thisCrater.clon), ...
+                    'Lat',num2cell(thisCrater.lat) ...
+                );
+            shapewrite(shape_struct, fullfile(folder_2_thisCrater, thisCrater_title));
+    end
 
 
     % Find the percentage of tracks where the max/min B value within 200% radius occurs within 150% radius
+    if write_minmaxstats
+
         thisMinMaxStats = {i_crater, craters.id(i_crater)};
         
         for i=1:length(components_stats)
@@ -270,6 +286,8 @@ for i_crater=1 : height(craters)
         end
         
         MinMaxStats(i_crater,:) = cell2table(thisMinMaxStats);
+
+    end
 
 
     %{ 
@@ -416,19 +434,11 @@ for i_crater=1 : height(craters)
 end     % end crater for loop
 
 % Save min/max stats table as csv
-    title = sprintf('MinMaxStats__diam=[%.0f,%.0f]_alt=[%.0f,%.0f].csv', minDiam, maxDiam, minAlt, maxAlt);
-    writetable(MinMaxStats, fullfile(folder_1_diamRange, title));
-
+    if write_minmaxstats
+        title = sprintf('MinMaxStats__diam=[%.0f,%.0f]_alt=[%.0f,%.0f].csv', minDiam, maxDiam, minAlt, maxAlt);
+        writetable(MinMaxStats, fullfile(folder_1_diamRange, title));
+    end
     
-% Save crater stats table as csv
-    index = 1:height(craters);
-    index = index';
-    index = table(index);
-    craters_csv = [index, craters];
-    
-    title = sprintf('CraterStats__diam=[%.0f,%.0f]_alt=[%.0f,%.0f].csv', minDiam, maxDiam, minAlt, maxAlt);
-    writetable(craters_csv, fullfile(folder_1_diamRange, title));
-
 
 % Final times
     t = seconds(toc(allCratersTimer));

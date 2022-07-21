@@ -8,7 +8,7 @@ maxDiam = 150;
 minAlt = 0;
 maxAlt = 200;
 
-padding = 4.0; % eg "0.5" means the shapefiles extend beyond the crater rim by 50% of the radius
+padding = 10.0; % eg "0.5" means the shapefiles extend beyond the crater rim by 50% of the radius
 
 crater_database_path = 'C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\geological_features\crater_database\Catalog_Mars_Release_2020_1kmPlus_FullMorphData.csv';
 
@@ -105,7 +105,7 @@ fullTimer = tic;
 % making crater shapefiles + plots of B-field cross-section
 
 allCratersTimer = tic;
-
+%%%
 for i_crater=1 : height(craters)
 
     thisCraterTimer = tic;
@@ -113,8 +113,8 @@ for i_crater=1 : height(craters)
 
     % If are any tracks that actually pass through the crater (as opposed to being captured in the padded radius), continue with processing
     if maxAlt < 150
-%         [TEST_clon_rad,~,~,~,~,~,~,~] = MAGcart2sph(...
-%             mvn.posX,mvn.posY,mvn.posZ,mvn.magX,mvn.magY,mvn.magZ,[],[],[],[],[],[],[],[],[],[craters.clon(i_crater) craters.lat(i_crater) craters.theta(i_crater)]);
+        [TEST_clon_rad,~,~,~,~,~,~,~] = MAGcart2sph(...
+            mvn.posX,mvn.posY,mvn.posZ,mvn.magX,mvn.magY,mvn.magZ,[],[],[],[],[],[],[],[],[],[craters.clon(i_crater) craters.lat(i_crater) craters.theta(i_crater)]);
     else
         TEST_clon_rad = 'not manually calculating this for optimization purposes';
     end
@@ -128,8 +128,8 @@ for i_crater=1 : height(craters)
 
     clear TEST_clon_rad
     % Convert position and magnetic field vectors from cartesian to spherical coordinates, and do a spherical cut around a cap specified by [clon lat Th_PADDED]
-        [clon_rad,cola_rad,r,data,~,~,~,~] = MAGcart2sph...
-            (mvn.posX,mvn.posY,mvn.posZ,mvn.magX,mvn.magY,mvn.magZ,[],[],[],[],[],[],[],[],[],[craters.clon(i_crater) craters.lat(i_crater) craters.theta_padded(i_crater)]);
+        [clon_rad,cola_rad,r,data,~,~,~,~] = MAGcart2sph( ...
+            mvn.posX,mvn.posY,mvn.posZ,mvn.magX,mvn.magY,mvn.magZ,[],[],[],[],[],[],[],[],[],[craters.clon(i_crater) craters.lat(i_crater) craters.theta_padded(i_crater)]);
         
         data = cell2mat(data);
             Blon = data(:,3);
