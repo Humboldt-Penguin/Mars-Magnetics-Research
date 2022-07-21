@@ -215,79 +215,78 @@ for i_crater=1 : height(craters)
         thisCrater = [thisCrater, table(Bmag_norm)]; %#ok<AGROW> 
 
     % Quick detour now that we have Bmag_norm: write shapefile
-
-    if write_shape
+        if write_shape
             shape_struct = struct...
                 ( ...
-                    'Geometry', 'Multipoint', ...
-                    'CRATER_ID', craters.id{i_crater}, ...
-                    'Bmag', num2cell(thisCrater.Bmag), ...
-                    'Bmag_norm', num2cell(thisCrater.Bmag_norm), ...
-                    'Br', num2cell(thisCrater.Br), ...
-                    'Blon', num2cell(thisCrater.Blon), ...
-                    'Bcola', num2cell(thisCrater.Bcola), ...
-                    'Altitude', num2cell(thisCrater.altitude), ...
-                    'Lon', num2cell(thisCrater.lon), ...
-                    'Clon', num2cell(thisCrater.clon), ...
-                    'Lat',num2cell(thisCrater.lat) ...
+                'Geometry', 'Multipoint', ...
+                'CRATER_ID', craters.id{i_crater}, ...
+                'Bmag', num2cell(thisCrater.Bmag), ...
+                'Bmag_norm', num2cell(thisCrater.Bmag_norm), ...
+                'Br', num2cell(thisCrater.Br), ...
+                'Blon', num2cell(thisCrater.Blon), ...
+                'Bcola', num2cell(thisCrater.Bcola), ...
+                'Altitude', num2cell(thisCrater.altitude), ...
+                'Lon', num2cell(thisCrater.lon), ...
+                'Clon', num2cell(thisCrater.clon), ...
+                'Lat',num2cell(thisCrater.lat) ...
                 );
             shapewrite(shape_struct, fullfile(folder_2_thisCrater, thisCrater_title));
-    end
+        end
 
 
     % Find the percentage of tracks where the max/min B value within 200% radius occurs within 150% radius
-    if write_minmaxstats
-
-        thisMinMaxStats = {i_crater, craters.id(i_crater)};
-        
-        for i=1:length(components_stats)
-            component = components_stats(i);
-            for deg = 0:3
-                numMin = 0;
-                numMax = 0;
-                for thisTrack = good_tracks
+        if write_minmaxstats
+    
+            thisMinMaxStats = {i_crater, craters.id(i_crater)};
+            
+            for i=1:length(components_stats)
+                component = components_stats(i);
+                for deg = 0:3
+                    numMin = 0;
+                    numMax = 0;
+                    for thisTrack = good_tracks
+                        
+                        thisTrack = thisTrack{1};  
+                        B_array = thisTrack.(component);
+                        B_array = smoothdata(B_array, 'sgolay', 200);
+                        if deg > 0
+                            B_array = detrend(B_array, deg);
+                        end
+            
+                        start_200 = find(thisTrack.in_crater_200, 1, 'first');
+                        end_200 = find(thisTrack.in_crater_200, 1, 'last');
+            
+                        minVal_200 = min(B_array(start_200:end_200));
+                        maxVal_200 = max(B_array(start_200:end_200));
+                        
+                        minIndex = find(B_array == minVal_200);
+                        maxIndex = find(B_array == maxVal_200);
+                        
+                        hasMin = thisTrack.in_crater_150(minIndex);
+                        hasMax = thisTrack.in_crater_150(maxIndex);
                     
-                    thisTrack = thisTrack{1}; %#ok<FXSET> 
-                    B_array = thisTrack.(component);
-                    B_array = smoothdata(B_array, 'sgolay', 200);
-                    if deg > 0
-                        B_array = detrend(B_array, deg);
+                        start_150 = find(thisTrack.in_crater_150, 1, 'first');
+                        end_150 = find(thisTrack.in_crater_150, 1, 'last');
+                        if start_150 == 1 || end_150 == height(thisTrack)
+                            hasMin = false;
+                            hasMax = false;
+                        end
+                        numMin = numMin + hasMin;
+                        numMax = numMax + hasMax;
                     end
-        
-                    start_200 = find(thisTrack.in_crater_200, 1, 'first');
-                    end_200 = find(thisTrack.in_crater_200, 1, 'last');
-        
-                    minVal_200 = min(B_array(start_200:end_200));
-                    maxVal_200 = max(B_array(start_200:end_200));
-                    
-                    minIndex = find(B_array == minVal_200);
-                    maxIndex = find(B_array == maxVal_200);
-                    
-                    hasMin = thisTrack.in_crater_150(minIndex);
-                    hasMax = thisTrack.in_crater_150(maxIndex);
-                
-                    start_150 = find(thisTrack.in_crater_150, 1, 'first');
-                    end_150 = find(thisTrack.in_crater_150, 1, 'last');
-                    if start_150 == 1 || end_150 == height(thisTrack)
-                        hasMin = false;
-                        hasMax = false;
-                    end
-                    numMin = numMin + hasMin;
-                    numMax = numMax + hasMax;
+            
+                    numTracks = length(good_tracks);
+                    percentMin = numMin / numTracks;
+                    percentMax = numMax / numTracks;
+                    percentMinOrMax = (numMin + numMax) / numTracks;
+            
+                    thisMinMaxStats = [thisMinMaxStats(:)', {percentMin}, {percentMax}, {percentMinOrMax}]; 
                 end
-        
-                numTracks = length(good_tracks);
-                percentMin = numMin / numTracks;
-                percentMax = numMax / numTracks;
-                percentMinOrMax = (numMin + numMax) / numTracks;
-        
-                thisMinMaxStats = [thisMinMaxStats(:)', {percentMin}, {percentMax}, {percentMinOrMax}]; 
             end
+            
+            MinMaxStats(i_crater,:) = cell2table(thisMinMaxStats);
+    
         end
-        
-        MinMaxStats(i_crater,:) = cell2table(thisMinMaxStats);
-
-    end
 
 
     %{ 
@@ -322,7 +321,6 @@ for i_crater=1 : height(craters)
                 xline(craters.lat(i_crater) - 1.5*craters.theta(i_crater), '--black');
                 xline(craters.lat(i_crater) + 1.5*craters.theta(i_crater), '--black');
                 
-
                 xlabel('Latitude $[^\circ]$','Interpreter','latex','FontSize',14);
                 ylabel(titles(comp),'Interpreter','latex','FontSize',14);
         %             hYLabel = get(gca,'YLabel');
@@ -364,74 +362,11 @@ for i_crater=1 : height(craters)
 
             close(fig);
         end     % end degree for loop
-
-
-
-        % v2 of making plots
-        %{
-        fig = figure('visible','off');
-        fig.Position = [0,0,1200,700];
-
-        for deg = 0:3
-            for comp = 1:4
-                subplot(4,4, 3*deg + comp);
-                hold on
-                xlim('tight');
-                ylim('padded');
-                
-                xline(craters.lat(i_crater) - craters.theta(i_crater));
-                xline(craters.lat(i_crater) + craters.theta(i_crater));
-                xline(craters.lat(i_crater) - 1.5*craters.theta(i_crater), '--black');
-                xline(craters.lat(i_crater) + 1.5*craters.theta(i_crater), '--black');
-        
-                xlabel('Latitude $[^\circ]$','Interpreter','latex','FontSize',14);
-                ylabel(sprintf('%s (%s Detrend)', ...
-                    titles(comp), orders(comp)), ...
-                    'Interpreter','latex','FontSize',14);
-        %             hYLabel = get(gca,'YLabel');
-        %             set(hYLabel,'rotation',0,'VerticalAlignment','middle')
-        
-                for i=1 : length(good_tracks)
-                    thisTrack = good_tracks{i}; 
-                    B_array = thisTrack.(components_plots(comp));
-                    B_array = smoothdata(B_array, 'sgolay', 200);
-                    if deg > 0
-                        B_array = detrend(B_array, deg);
-                    end
-                    scatter(thisTrack.lat_deg(~thisTrack.in_crater), B_array(~thisTrack.in_crater), 1, trackColors(i,:), '.');
-                    scatter(thisTrack.lat_deg(thisTrack.in_crater), B_array(thisTrack.in_crater), 50, trackColors(i,:), '.');
-                end
-                
-                hold off
-            end     % end component for loop
-        end     % end degree for loop
-
-    
-        sgtitle(sprintf('Crater #%04d (ID: %s) \nCoordinates = (%.1f, %.1f), Diameter = %.2fkm', ...
-                         i_crater, craters.id{i_crater}, ...
-                         craters.lon(i_crater), craters.lat(i_crater), craters.diam(i_crater)));
-    
-        thisPlot_title = sprintf('%u.png', i_crater, deg);
-        saveas(fig, fullfile(folder_2_thisCrater, thisPlot_title));
-
-        % option for saving the undetrended plots for individual inspection
-        folder_3_plots = fullfile(folder_1_diamRange, '_plots');
-        [~,~] = mkdir(folder_3_plots);
-        saveas(fig, fullfile(folder_3_plots, thisPlot_title));
-
-        close(fig);
-        %}
-
-
-
-
         
 
     verbose(sprintf("- Crater %.0f/%.0f (%s) was processed in %.2f seconds.", i_crater, height(craters), craters.id{i_crater}, toc(thisCraterTimer)));                                
 
-%     end     % end if statement for making shapefiles/plots    % replaced with continue statement 
-%     end     % end if statement for spherical cut to check if any data points in crater    % replaced with continue statement 
-end     % end crater for loop
+end
 
 % Save min/max stats table as csv
     if write_minmaxstats
@@ -580,41 +515,6 @@ end
 
 %% maven track signal analysis
 
-% function [hasMin, hasMax] = find_num_MinMax(B_array, thisTrack, searchRange)
-%     %{
-%         Check if there's a local min/max in the crater, in the range of
-%         searchRange*crater_radius beyond the crater rim 
-%             [although note that it's not really a scalar of crater_radius,
-%             it's really just scaling based on the number of data points
-%             that were in the crater for that track]
-%     %}
-% 
-%     % Smooth data
-%         B_array = smoothdata(B_array, 'sgolay', 300);
-%     
-%     % Find start/end indices of crater and full region where we're searching
-%         craterStart = find(thisTrack.in_crater, 1, 'first');
-%         craterEnd = find(thisTrack.in_crater, 1, 'last');
-% 
-%         searchStart = craterStart - round(abs(craterStart-craterEnd)*0.5*searchRange);  
-%         searchEnd = craterEnd + round(abs(craterStart-craterEnd)*0.5*searchRange);
-%     
-%         if searchStart < 0 || searchEnd > height(thisTrack)
-%             hasMin = false;
-%             hasMax = false;
-%             return
-%         end
-% 
-%     % Check if the minimum/maximum values of the full search region are in the crater 
-%         [~, minIndex] = min(B_array(searchStart:searchEnd));
-%         minIndex = minIndex + searchStart;
-%         hasMin = thisTrack.in_crater(minIndex);
-%     
-%         [~, maxIndex] = max(B_array(searchStart:searchEnd));
-%         maxIndex = maxIndex + searchStart - 1;
-%         hasMax = thisTrack.in_crater(maxIndex);
-% end
-
 function [good_tracks, Bmag_norm] = isolateGoodTracks(thisCrater, craterMetaData)
     
     % Find the index where each track begins by searching for abrupt jumps in lat_deg and altitude
@@ -626,17 +526,6 @@ function [good_tracks, Bmag_norm] = isolateGoodTracks(thisCrater, craterMetaData
             end
         end
         num_tracks = length(track_indices);
-        
-
-        
-    %{
-%     For each track, put its crater data into cell array
-        tracks = cell(1,num_tracks);
-        for i=1 : num_tracks-1
-            tracks{i} = thisCrater(track_indices(i):track_indices(i+1)-1,:);  
-        end
-        tracks{end} = thisCrater(track_indices(end):end,:);
-    %}
 
     
     % (1) Remove tracks that don't pass through the crater, and (2) apply the following flags to data points:
