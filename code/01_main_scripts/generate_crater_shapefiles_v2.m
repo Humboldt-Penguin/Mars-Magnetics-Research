@@ -3,18 +3,19 @@ clear
 
 %%% INPUTS (see decription for more details)
 minDiam = 70;
-maxDiam = 150;
+maxDiam = 500;
 
 minAlt = 0;
 maxAlt = 200;
 
-padding = 10.0; % eg "0.5" means the shapefiles extend beyond the crater rim by 0.5 times the radius
+padding = 5.0; % eg "0.5" means the shapefiles extend beyond the crater rim by 0.5 times the radius
+
+write_shape = true;
+write_minmaxstats = true;
+saveLogs = true;
+
 
 crater_database_path = 'C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\geological_features\crater_database\Catalog_Mars_Release_2020_1kmPlus_FullMorphData.csv';
-
-write_shape = false;
-write_minmaxstats = false;
-saveLogs = true;
 
 % infile_mavenFolders = 'inputfile_mavenReduced.txt';
 % infile_craters = 'craters_70km_to_150km.txt';
@@ -116,11 +117,25 @@ fullTimer = tic;
     writetable(craters_csv, fullfile(folder_1_diamRange, title));
 
 
+
+% OPTIONAL: only look at certain craters based on user-filtered folder of plots
+    filtered_plots = "C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\magnetic_shapefiles\magnetic_anomalies\_plotsonly_diam=[70,150]_alt=[0,200]_pad=10\_plots_linearDetrend";
+    crater_indices = getUserFilteredIndices(filtered_plots);
+
+
 % making crater shapefiles + plots of B-field cross-section
 
 allCratersTimer = tic;
 
-for i_crater=1 : height(craters)
+
+% for i_crater=1 : height(craters)
+
+
+for i_crater_indices=1 : height(crater_indices)
+    i_crater = crater_indices(i_crater_indices);
+
+
+
 
     thisCraterTimer = tic;
 
@@ -246,7 +261,7 @@ for i_crater=1 : height(craters)
                     numMax = 0;
                     for thisTrack = good_tracks
                         
-                        thisTrack = thisTrack{1};  
+                        thisTrack = thisTrack{1};  %#ok<FXSET> 
                         B_array = thisTrack.(component);
                         B_array = smoothdata(B_array, 'sgolay', 200);
                         if deg > 0
@@ -412,6 +427,22 @@ function [data] = readData(infile, formatSpec)
     
     fclose(fid);
 end
+
+
+%% reading crater data from user-filtered folder of line plots
+
+function [crater_indices] = getUserFilteredIndices(folder)
+%     folder = fullfile("C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\magnetic_shapefiles\magnetic_anomalies\_plotsonly_diam=[70,150]_alt=[0,200]_pad=10\_plots_linearDetrend");
+    files = ls(folder);
+    
+    crater_indices = [];
+    
+    for i=3 : height(files)
+        index = str2double(files(i,1:4));
+        crater_indices = [crater_indices; index]; %#ok<AGROW> 
+    end
+end
+
 
 %% Old method of reading crater data
 function [crater_data] = read_crater_file(infile_craters)
