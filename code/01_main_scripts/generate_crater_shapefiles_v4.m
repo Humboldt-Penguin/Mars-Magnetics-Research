@@ -2,17 +2,24 @@ clc
 clear
 
 %%% INPUTS (see decription for more details)
-minDiam = 70;
+minDiam = 50;
 maxDiam = 500;
 
+lonleft = 10;
+lonright = 40; 
+lattop = 30;
+latbottom = 0;
+
 minAlt = 0;
-maxAlt = 170;
+maxAlt = 200;
 
 padding = 5.0; % eg "0.5" means the shapefiles extend beyond the crater rim by 0.5 times the radius
 
 write_shape = true;
-write_minmaxstats = true;
+write_bigshape = true;
+write_minmaxstats = false;
 saveLogs = true;
+region_name = 'arabia_terra';
 
 
 crater_database_path = 'C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\geological_features\crater_database\Catalog_Mars_Release_2020_1kmPlus_FullMorphData.csv';
@@ -27,6 +34,9 @@ write this out btw lol
 
 v2 just uses a version of the maven measurements that is already converted to radial
     but this makes squares lol oopsie
+
+
+v4 just generates track data for a big rectangle bounded by lon/lat. plots are still made normally though.
     
 
 %}
@@ -53,8 +63,6 @@ fullTimer = tic;
         craters = generate_crater_locations_f(crater_database_path, minDiam, maxDiam);
         lon = clon2lon(craters.clon);
         craters = [craters, table(lon)]; clear lon
-        verbose(sprintf("\nLoaded crater data in %.2f seconds.", toc(cratersTimer)));
-        verbose(sprintf("There are %.0f craters that fit the diameter constraints.", height(craters)));
 
 
 % get angular radius (including padding) of shapefile surround crater
@@ -62,6 +70,21 @@ fullTimer = tic;
     theta_padded = (diameter2angular( (craters.diam/2) * (1+padding) ));
     craters = [craters, table(theta, theta_padded)];
     clear theta_padded theta
+
+% remove craters that don't fit within the lonlat boundary
+    newcraters = table();
+    for i=1 : height(craters)
+        inlon = craters.lon(i) > lonleft && craters.lon(i) < lonright;
+        inlat = craters.lat(i) > latbottom && craters.lat(i) < lattop;
+        if inlon && inlat
+            newcraters = [newcraters;craters(i,:)]; %#ok<AGROW> 
+        end
+    end
+    craters = newcraters; clear newcraters
+    verbose(sprintf("\nLoaded crater data in %.2f seconds.", toc(cratersTimer)));
+    verbose(sprintf("There are %.0f craters that fit the diameter constraints.", height(craters)));
+
+
 
 
 % load all maven data as a table (each line of each maven file) -- DO NOT MODIFY THIS ARRAY
@@ -123,6 +146,50 @@ fullTimer = tic;
 %     crater_indices = getUserFilteredIndices(filtered_plots);
 
 
+
+
+% v4 addition: make shapefile for the entire rectangle
+    if write_bigshape
+        write_shape_timer = tic;
+
+        loncut = mvn_sph.lon > lonleft & mvn_sph.lon < lonright;
+        rectangle = mvn_sph(loncut,:); clear loncut
+        latcut = rectangle.lat > latbottom & rectangle.lat < lattop;
+        rectangle = rectangle(latcut,:); clear latcut
+    
+        altitude = rectangle.r - 3390;
+        rectangle = [rectangle, table(altitude)]; clear altitude
+        altcut = rectangle.altitude < maxAlt;
+        rectangle = rectangle(altcut,:); clear altcut
+    
+        Bmag = sqrt(rectangle.Blon.^2 + rectangle.Bcola.^2 + rectangle.Br.^2);
+        clon = lon2clon(rectangle.lon);
+        rectangle = [rectangle, table(Bmag, clon)]; clear Bmag clon
+
+
+        shape_struct = struct...
+            ( ...
+            'Geometry', 'Multipoint', ...
+            'Bmag', num2cell(rectangle.Bmag), ...
+            'Br', num2cell(rectangle.Br), ...
+            'Blon', num2cell(rectangle.Blon), ...
+            'Bcola', num2cell(rectangle.Bcola), ...
+            'Altitude', num2cell(rectangle.altitude), ...
+            'Lon', num2cell(rectangle.lon), ...
+            'Clon', num2cell(rectangle.clon), ...
+            'Lat',num2cell(rectangle.lat) ...
+            );
+        folder_2_region = fullfile(folder_1_diamRange, region_name);
+        [~,~] = mkdir(folder_2_region);
+        shapewrite(shape_struct, fullfile(folder_2_region, region_name));
+
+        verbose(sprintf("\nRectangle shapefile written in %.2f seconds.\n\n", toc(write_shape_timer)));
+    end
+
+
+
+
+
 % making crater shapefiles + plots of B-field cross-section
 
 allCratersTimer = tic;
@@ -130,12 +197,8 @@ allCratersTimer = tic;
 
 for i_crater=1 : height(craters)
 
-
 % for i_crater_indices=1 : height(crater_indices)
 %     i_crater = crater_indices(i_crater_indices);
-
-
-
 
     thisCraterTimer = tic;
 
@@ -261,7 +324,7 @@ for i_crater=1 : height(craters)
                     numMax = 0;
                     for thisTrack = good_tracks
                         
-                        thisTrack = thisTrack{1};   %#ok<FXSET> 
+                        thisTrack = thisTrack{1};   
                         B_array = thisTrack.(component);
                         B_array = smoothdata(B_array, 'sgolay', 200);
                         if deg > 0
