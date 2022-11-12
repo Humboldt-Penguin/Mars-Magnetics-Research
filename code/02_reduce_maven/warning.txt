@@ -1,0 +1,10 @@
+- On 2022-11-12 I reorganized this entire repository. 
+	- Previously all scripts were dumped in code/01_main_scripts/, but I put them all in project-specific folders.
+	- I moved inputfiles from code/02 to the project-specific folders
+	
+- As a result, some scripts might not run. The expected reasons due to reorganization are:
+	1. `startup.m` is looking for folders that don't exist,
+	2. `getOaths.m` is looking for folders that don't exist,
+	3. A script calls another function that was accidentally moved to a separate folder.
+	
+- If nothing works, just revert to the first commit on 2022-11-12.

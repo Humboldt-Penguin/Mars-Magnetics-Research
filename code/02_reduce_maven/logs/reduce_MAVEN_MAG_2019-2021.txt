@@ -1,0 +1,1018 @@
+Started running at 20:45.
+
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 8).
+mvn_mag_2019_014 was reduced by 98.862% in 16.41 seconds. 
+mvn_mag_2019_021 was reduced by 98.880% in 16.71 seconds. 
+mvn_mag_2019_028 was reduced by 98.845% in 16.81 seconds. 
+mvn_mag_2019_035 was reduced by 98.389% in 16.26 seconds. 
+mvn_mag_2019_042 was reduced by 98.339% in 16.77 seconds. 
+mvn_mag_2019_007 was reduced by 98.208% in 17.41 seconds. 
+mvn_mag_2019_049 was reduced by 98.647% in 17.21 seconds. 
+mvn_mag_2019_056 was reduced by 97.901% in 17.50 seconds. 
+mvn_mag_2019_034 was reduced by 98.931% in 13.60 seconds. 
+mvn_mag_2019_013 was reduced by 98.302% in 14.16 seconds. 
+mvn_mag_2019_020 was reduced by 98.278% in 14.09 seconds. 
+mvn_mag_2019_027 was reduced by 98.273% in 14.30 seconds. 
+mvn_mag_2019_041 was reduced by 98.898% in 14.00 seconds. 
+mvn_mag_2019_006 was reduced by 98.810% in 14.40 seconds. 
+mvn_mag_2019_048 was reduced by 97.978% in 14.85 seconds. 
+mvn_mag_2019_055 was reduced by 97.912% in 14.65 seconds. 
+mvn_mag_2019_012 was reduced by 98.522% in 13.66 seconds. 
+mvn_mag_2019_033 was reduced by 98.291% in 14.29 seconds. 
+mvn_mag_2019_019 was reduced by 98.844% in 13.75 seconds. 
+mvn_mag_2019_005 was reduced by 98.384% in 14.50 seconds. 
+mvn_mag_2019_026 was reduced by 98.854% in 14.62 seconds. 
+mvn_mag_2019_040 was reduced by 98.356% in 15.23 seconds. 
+mvn_mag_2019_047 was reduced by 98.658% in 14.00 seconds. 
+mvn_mag_2019_054 was reduced by 98.613% in 14.11 seconds. 
+mvn_mag_2019_011 was reduced by 98.185% in 13.90 seconds. 
+mvn_mag_2019_032 was reduced by 98.335% in 14.36 seconds. 
+mvn_mag_2019_018 was reduced by 98.270% in 14.07 seconds. 
+mvn_mag_2019_004 was reduced by 98.655% in 14.24 seconds. 
+mvn_mag_2019_025 was reduced by 98.858% in 13.96 seconds. 
+mvn_mag_2019_039 was reduced by 98.908% in 13.88 seconds. 
+mvn_mag_2019_046 was reduced by 97.994% in 14.03 seconds. 
+mvn_mag_2019_053 was reduced by 97.930% in 14.61 seconds. 
+mvn_mag_2019_010 was reduced by 98.795% in 14.35 seconds. 
+mvn_mag_2019_017 was reduced by 98.853% in 14.52 seconds. 
+mvn_mag_2019_031 was reduced by 98.246% in 14.65 seconds. 
+mvn_mag_2019_024 was reduced by 98.290% in 14.46 seconds. 
+mvn_mag_2019_038 was reduced by 98.370% in 14.46 seconds. 
+mvn_mag_2019_045 was reduced by 98.671% in 14.42 seconds. 
+mvn_mag_2019_003 was reduced by 98.821% in 14.50 seconds. 
+mvn_mag_2019_052 was reduced by 98.024% in 14.22 seconds. 
+mvn_mag_2019_009 was reduced by 98.197% in 14.74 seconds. 
+mvn_mag_2019_016 was reduced by 98.434% in 14.34 seconds. 
+mvn_mag_2019_030 was reduced by 98.836% in 14.59 seconds. 
+mvn_mag_2019_023 was reduced by 98.867% in 14.12 seconds. 
+mvn_mag_2019_037 was reduced by 98.914% in 14.91 seconds. 
+mvn_mag_2019_044 was reduced by 98.012% in 15.12 seconds. 
+mvn_mag_2019_002 was reduced by 98.234% in 14.84 seconds. 
+mvn_mag_2019_051 was reduced by 98.549% in 14.87 seconds. 
+mvn_mag_2019_008 was reduced by 98.802% in 14.56 seconds. 
+mvn_mag_2019_015 was reduced by 98.710% in 14.86 seconds. 
+mvn_mag_2019_022 was reduced by 98.308% in 14.64 seconds. 
+mvn_mag_2019_029 was reduced by 98.260% in 15.00 seconds. 
+mvn_mag_2019_036 was reduced by 98.920% in 14.54 seconds. 
+mvn_mag_2019_043 was reduced by 98.681% in 14.80 seconds. 
+mvn_mag_2019_001 was reduced by 98.686% in 14.90 seconds. 
+mvn_mag_2019_050 was reduced by 97.960% in 15.11 seconds. 
+mvn_mag_2019_176 was reduced by 97.945% in 14.59 seconds. 
+mvn_mag_2019_236 was reduced by 98.246% in 14.35 seconds. 
+mvn_mag_2019_363 was reduced by 98.183% in 14.29 seconds. 
+mvn_mag_2019_303 was reduced by 98.640% in 14.43 seconds. 
+mvn_mag_2020_058 was reduced by 97.993% in 14.85 seconds. 
+mvn_mag_2020_118 was reduced by 97.994% in 14.29 seconds. 
+mvn_mag_2020_178 was reduced by 98.976% in 13.82 seconds. 
+mvn_mag_2019_116 was reduced by 97.532% in 14.63 seconds. 
+mvn_mag_2019_175 was reduced by 97.757% in 14.06 seconds. 
+mvn_mag_2019_235 was reduced by 98.246% in 13.85 seconds. 
+mvn_mag_2019_362 was reduced by 98.189% in 13.62 seconds. 
+mvn_mag_2019_302 was reduced by 97.956% in 14.23 seconds. 
+mvn_mag_2019_115 was reduced by 98.323% in 13.92 seconds. 
+mvn_mag_2020_057 was reduced by 97.527% in 14.04 seconds. 
+mvn_mag_2020_117 was reduced by 98.036% in 14.27 seconds. 
+mvn_mag_2020_177 was reduced by 98.945% in 13.91 seconds. 
+mvn_mag_2019_174 was reduced by 98.115% in 13.70 seconds. 
+mvn_mag_2019_234 was reduced by 98.228% in 14.01 seconds. 
+mvn_mag_2019_301 was reduced by 97.953% in 13.85 seconds. 
+mvn_mag_2019_361 was reduced by 98.205% in 13.99 seconds. 
+mvn_mag_2020_056 was reduced by 98.483% in 13.58 seconds. 
+mvn_mag_2020_176 was reduced by 98.937% in 13.40 seconds. 
+mvn_mag_2019_114 was reduced by 97.243% in 14.03 seconds. 
+mvn_mag_2020_116 was reduced by 98.026% in 13.94 seconds. 
+mvn_mag_2019_173 was reduced by 97.230% in 13.99 seconds. 
+mvn_mag_2019_233 was reduced by 98.225% in 13.61 seconds. 
+mvn_mag_2019_360 was reduced by 97.624% in 13.91 seconds. 
+mvn_mag_2019_300 was reduced by 97.962% in 13.64 seconds. 
+mvn_mag_2020_175 was reduced by 98.920% in 13.84 seconds. 
+mvn_mag_2019_113 was reduced by 98.621% in 13.88 seconds. 
+mvn_mag_2020_055 was reduced by 98.011% in 14.56 seconds. 
+mvn_mag_2020_115 was reduced by 97.632% in 14.23 seconds. 
+mvn_mag_2019_172 was reduced by 98.615% in 13.35 seconds. 
+mvn_mag_2019_232 was reduced by 97.617% in 13.91 seconds. 
+mvn_mag_2019_359 was reduced by 98.783% in 13.63 seconds. 
+mvn_mag_2019_299 was reduced by 97.757% in 13.70 seconds. 
+mvn_mag_2020_054 was reduced by 98.023% in 13.65 seconds. 
+mvn_mag_2020_174 was reduced by 98.889% in 13.73 seconds. 
+mvn_mag_2019_112 was reduced by 97.665% in 14.01 seconds. 
+mvn_mag_2020_114 was reduced by 98.020% in 13.85 seconds. 
+mvn_mag_2019_171 was reduced by 97.909% in 13.92 seconds. 
+mvn_mag_2019_231 was reduced by 98.718% in 13.96 seconds. 
+mvn_mag_2019_358 was reduced by 98.132% in 14.54 seconds. 
+mvn_mag_2019_298 was reduced by 97.953% in 14.36 seconds. 
+mvn_mag_2020_173 was reduced by 98.881% in 13.96 seconds. 
+mvn_mag_2020_053 was reduced by 98.020% in 14.01 seconds. 
+mvn_mag_2019_111 was reduced by 98.213% in 14.54 seconds. 
+mvn_mag_2020_113 was reduced by 98.013% in 13.98 seconds. 
+mvn_mag_2019_170 was reduced by 97.902% in 13.98 seconds. 
+mvn_mag_2019_230 was reduced by 98.200% in 13.87 seconds. 
+mvn_mag_2019_357 was reduced by 97.526% in 13.90 seconds. 
+mvn_mag_2019_297 was reduced by 97.964% in 14.09 seconds. 
+mvn_mag_2020_172 was reduced by 98.860% in 13.82 seconds. 
+mvn_mag_2020_052 was reduced by 97.533% in 14.38 seconds. 
+mvn_mag_2019_110 was reduced by 97.937% in 14.19 seconds. 
+mvn_mag_2020_112 was reduced by 97.337% in 14.37 seconds. 
+mvn_mag_2019_169 was reduced by 97.900% in 14.05 seconds. 
+mvn_mag_2019_229 was reduced by 98.186% in 14.13 seconds. 
+mvn_mag_2019_356 was reduced by 98.771% in 14.14 seconds. 
+mvn_mag_2019_296 was reduced by 97.285% in 14.46 seconds. 
+mvn_mag_2020_171 was reduced by 98.695% in 13.93 seconds. 
+mvn_mag_2020_051 was reduced by 98.042% in 13.98 seconds. 
+mvn_mag_2019_109 was reduced by 97.948% in 13.88 seconds. 
+mvn_mag_2020_111 was reduced by 98.002% in 14.10 seconds. 
+mvn_mag_2019_168 was reduced by 97.888% in 14.12 seconds. 
+mvn_mag_2019_228 was reduced by 98.176% in 14.59 seconds. 
+mvn_mag_2019_355 was reduced by 98.163% in 14.01 seconds. 
+mvn_mag_2019_295 was reduced by 98.637% in 14.12 seconds. 
+mvn_mag_2020_170 was reduced by 98.953% in 13.82 seconds. 
+mvn_mag_2020_050 was reduced by 98.044% in 13.94 seconds. 
+mvn_mag_2019_108 was reduced by 97.948% in 13.99 seconds. 
+mvn_mag_2020_110 was reduced by 98.000% in 14.02 seconds. 
+mvn_mag_2019_167 was reduced by 97.886% in 13.99 seconds. 
+mvn_mag_2019_227 was reduced by 97.562% in 14.34 seconds. 
+mvn_mag_2019_354 was reduced by 98.175% in 14.00 seconds. 
+mvn_mag_2020_169 was reduced by 98.800% in 13.84 seconds. 
+mvn_mag_2019_294 was reduced by 97.963% in 14.17 seconds. 
+mvn_mag_2020_049 was reduced by 97.399% in 14.39 seconds. 
+mvn_mag_2020_109 was reduced by 97.322% in 13.77 seconds. 
+mvn_mag_2019_107 was reduced by 97.951% in 13.76 seconds. 
+mvn_mag_2019_166 was reduced by 97.168% in 13.77 seconds. 
+mvn_mag_2019_226 was reduced by 98.769% in 13.97 seconds. 
+mvn_mag_2019_353 was reduced by 98.179% in 13.90 seconds. 
+mvn_mag_2020_168 was reduced by 98.545% in 14.16 seconds. 
+mvn_mag_2019_293 was reduced by 97.287% in 14.65 seconds. 
+mvn_mag_2020_048 was reduced by 98.710% in 13.80 seconds. 
+mvn_mag_2019_106 was reduced by 97.955% in 13.98 seconds. 
+mvn_mag_2020_108 was reduced by 98.403% in 14.56 seconds. 
+mvn_mag_2019_165 was reduced by 98.579% in 14.28 seconds. 
+mvn_mag_2019_225 was reduced by 98.149% in 14.68 seconds. 
+mvn_mag_2019_352 was reduced by 97.755% in 14.42 seconds. 
+mvn_mag_2020_167 was reduced by 99.006% in 14.30 seconds. 
+mvn_mag_2019_292 was reduced by 98.617% in 14.58 seconds. 
+mvn_mag_2019_105 was reduced by 97.678% in 14.57 seconds. 
+mvn_mag_2020_047 was reduced by 98.065% in 14.90 seconds. 
+mvn_mag_2020_107 was reduced by 97.984% in 15.15 seconds. 
+mvn_mag_2019_164 was reduced by 97.866% in 15.30 seconds. 
+mvn_mag_2019_351 was reduced by 98.106% in 15.24 seconds. 
+mvn_mag_2019_224 was reduced by 98.144% in 15.75 seconds. 
+mvn_mag_2020_166 was reduced by 98.744% in 15.28 seconds. 
+mvn_mag_2019_291 was reduced by 97.963% in 15.97 seconds. 
+mvn_mag_2019_104 was reduced by 98.244% in 16.03 seconds. 
+mvn_mag_2020_046 was reduced by 97.612% in 16.45 seconds. 
+mvn_mag_2020_106 was reduced by 97.303% in 16.25 seconds. 
+mvn_mag_2019_163 was reduced by 97.856% in 15.72 seconds. 
+mvn_mag_2019_350 was reduced by 98.111% in 16.29 seconds. 
+mvn_mag_2020_165 was reduced by 98.401% in 16.22 seconds. 
+mvn_mag_2019_223 was reduced by 98.131% in 16.66 seconds. 
+mvn_mag_2019_290 was reduced by 97.966% in 16.04 seconds. 
+mvn_mag_2019_103 was reduced by 97.285% in 16.44 seconds. 
+mvn_mag_2020_045 was reduced by 98.543% in 16.67 seconds. 
+mvn_mag_2020_105 was reduced by 98.645% in 15.94 seconds. 
+mvn_mag_2019_162 was reduced by 97.853% in 16.53 seconds. 
+mvn_mag_2019_349 was reduced by 97.490% in 16.20 seconds. 
+mvn_mag_2020_164 was reduced by 99.048% in 15.50 seconds. 
+mvn_mag_2019_222 was reduced by 97.601% in 15.74 seconds. 
+mvn_mag_2019_289 was reduced by 97.960% in 15.54 seconds. 
+mvn_mag_2019_102 was reduced by 98.649% in 15.27 seconds. 
+mvn_mag_2020_044 was reduced by 98.090% in 15.37 seconds. 
+mvn_mag_2020_104 was reduced by 97.971% in 15.62 seconds. 
+mvn_mag_2019_161 was reduced by 97.848% in 14.52 seconds. 
+mvn_mag_2019_348 was reduced by 98.753% in 14.02 seconds. 
+mvn_mag_2020_163 was reduced by 98.693% in 13.85 seconds. 
+mvn_mag_2019_221 was reduced by 98.809% in 13.80 seconds. 
+mvn_mag_2019_101 was reduced by 97.420% in 14.23 seconds. 
+mvn_mag_2019_288 was reduced by 97.292% in 14.85 seconds. 
+mvn_mag_2020_043 was reduced by 98.089% in 14.75 seconds. 
+mvn_mag_2020_103 was reduced by 97.293% in 14.89 seconds. 
+mvn_mag_2019_160 was reduced by 97.842% in 15.09 seconds. 
+mvn_mag_2019_347 was reduced by 98.137% in 14.97 seconds. 
+mvn_mag_2020_162 was reduced by 98.296% in 15.24 seconds. 
+mvn_mag_2019_220 was reduced by 98.201% in 14.98 seconds. 
+mvn_mag_2020_161 was reduced by 99.613% in 1.85 seconds. 
+mvn_mag_2019_287 was reduced by 98.047% in 15.29 seconds. 
+mvn_mag_2019_100 was reduced by 98.557% in 15.57 seconds. 
+mvn_mag_2020_042 was reduced by 98.106% in 15.85 seconds. 
+mvn_mag_2020_102 was reduced by 98.640% in 15.27 seconds. 
+mvn_mag_2020_160 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_159 was reduced by 96.798% in 4.51 seconds. 
+mvn_mag_2019_159 was reduced by 97.116% in 15.16 seconds. 
+mvn_mag_2019_219 was reduced by 98.202% in 14.99 seconds. 
+mvn_mag_2019_346 was reduced by 97.483% in 15.27 seconds. 
+mvn_mag_2019_099 was reduced by 97.988% in 14.59 seconds. 
+mvn_mag_2019_286 was reduced by 97.958% in 14.82 seconds. 
+mvn_mag_2020_041 was reduced by 97.486% in 14.56 seconds. 
+mvn_mag_2020_101 was reduced by 97.959% in 14.33 seconds. 
+mvn_mag_2020_158 was reduced by 99.055% in 13.90 seconds. 
+mvn_mag_2019_158 was reduced by 98.552% in 13.65 seconds. 
+mvn_mag_2019_218 was reduced by 98.185% in 13.73 seconds. 
+mvn_mag_2019_345 was reduced by 98.684% in 13.74 seconds. 
+mvn_mag_2019_285 was reduced by 97.329% in 13.87 seconds. 
+mvn_mag_2019_098 was reduced by 97.988% in 13.81 seconds. 
+mvn_mag_2020_040 was reduced by 98.525% in 14.08 seconds. 
+mvn_mag_2020_100 was reduced by 97.278% in 14.05 seconds. 
+mvn_mag_2020_157 was reduced by 98.609% in 13.81 seconds. 
+mvn_mag_2019_157 was reduced by 97.105% in 14.04 seconds. 
+mvn_mag_2019_344 was reduced by 98.033% in 13.69 seconds. 
+mvn_mag_2019_217 was reduced by 98.180% in 13.92 seconds. 
+mvn_mag_2019_284 was reduced by 98.746% in 13.47 seconds. 
+mvn_mag_2019_097 was reduced by 97.996% in 13.86 seconds. 
+mvn_mag_2020_099 was reduced by 98.635% in 13.32 seconds. 
+mvn_mag_2020_039 was reduced by 98.086% in 13.99 seconds. 
+mvn_mag_2020_156 was reduced by 98.172% in 13.95 seconds. 
+mvn_mag_2019_156 was reduced by 98.475% in 13.36 seconds. 
+mvn_mag_2019_216 was reduced by 98.169% in 13.72 seconds. 
+mvn_mag_2019_343 was reduced by 98.030% in 13.77 seconds. 
+mvn_mag_2019_283 was reduced by 98.110% in 14.25 seconds. 
+mvn_mag_2019_096 was reduced by 97.999% in 14.25 seconds. 
+mvn_mag_2020_098 was reduced by 97.952% in 14.50 seconds. 
+mvn_mag_2020_038 was reduced by 97.432% in 15.09 seconds. 
+mvn_mag_2020_155 was reduced by 99.013% in 14.46 seconds. 
+mvn_mag_2019_155 was reduced by 97.815% in 15.88 seconds. 
+mvn_mag_2019_215 was reduced by 97.723% in 16.22 seconds. 
+mvn_mag_2019_342 was reduced by 98.046% in 16.04 seconds. 
+mvn_mag_2019_282 was reduced by 98.112% in 16.42 seconds. 
+mvn_mag_2019_095 was reduced by 98.006% in 16.88 seconds. 
+mvn_mag_2020_097 was reduced by 97.271% in 17.24 seconds. 
+mvn_mag_2020_154 was reduced by 98.571% in 16.79 seconds. 
+mvn_mag_2020_037 was reduced by 98.718% in 16.67 seconds. 
+mvn_mag_2019_154 was reduced by 97.819% in 18.12 seconds. 
+mvn_mag_2019_214 was reduced by 98.888% in 17.94 seconds. 
+mvn_mag_2019_341 was reduced by 98.058% in 18.11 seconds. 
+mvn_mag_2019_281 was reduced by 98.111% in 17.63 seconds. 
+mvn_mag_2019_094 was reduced by 98.015% in 18.09 seconds. 
+mvn_mag_2020_096 was reduced by 98.634% in 17.48 seconds. 
+mvn_mag_2020_036 was reduced by 98.091% in 18.56 seconds. 
+mvn_mag_2020_153 was reduced by 98.153% in 18.74 seconds. 
+mvn_mag_2019_153 was reduced by 97.807% in 18.34 seconds. 
+mvn_mag_2019_340 was reduced by 98.057% in 18.29 seconds. 
+mvn_mag_2019_213 was reduced by 98.317% in 18.56 seconds. 
+mvn_mag_2019_280 was reduced by 97.474% in 19.05 seconds. 
+mvn_mag_2019_093 was reduced by 97.841% in 19.14 seconds. 
+mvn_mag_2020_095 was reduced by 97.943% in 19.00 seconds. 
+mvn_mag_2020_152 was reduced by 98.943% in 18.23 seconds. 
+mvn_mag_2020_035 was reduced by 98.103% in 18.94 seconds. 
+mvn_mag_2019_152 was reduced by 97.788% in 18.54 seconds. 
+mvn_mag_2019_212 was reduced by 98.305% in 17.68 seconds. 
+mvn_mag_2019_339 was reduced by 98.066% in 18.71 seconds. 
+mvn_mag_2019_279 was reduced by 98.365% in 17.96 seconds. 
+mvn_mag_2019_092 was reduced by 97.082% in 18.46 seconds. 
+mvn_mag_2020_094 was reduced by 97.582% in 18.58 seconds. 
+mvn_mag_2020_151 was reduced by 98.530% in 17.94 seconds. 
+mvn_mag_2020_034 was reduced by 98.106% in 18.41 seconds. 
+mvn_mag_2019_151 was reduced by 97.817% in 18.82 seconds. 
+mvn_mag_2019_211 was reduced by 98.301% in 18.92 seconds. 
+mvn_mag_2019_338 was reduced by 97.368% in 19.15 seconds. 
+mvn_mag_2019_278 was reduced by 98.107% in 18.67 seconds. 
+mvn_mag_2019_091 was reduced by 98.466% in 18.38 seconds. 
+mvn_mag_2020_093 was reduced by 98.311% in 18.03 seconds. 
+mvn_mag_2020_150 was reduced by 98.186% in 18.03 seconds. 
+mvn_mag_2020_033 was reduced by 97.818% in 17.75 seconds. 
+mvn_mag_2019_150 was reduced by 97.058% in 17.10 seconds. 
+mvn_mag_2019_210 was reduced by 97.899% in 15.95 seconds. 
+mvn_mag_2019_337 was reduced by 98.425% in 15.95 seconds. 
+mvn_mag_2019_277 was reduced by 97.467% in 15.66 seconds. 
+mvn_mag_2020_032 was reduced by 97.723% in 12.99 seconds. 
+mvn_mag_2019_090 was reduced by 96.939% in 15.84 seconds. 
+mvn_mag_2020_092 was reduced by 97.943% in 15.58 seconds. 
+mvn_mag_2020_149 was reduced by 98.827% in 15.41 seconds. 
+mvn_mag_2019_149 was reduced by 98.529% in 14.86 seconds. 
+mvn_mag_2019_209 was reduced by 98.664% in 15.03 seconds. 
+mvn_mag_2019_336 was reduced by 97.994% in 15.65 seconds. 
+mvn_mag_2019_276 was reduced by 98.730% in 14.84 seconds. 
+mvn_mag_2020_031 was reduced by 98.136% in 15.02 seconds. 
+mvn_mag_2019_089 was reduced by 98.476% in 15.49 seconds. 
+mvn_mag_2020_091 was reduced by 97.940% in 15.76 seconds. 
+mvn_mag_2020_148 was reduced by 98.489% in 15.18 seconds. 
+mvn_mag_2019_148 was reduced by 97.789% in 15.20 seconds. 
+mvn_mag_2019_208 was reduced by 97.689% in 15.10 seconds. 
+mvn_mag_2019_335 was reduced by 97.336% in 15.36 seconds. 
+mvn_mag_2019_275 was reduced by 98.098% in 15.28 seconds. 
+mvn_mag_2020_030 was reduced by 97.529% in 15.59 seconds. 
+mvn_mag_2019_088 was reduced by 97.319% in 15.57 seconds. 
+mvn_mag_2020_090 was reduced by 97.941% in 15.64 seconds. 
+mvn_mag_2020_147 was reduced by 98.261% in 15.29 seconds. 
+mvn_mag_2019_147 was reduced by 97.781% in 15.10 seconds. 
+mvn_mag_2019_207 was reduced by 98.832% in 14.73 seconds. 
+mvn_mag_2019_334 was reduced by 98.668% in 14.61 seconds. 
+mvn_mag_2019_274 was reduced by 98.089% in 14.93 seconds. 
+mvn_mag_2020_029 was reduced by 98.775% in 14.87 seconds. 
+mvn_mag_2019_087 was reduced by 98.129% in 15.18 seconds. 
+mvn_mag_2020_089 was reduced by 97.939% in 15.15 seconds. 
+mvn_mag_2020_146 was reduced by 98.675% in 14.91 seconds. 
+mvn_mag_2019_146 was reduced by 97.785% in 14.77 seconds. 
+mvn_mag_2019_206 was reduced by 98.243% in 14.97 seconds. 
+mvn_mag_2019_333 was reduced by 98.007% in 14.81 seconds. 
+mvn_mag_2019_273 was reduced by 98.089% in 14.20 seconds. 
+mvn_mag_2020_028 was reduced by 98.165% in 14.65 seconds. 
+mvn_mag_2020_145 was reduced by 98.448% in 14.20 seconds. 
+mvn_mag_2019_086 was reduced by 97.036% in 15.08 seconds. 
+mvn_mag_2020_088 was reduced by 97.932% in 14.26 seconds. 
+mvn_mag_2019_205 was reduced by 98.231% in 13.78 seconds. 
+mvn_mag_2019_145 was reduced by 97.796% in 14.35 seconds. 
+mvn_mag_2019_332 was reduced by 97.359% in 14.21 seconds. 
+mvn_mag_2019_272 was reduced by 97.448% in 14.14 seconds. 
+mvn_mag_2020_027 was reduced by 98.155% in 14.26 seconds. 
+mvn_mag_2020_144 was reduced by 98.174% in 14.04 seconds. 
+mvn_mag_2019_085 was reduced by 98.404% in 13.94 seconds. 
+mvn_mag_2020_087 was reduced by 97.942% in 14.12 seconds. 
+mvn_mag_2019_144 was reduced by 97.812% in 13.93 seconds. 
+mvn_mag_2019_204 was reduced by 98.222% in 13.45 seconds. 
+mvn_mag_2019_331 was reduced by 98.665% in 13.27 seconds. 
+mvn_mag_2019_271 was reduced by 98.716% in 13.55 seconds. 
+mvn_mag_2020_026 was reduced by 98.209% in 13.70 seconds. 
+mvn_mag_2020_143 was reduced by 98.431% in 13.80 seconds. 
+mvn_mag_2020_086 was reduced by 97.849% in 14.03 seconds. 
+mvn_mag_2019_084 was reduced by 97.607% in 14.06 seconds. 
+mvn_mag_2019_203 was reduced by 97.617% in 14.29 seconds. 
+mvn_mag_2019_143 was reduced by 97.078% in 14.61 seconds. 
+mvn_mag_2019_330 was reduced by 97.967% in 14.50 seconds. 
+mvn_mag_2019_270 was reduced by 98.075% in 14.27 seconds. 
+mvn_mag_2020_025 was reduced by 98.131% in 14.37 seconds. 
+mvn_mag_2020_142 was reduced by 98.259% in 14.50 seconds. 
+mvn_mag_2019_083 was reduced by 97.625% in 14.81 seconds. 
+mvn_mag_2020_085 was reduced by 97.930% in 14.90 seconds. 
+mvn_mag_2019_202 was reduced by 98.797% in 13.82 seconds. 
+mvn_mag_2019_142 was reduced by 98.531% in 14.10 seconds. 
+mvn_mag_2019_269 was reduced by 98.076% in 14.25 seconds. 
+mvn_mag_2019_329 was reduced by 97.977% in 14.59 seconds. 
+mvn_mag_2020_024 was reduced by 98.102% in 14.13 seconds. 
+mvn_mag_2020_141 was reduced by 98.035% in 14.29 seconds. 
+mvn_mag_2020_084 was reduced by 97.936% in 14.30 seconds. 
+mvn_mag_2019_082 was reduced by 97.631% in 14.35 seconds. 
+mvn_mag_2019_201 was reduced by 97.589% in 14.28 seconds. 
+mvn_mag_2019_141 was reduced by 97.069% in 15.09 seconds. 
+mvn_mag_2019_328 was reduced by 97.977% in 13.83 seconds. 
+mvn_mag_2019_268 was reduced by 98.070% in 14.36 seconds. 
+mvn_mag_2020_023 was reduced by 98.118% in 15.52 seconds. 
+mvn_mag_2020_140 was reduced by 98.454% in 15.62 seconds. 
+mvn_mag_2020_083 was reduced by 97.250% in 15.78 seconds. 
+mvn_mag_2019_081 was reduced by 97.557% in 16.23 seconds. 
+mvn_mag_2019_200 was reduced by 98.606% in 15.24 seconds. 
+mvn_mag_2019_140 was reduced by 98.528% in 15.61 seconds. 
+mvn_mag_2019_327 was reduced by 97.955% in 15.97 seconds. 
+mvn_mag_2019_267 was reduced by 97.636% in 15.57 seconds. 
+mvn_mag_2020_022 was reduced by 97.498% in 15.04 seconds. 
+mvn_mag_2020_139 was reduced by 98.224% in 14.65 seconds. 
+mvn_mag_2019_080 was reduced by 97.744% in 14.80 seconds. 
+mvn_mag_2020_082 was reduced by 97.935% in 15.09 seconds. 
+mvn_mag_2019_199 was reduced by 98.168% in 14.26 seconds. 
+mvn_mag_2019_139 was reduced by 97.796% in 14.28 seconds. 
+mvn_mag_2019_326 was reduced by 97.905% in 13.97 seconds. 
+mvn_mag_2019_266 was reduced by 98.065% in 14.18 seconds. 
+mvn_mag_2020_021 was reduced by 98.755% in 13.98 seconds. 
+mvn_mag_2020_138 was reduced by 98.007% in 14.45 seconds. 
+mvn_mag_2020_081 was reduced by 97.938% in 14.09 seconds. 
+mvn_mag_2019_079 was reduced by 97.662% in 14.35 seconds. 
+mvn_mag_2019_198 was reduced by 98.162% in 14.03 seconds. 
+mvn_mag_2019_138 was reduced by 97.795% in 14.06 seconds. 
+mvn_mag_2019_325 was reduced by 97.911% in 14.11 seconds. 
+mvn_mag_2019_265 was reduced by 98.057% in 14.55 seconds. 
+mvn_mag_2020_020 was reduced by 98.148% in 14.40 seconds. 
+mvn_mag_2020_137 was reduced by 98.418% in 14.22 seconds. 
+mvn_mag_2019_078 was reduced by 97.674% in 14.56 seconds. 
+mvn_mag_2020_080 was reduced by 97.253% in 14.71 seconds. 
+mvn_mag_2019_197 was reduced by 98.146% in 14.33 seconds. 
+mvn_mag_2019_137 was reduced by 97.789% in 14.69 seconds. 
+mvn_mag_2019_324 was reduced by 97.218% in 14.88 seconds. 
+mvn_mag_2019_264 was reduced by 97.578% in 14.19 seconds. 
+mvn_mag_2020_019 was reduced by 97.630% in 14.47 seconds. 
+mvn_mag_2020_136 was reduced by 98.196% in 14.10 seconds. 
+mvn_mag_2020_079 was reduced by 98.546% in 13.92 seconds. 
+mvn_mag_2019_077 was reduced by 97.685% in 14.13 seconds. 
+mvn_mag_2019_196 was reduced by 97.512% in 14.52 seconds. 
+mvn_mag_2019_136 was reduced by 97.794% in 14.29 seconds. 
+mvn_mag_2019_263 was reduced by 98.814% in 13.70 seconds. 
+mvn_mag_2019_323 was reduced by 98.015% in 13.84 seconds. 
+mvn_mag_2020_018 was reduced by 98.688% in 14.22 seconds. 
+mvn_mag_2020_135 was reduced by 98.043% in 14.05 seconds. 
+mvn_mag_2019_076 was reduced by 97.698% in 14.17 seconds. 
+mvn_mag_2020_078 was reduced by 97.936% in 14.38 seconds. 
+mvn_mag_2019_195 was reduced by 98.751% in 14.07 seconds. 
+mvn_mag_2019_322 was reduced by 97.927% in 13.99 seconds. 
+mvn_mag_2019_262 was reduced by 98.209% in 14.20 seconds. 
+mvn_mag_2019_135 was reduced by 97.785% in 14.54 seconds. 
+mvn_mag_2020_017 was reduced by 98.178% in 14.24 seconds. 
+mvn_mag_2020_134 was reduced by 98.314% in 14.02 seconds. 
+mvn_mag_2019_075 was reduced by 98.472% in 13.63 seconds. 
+mvn_mag_2020_077 was reduced by 97.256% in 14.16 seconds. 
+mvn_mag_2019_194 was reduced by 97.567% in 13.89 seconds. 
+mvn_mag_2019_321 was reduced by 97.240% in 13.91 seconds. 
+mvn_mag_2019_261 was reduced by 98.213% in 13.69 seconds. 
+mvn_mag_2019_134 was reduced by 97.048% in 14.14 seconds. 
+mvn_mag_2020_016 was reduced by 98.188% in 13.98 seconds. 
+mvn_mag_2020_133 was reduced by 98.164% in 14.05 seconds. 
+mvn_mag_2020_076 was reduced by 98.628% in 13.76 seconds. 
+mvn_mag_2019_074 was reduced by 97.720% in 14.17 seconds. 
+mvn_mag_2019_193 was reduced by 98.470% in 13.70 seconds. 
+mvn_mag_2019_260 was reduced by 98.206% in 13.74 seconds. 
+mvn_mag_2019_320 was reduced by 98.598% in 13.56 seconds. 
+mvn_mag_2019_133 was reduced by 98.525% in 13.52 seconds. 
+mvn_mag_2020_015 was reduced by 98.195% in 13.67 seconds. 
+mvn_mag_2020_132 was reduced by 98.130% in 13.98 seconds. 
+mvn_mag_2020_075 was reduced by 97.941% in 13.65 seconds. 
+mvn_mag_2019_073 was reduced by 97.730% in 14.06 seconds. 
+mvn_mag_2019_192 was reduced by 98.096% in 13.55 seconds. 
+mvn_mag_2019_319 was reduced by 97.901% in 13.72 seconds. 
+mvn_mag_2019_259 was reduced by 97.596% in 13.93 seconds. 
+mvn_mag_2019_132 was reduced by 97.281% in 14.04 seconds. 
+mvn_mag_2020_014 was reduced by 97.616% in 14.11 seconds. 
+mvn_mag_2020_131 was reduced by 98.167% in 13.83 seconds. 
+mvn_mag_2020_074 was reduced by 97.259% in 14.47 seconds. 
+mvn_mag_2019_072 was reduced by 97.741% in 13.97 seconds. 
+mvn_mag_2019_191 was reduced by 98.080% in 14.30 seconds. 
+mvn_mag_2019_318 was reduced by 97.204% in 14.12 seconds. 
+mvn_mag_2019_258 was reduced by 98.800% in 13.93 seconds. 
+mvn_mag_2019_131 was reduced by 98.202% in 14.13 seconds. 
+mvn_mag_2020_013 was reduced by 98.786% in 13.73 seconds. 
+mvn_mag_2020_130 was reduced by 98.140% in 14.14 seconds. 
+mvn_mag_2019_071 was reduced by 97.753% in 14.06 seconds. 
+mvn_mag_2020_073 was reduced by 98.634% in 13.59 seconds. 
+mvn_mag_2019_190 was reduced by 98.078% in 13.77 seconds. 
+mvn_mag_2019_317 was reduced by 98.604% in 13.52 seconds. 
+mvn_mag_2019_257 was reduced by 98.188% in 13.78 seconds. 
+mvn_mag_2019_130 was reduced by 97.780% in 13.84 seconds. 
+mvn_mag_2020_012 was reduced by 98.227% in 13.82 seconds. 
+mvn_mag_2020_129 was reduced by 98.120% in 13.88 seconds. 
+mvn_mag_2020_072 was reduced by 97.946% in 13.96 seconds. 
+mvn_mag_2019_070 was reduced by 97.748% in 14.05 seconds. 
+mvn_mag_2019_189 was reduced by 97.415% in 14.01 seconds. 
+mvn_mag_2019_316 was reduced by 97.912% in 13.34 seconds. 
+mvn_mag_2019_256 was reduced by 98.181% in 13.94 seconds. 
+mvn_mag_2019_129 was reduced by 97.783% in 14.16 seconds. 
+mvn_mag_2020_011 was reduced by 97.522% in 14.37 seconds. 
+mvn_mag_2020_128 was reduced by 98.115% in 14.19 seconds. 
+mvn_mag_2019_069 was reduced by 97.759% in 14.20 seconds. 
+mvn_mag_2020_071 was reduced by 97.669% in 14.37 seconds. 
+mvn_mag_2019_255 was reduced by 87.648% in 0.87 seconds. 
+mvn_mag_2019_247 was reduced by 97.845% in 7.49 seconds. 
+mvn_mag_2019_188 was reduced by 98.698% in 14.30 seconds. 
+mvn_mag_2019_315 was reduced by 97.758% in 14.66 seconds. 
+mvn_mag_2019_128 was reduced by 97.783% in 14.33 seconds. 
+mvn_mag_2020_010 was reduced by 98.748% in 14.12 seconds. 
+mvn_mag_2020_127 was reduced by 98.109% in 14.15 seconds. 
+mvn_mag_2019_246 was reduced by 98.335% in 13.78 seconds. 
+mvn_mag_2020_070 was reduced by 98.240% in 14.22 seconds. 
+mvn_mag_2019_068 was reduced by 97.771% in 14.35 seconds. 
+mvn_mag_2019_187 was reduced by 97.399% in 14.03 seconds. 
+mvn_mag_2019_314 was reduced by 98.079% in 14.03 seconds. 
+mvn_mag_2019_127 was reduced by 97.778% in 13.88 seconds. 
+mvn_mag_2020_009 was reduced by 98.125% in 13.93 seconds. 
+mvn_mag_2020_126 was reduced by 98.099% in 14.01 seconds. 
+mvn_mag_2020_069 was reduced by 97.957% in 13.58 seconds. 
+mvn_mag_2019_245 was reduced by 98.322% in 13.91 seconds. 
+mvn_mag_2019_067 was reduced by 97.782% in 14.19 seconds. 
+mvn_mag_2019_186 was reduced by 98.506% in 13.39 seconds. 
+mvn_mag_2019_313 was reduced by 97.921% in 13.62 seconds. 
+mvn_mag_2019_126 was reduced by 97.785% in 13.69 seconds. 
+mvn_mag_2020_008 was reduced by 98.142% in 14.02 seconds. 
+mvn_mag_2020_125 was reduced by 98.091% in 13.87 seconds. 
+mvn_mag_2020_068 was reduced by 97.955% in 14.07 seconds. 
+mvn_mag_2019_066 was reduced by 97.797% in 13.82 seconds. 
+mvn_mag_2019_244 was reduced by 97.756% in 13.96 seconds. 
+mvn_mag_2019_185 was reduced by 98.024% in 13.81 seconds. 
+mvn_mag_2019_312 was reduced by 97.928% in 13.63 seconds. 
+mvn_mag_2019_125 was reduced by 97.041% in 14.24 seconds. 
+mvn_mag_2020_007 was reduced by 98.149% in 14.23 seconds. 
+mvn_mag_2020_124 was reduced by 98.083% in 13.80 seconds. 
+mvn_mag_2020_067 was reduced by 97.964% in 13.90 seconds. 
+mvn_mag_2019_065 was reduced by 97.817% in 13.91 seconds. 
+mvn_mag_2019_243 was reduced by 98.871% in 13.46 seconds. 
+mvn_mag_2019_184 was reduced by 98.014% in 13.58 seconds. 
+mvn_mag_2019_311 was reduced by 97.930% in 13.82 seconds. 
+mvn_mag_2019_124 was reduced by 98.568% in 13.53 seconds. 
+mvn_mag_2020_006 was reduced by 97.612% in 14.32 seconds. 
+mvn_mag_2020_123 was reduced by 98.076% in 13.92 seconds. 
+mvn_mag_2019_242 was reduced by 98.299% in 13.59 seconds. 
+mvn_mag_2020_066 was reduced by 97.804% in 13.96 seconds. 
+mvn_mag_2019_064 was reduced by 98.002% in 14.22 seconds. 
+mvn_mag_2019_183 was reduced by 98.005% in 13.88 seconds. 
+mvn_mag_2019_310 was reduced by 97.344% in 13.87 seconds. 
+mvn_mag_2019_123 was reduced by 97.451% in 14.08 seconds. 
+mvn_mag_2020_005 was reduced by 98.176% in 13.97 seconds. 
+mvn_mag_2020_122 was reduced by 98.063% in 14.03 seconds. 
+mvn_mag_2019_241 was reduced by 98.295% in 14.24 seconds. 
+mvn_mag_2020_065 was reduced by 97.965% in 14.05 seconds. 
+mvn_mag_2019_063 was reduced by 99.176% in 13.69 seconds. 
+mvn_mag_2019_182 was reduced by 97.434% in 13.76 seconds. 
+mvn_mag_2019_309 was reduced by 97.941% in 13.98 seconds. 
+mvn_mag_2019_122 was reduced by 98.374% in 13.77 seconds. 
+mvn_mag_2020_121 was reduced by 98.058% in 13.92 seconds. 
+mvn_mag_2020_004 was reduced by 98.184% in 14.27 seconds. 
+mvn_mag_2019_240 was reduced by 98.281% in 14.44 seconds. 
+mvn_mag_2020_064 was reduced by 97.975% in 14.36 seconds. 
+mvn_mag_2019_062 was reduced by 97.948% in 14.05 seconds. 
+mvn_mag_2019_181 was reduced by 98.547% in 13.61 seconds. 
+mvn_mag_2019_308 was reduced by 97.938% in 13.64 seconds. 
+mvn_mag_2019_121 was reduced by 97.923% in 13.99 seconds. 
+mvn_mag_2020_120 was reduced by 98.059% in 13.58 seconds. 
+mvn_mag_2020_003 was reduced by 97.678% in 14.01 seconds. 
+mvn_mag_2019_239 was reduced by 97.747% in 13.88 seconds. 
+mvn_mag_2020_063 was reduced by 97.300% in 14.34 seconds. 
+mvn_mag_2019_061 was reduced by 97.851% in 13.93 seconds. 
+mvn_mag_2019_180 was reduced by 97.306% in 14.06 seconds. 
+mvn_mag_2019_307 was reduced by 97.258% in 13.80 seconds. 
+mvn_mag_2019_120 was reduced by 97.919% in 13.77 seconds. 
+mvn_mag_2020_119 was reduced by 98.044% in 13.61 seconds. 
+mvn_mag_2020_002 was reduced by 98.785% in 13.54 seconds. 
+mvn_mag_2019_238 was reduced by 98.800% in 13.99 seconds. 
+mvn_mag_2020_062 was reduced by 98.472% in 13.93 seconds. 
+mvn_mag_2019_060 was reduced by 97.860% in 14.30 seconds. 
+mvn_mag_2019_179 was reduced by 98.644% in 13.81 seconds. 
+mvn_mag_2019_306 was reduced by 98.637% in 13.49 seconds. 
+mvn_mag_2019_119 was reduced by 97.922% in 13.89 seconds. 
+mvn_mag_2021_068 was reduced by 98.553% in 13.86 seconds. 
+mvn_mag_2020_001 was reduced by 98.198% in 13.96 seconds. 
+mvn_mag_2019_237 was reduced by 98.036% in 13.90 seconds. 
+mvn_mag_2020_061 was reduced by 97.984% in 14.04 seconds. 
+mvn_mag_2019_059 was reduced by 97.870% in 14.10 seconds. 
+mvn_mag_2019_178 was reduced by 97.957% in 13.89 seconds. 
+mvn_mag_2019_305 was reduced by 97.948% in 13.94 seconds. 
+mvn_mag_2019_118 was reduced by 97.924% in 13.86 seconds. 
+mvn_mag_2021_067 was reduced by 98.064% in 13.81 seconds. 
+mvn_mag_2019_365 was reduced by 98.160% in 13.71 seconds. 
+mvn_mag_2020_298 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2019_058 was reduced by 99.295% in 13.30 seconds. 
+mvn_mag_2020_060 was reduced by 97.321% in 14.26 seconds. 
+mvn_mag_2019_177 was reduced by 97.958% in 13.83 seconds. 
+mvn_mag_2019_304 was reduced by 97.266% in 14.11 seconds. 
+mvn_mag_2019_117 was reduced by 97.923% in 14.17 seconds. 
+mvn_mag_2021_066 was reduced by 98.876% in 13.61 seconds. 
+mvn_mag_2019_364 was reduced by 98.173% in 13.77 seconds. 
+mvn_mag_2020_297 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_059 was reduced by 98.658% in 13.78 seconds. 
+mvn_mag_2019_057 was reduced by 97.890% in 14.04 seconds. 
+mvn_mag_2020_238 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_268 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_006 was reduced by 97.957% in 3.11 seconds. 
+mvn_mag_2020_208 was reduced by 99.705% in 13.14 seconds. 
+mvn_mag_2020_342 was reduced by 99.211% in 13.22 seconds. 
+mvn_mag_2021_065 was reduced by 98.534% in 14.10 seconds. 
+mvn_mag_2020_296 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_038 was reduced by 97.964% in 13.88 seconds. 
+mvn_mag_2020_237 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_267 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_005 was reduced by 98.699% in 13.66 seconds. 
+mvn_mag_2020_207 was reduced by 99.797% in 13.06 seconds. 
+mvn_mag_2020_341 was reduced by 98.996% in 13.61 seconds. 
+mvn_mag_2020_295 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_064 was reduced by 98.036% in 13.98 seconds. 
+mvn_mag_2020_236 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_037 was reduced by 98.981% in 13.64 seconds. 
+mvn_mag_2020_266 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_004 was reduced by 98.274% in 13.97 seconds. 
+mvn_mag_2020_206 was reduced by 99.636% in 13.25 seconds. 
+mvn_mag_2020_340 was reduced by 99.514% in 13.37 seconds. 
+mvn_mag_2021_063 was reduced by 99.007% in 13.82 seconds. 
+mvn_mag_2020_294 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_235 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_036 was reduced by 98.468% in 13.52 seconds. 
+mvn_mag_2020_265 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_003 was reduced by 99.141% in 13.41 seconds. 
+mvn_mag_2020_205 was reduced by 99.513% in 13.19 seconds. 
+mvn_mag_2020_339 was reduced by 99.295% in 13.65 seconds. 
+mvn_mag_2020_293 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_062 was reduced by 98.512% in 14.21 seconds. 
+mvn_mag_2020_234 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_264 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_035 was reduced by 98.483% in 13.92 seconds. 
+mvn_mag_2021_002 was reduced by 98.734% in 13.38 seconds. 
+mvn_mag_2020_204 was reduced by 99.761% in 13.08 seconds. 
+mvn_mag_2020_292 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_338 was reduced by 99.334% in 13.57 seconds. 
+mvn_mag_2021_061 was reduced by 98.018% in 13.92 seconds. 
+mvn_mag_2020_233 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_263 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_034 was reduced by 98.489% in 13.67 seconds. 
+mvn_mag_2020_203 was reduced by 99.562% in 13.22 seconds. 
+mvn_mag_2021_001 was reduced by 98.330% in 13.75 seconds. 
+mvn_mag_2020_291 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_337 was reduced by 99.353% in 13.48 seconds. 
+mvn_mag_2020_232 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_060 was reduced by 99.002% in 13.74 seconds. 
+mvn_mag_2020_262 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_033 was reduced by 98.509% in 13.78 seconds. 
+mvn_mag_2020_366 was reduced by 99.163% in 13.24 seconds. 
+mvn_mag_2020_202 was reduced by 99.370% in 13.50 seconds. 
+mvn_mag_2020_336 was reduced by 99.390% in 13.41 seconds. 
+mvn_mag_2020_231 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_290 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_059 was reduced by 98.495% in 14.08 seconds. 
+mvn_mag_2020_261 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_032 was reduced by 98.513% in 14.62 seconds. 
+mvn_mag_2020_365 was reduced by 98.763% in 14.26 seconds. 
+mvn_mag_2020_201 was reduced by 99.509% in 14.34 seconds. 
+mvn_mag_2020_230 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_289 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_335 was reduced by 99.431% in 14.49 seconds. 
+mvn_mag_2020_260 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_058 was reduced by 97.993% in 14.02 seconds. 
+mvn_mag_2021_031 was reduced by 98.515% in 13.85 seconds. 
+mvn_mag_2020_200 was reduced by 99.471% in 13.03 seconds. 
+mvn_mag_2020_364 was reduced by 98.380% in 13.79 seconds. 
+mvn_mag_2020_229 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_288 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_334 was reduced by 99.465% in 13.43 seconds. 
+mvn_mag_2020_259 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_057 was reduced by 98.996% in 13.43 seconds. 
+mvn_mag_2021_030 was reduced by 98.195% in 14.01 seconds. 
+mvn_mag_2020_199 was reduced by 99.259% in 13.15 seconds. 
+mvn_mag_2020_363 was reduced by 99.196% in 13.55 seconds. 
+mvn_mag_2020_228 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_287 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_333 was reduced by 99.412% in 13.14 seconds. 
+mvn_mag_2020_258 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_056 was reduced by 98.487% in 14.03 seconds. 
+mvn_mag_2021_029 was reduced by 98.519% in 13.69 seconds. 
+mvn_mag_2020_198 was reduced by 99.425% in 13.06 seconds. 
+mvn_mag_2021_055 was reduced by 98.389% in 4.26 seconds. 
+mvn_mag_2020_362 was reduced by 98.808% in 13.82 seconds. 
+mvn_mag_2020_227 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_332 was reduced by 99.540% in 13.27 seconds. 
+mvn_mag_2020_286 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_257 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_054 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_053 was reduced by 98.853% in 11.75 seconds. 
+mvn_mag_2020_197 was reduced by 99.411% in 13.51 seconds. 
+mvn_mag_2021_028 was reduced by 98.533% in 14.02 seconds. 
+mvn_mag_2020_361 was reduced by 98.832% in 13.55 seconds. 
+mvn_mag_2020_226 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_285 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_331 was reduced by 99.598% in 13.45 seconds. 
+mvn_mag_2020_256 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_052 was reduced by 98.466% in 13.34 seconds. 
+mvn_mag_2020_196 was reduced by 99.219% in 13.53 seconds. 
+mvn_mag_2021_027 was reduced by 98.037% in 13.89 seconds. 
+mvn_mag_2020_360 was reduced by 98.835% in 13.22 seconds. 
+mvn_mag_2020_225 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_284 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_330 was reduced by 99.515% in 13.63 seconds. 
+mvn_mag_2020_255 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_051 was reduced by 98.481% in 13.46 seconds. 
+mvn_mag_2020_195 was reduced by 99.330% in 13.50 seconds. 
+mvn_mag_2021_026 was reduced by 98.958% in 13.88 seconds. 
+mvn_mag_2020_359 was reduced by 98.851% in 13.92 seconds. 
+mvn_mag_2020_224 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_283 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_329 was reduced by 99.749% in 13.50 seconds. 
+mvn_mag_2020_254 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_050 was reduced by 98.287% in 13.71 seconds. 
+mvn_mag_2020_194 was reduced by 99.328% in 13.37 seconds. 
+mvn_mag_2021_025 was reduced by 98.542% in 13.65 seconds. 
+mvn_mag_2020_358 was reduced by 98.883% in 13.90 seconds. 
+mvn_mag_2020_223 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_282 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_253 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_328 was reduced by 99.850% in 13.55 seconds. 
+mvn_mag_2021_049 was reduced by 98.418% in 13.26 seconds. 
+mvn_mag_2020_193 was reduced by 99.310% in 13.46 seconds. 
+mvn_mag_2021_024 was reduced by 98.063% in 13.99 seconds. 
+mvn_mag_2020_357 was reduced by 98.893% in 13.78 seconds. 
+mvn_mag_2020_222 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_281 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_327 was reduced by 99.851% in 13.22 seconds. 
+mvn_mag_2020_252 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_048 was reduced by 98.473% in 13.71 seconds. 
+mvn_mag_2020_192 was reduced by 99.275% in 13.39 seconds. 
+mvn_mag_2021_023 was reduced by 99.029% in 13.59 seconds. 
+mvn_mag_2020_356 was reduced by 98.907% in 13.43 seconds. 
+mvn_mag_2020_280 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_221 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_326 was reduced by 99.949% in 13.34 seconds. 
+mvn_mag_2020_251 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_191 was reduced by 99.262% in 13.18 seconds. 
+mvn_mag_2021_047 was reduced by 97.951% in 13.84 seconds. 
+mvn_mag_2020_355 was reduced by 98.931% in 13.23 seconds. 
+mvn_mag_2021_022 was reduced by 98.556% in 13.57 seconds. 
+mvn_mag_2020_279 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_220 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_250 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_325 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_190 was reduced by 99.235% in 13.48 seconds. 
+mvn_mag_2021_046 was reduced by 98.690% in 13.49 seconds. 
+mvn_mag_2020_354 was reduced by 98.949% in 13.47 seconds. 
+mvn_mag_2021_021 was reduced by 98.084% in 13.97 seconds. 
+mvn_mag_2020_278 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_219 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_249 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_324 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_045 was reduced by 98.468% in 13.38 seconds. 
+mvn_mag_2020_189 was reduced by 99.207% in 13.69 seconds. 
+mvn_mag_2020_353 was reduced by 98.618% in 13.58 seconds. 
+mvn_mag_2021_020 was reduced by 99.039% in 13.84 seconds. 
+mvn_mag_2020_277 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_218 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_248 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_323 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_188 was reduced by 99.185% in 13.35 seconds. 
+mvn_mag_2021_044 was reduced by 97.959% in 14.24 seconds. 
+mvn_mag_2020_352 was reduced by 98.985% in 13.41 seconds. 
+mvn_mag_2020_276 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_019 was reduced by 98.570% in 13.90 seconds. 
+mvn_mag_2020_217 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_247 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_322 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_187 was reduced by 99.169% in 13.31 seconds. 
+mvn_mag_2021_043 was reduced by 98.973% in 13.28 seconds. 
+mvn_mag_2020_275 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_351 was reduced by 99.013% in 13.30 seconds. 
+mvn_mag_2020_216 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_018 was reduced by 98.466% in 13.90 seconds. 
+mvn_mag_2020_246 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_321 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_186 was reduced by 99.155% in 13.81 seconds. 
+mvn_mag_2021_042 was reduced by 98.463% in 13.98 seconds. 
+mvn_mag_2020_274 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_350 was reduced by 98.699% in 13.77 seconds. 
+mvn_mag_2020_215 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_017 was reduced by 98.707% in 13.84 seconds. 
+mvn_mag_2020_245 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_320 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_185 was reduced by 99.124% in 13.37 seconds. 
+mvn_mag_2021_041 was reduced by 97.957% in 13.96 seconds. 
+mvn_mag_2020_273 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_214 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_349 was reduced by 99.369% in 13.74 seconds. 
+mvn_mag_2021_016 was reduced by 98.591% in 13.71 seconds. 
+mvn_mag_2020_244 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_305 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_015 was reduced by 97.219% in 2.38 seconds. 
+mvn_mag_2020_184 was reduced by 99.098% in 13.40 seconds. 
+mvn_mag_2020_272 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_040 was reduced by 98.976% in 13.67 seconds. 
+mvn_mag_2020_213 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_348 was reduced by 99.073% in 13.76 seconds. 
+mvn_mag_2020_243 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_304 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_014 was reduced by 98.966% in 12.23 seconds. 
+mvn_mag_2020_183 was reduced by 99.082% in 13.08 seconds. 
+mvn_mag_2020_271 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_039 was reduced by 98.467% in 13.78 seconds. 
+mvn_mag_2020_212 was reduced by 99.938% in 13.35 seconds. 
+mvn_mag_2020_347 was reduced by 98.793% in 13.61 seconds. 
+mvn_mag_2020_242 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_303 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_011 was reduced by 99.048% in 12.82 seconds. 
+mvn_mag_2020_182 was reduced by 99.053% in 13.35 seconds. 
+mvn_mag_2021_010 was reduced by 99.265% in 8.32 seconds. 
+mvn_mag_2020_270 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_009 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_083 was reduced by 99.128% in 13.57 seconds. 
+mvn_mag_2020_211 was reduced by 99.927% in 13.14 seconds. 
+mvn_mag_2020_346 was reduced by 99.408% in 13.49 seconds. 
+mvn_mag_2020_241 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_302 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_181 was reduced by 99.036% in 13.35 seconds. 
+mvn_mag_2020_269 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_008 was reduced by 98.669% in 13.86 seconds. 
+mvn_mag_2020_210 was reduced by 99.921% in 13.24 seconds. 
+mvn_mag_2021_082 was reduced by 98.686% in 13.60 seconds. 
+mvn_mag_2020_345 was reduced by 99.139% in 13.68 seconds. 
+mvn_mag_2020_240 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_301 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_007 was reduced by 98.723% in 9.44 seconds. 
+mvn_mag_2020_180 was reduced by 99.019% in 13.55 seconds. 
+mvn_mag_2021_098 was reduced by 98.923% in 13.44 seconds. 
+mvn_mag_2020_209 was reduced by 99.824% in 13.41 seconds. 
+mvn_mag_2020_344 was reduced by 98.890% in 13.30 seconds. 
+mvn_mag_2021_081 was reduced by 98.238% in 14.12 seconds. 
+mvn_mag_2020_239 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_300 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_188 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_179 was reduced by 99.001% in 13.54 seconds. 
+mvn_mag_2021_097 was reduced by 98.903% in 13.46 seconds. 
+mvn_mag_2021_080 was reduced by 99.109% in 13.47 seconds. 
+mvn_mag_2021_113 was reduced by 99.004% in 13.90 seconds. 
+mvn_mag_2020_299 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2020_343 was reduced by 99.452% in 13.65 seconds. 
+mvn_mag_2021_128 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_187 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_143 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_096 was reduced by 98.879% in 13.56 seconds. 
+mvn_mag_2021_112 was reduced by 99.463% in 13.33 seconds. 
+mvn_mag_2021_158 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_079 was reduced by 98.648% in 13.75 seconds. 
+mvn_mag_2021_127 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_173 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_186 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_142 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_095 was reduced by 98.864% in 13.58 seconds. 
+mvn_mag_2021_111 was reduced by 99.199% in 13.44 seconds. 
+mvn_mag_2021_126 was reduced by 99.941% in 13.40 seconds. 
+mvn_mag_2021_157 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_172 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_078 was reduced by 98.524% in 14.31 seconds. 
+mvn_mag_2021_185 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_141 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_094 was reduced by 98.856% in 13.76 seconds. 
+mvn_mag_2021_110 was reduced by 98.895% in 13.90 seconds. 
+mvn_mag_2021_156 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_125 was reduced by 99.850% in 13.97 seconds. 
+mvn_mag_2021_171 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_077 was reduced by 98.759% in 13.72 seconds. 
+mvn_mag_2021_184 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_140 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_093 was reduced by 98.445% in 13.59 seconds. 
+mvn_mag_2021_155 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_109 was reduced by 99.415% in 13.78 seconds. 
+mvn_mag_2021_170 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_124 was reduced by 99.772% in 13.51 seconds. 
+mvn_mag_2021_076 was reduced by 98.624% in 13.78 seconds. 
+mvn_mag_2021_183 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_139 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_092 was reduced by 98.815% in 13.19 seconds. 
+mvn_mag_2021_154 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_169 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_108 was reduced by 99.118% in 13.88 seconds. 
+mvn_mag_2021_123 was reduced by 99.664% in 13.51 seconds. 
+mvn_mag_2021_075 was reduced by 98.610% in 13.71 seconds. 
+mvn_mag_2021_182 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_138 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_091 was reduced by 98.807% in 13.62 seconds. 
+mvn_mag_2021_168 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_153 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_107 was reduced by 98.793% in 13.79 seconds. 
+mvn_mag_2021_122 was reduced by 99.607% in 13.09 seconds. 
+mvn_mag_2021_074 was reduced by 98.604% in 13.66 seconds. 
+mvn_mag_2021_181 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_137 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_167 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_090 was reduced by 98.384% in 13.80 seconds. 
+mvn_mag_2021_152 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_121 was reduced by 99.566% in 13.46 seconds. 
+mvn_mag_2021_106 was reduced by 99.371% in 13.32 seconds. 
+mvn_mag_2021_073 was reduced by 98.595% in 13.94 seconds. 
+mvn_mag_2021_180 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_136 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_166 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_089 was reduced by 99.118% in 13.70 seconds. 
+mvn_mag_2021_151 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_105 was reduced by 99.044% in 13.70 seconds. 
+mvn_mag_2021_120 was reduced by 99.508% in 13.35 seconds. 
+mvn_mag_2021_072 was reduced by 98.578% in 13.42 seconds. 
+mvn_mag_2021_179 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_135 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_165 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_150 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_088 was reduced by 98.763% in 13.78 seconds. 
+mvn_mag_2021_119 was reduced by 99.273% in 13.19 seconds. 
+mvn_mag_2021_104 was reduced by 98.808% in 13.84 seconds. 
+mvn_mag_2021_071 was reduced by 98.584% in 13.46 seconds. 
+mvn_mag_2021_178 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_134 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_164 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_149 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_087 was reduced by 98.336% in 13.58 seconds. 
+mvn_mag_2021_118 was reduced by 99.419% in 13.44 seconds. 
+mvn_mag_2021_103 was reduced by 99.238% in 13.60 seconds. 
+mvn_mag_2021_177 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_070 was reduced by 98.196% in 14.38 seconds. 
+mvn_mag_2021_133 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_163 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_148 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_086 was reduced by 99.151% in 13.18 seconds. 
+mvn_mag_2021_102 was reduced by 98.981% in 13.25 seconds. 
+mvn_mag_2021_117 was reduced by 99.393% in 13.52 seconds. 
+mvn_mag_2021_176 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_069 was reduced by 98.552% in 13.75 seconds. 
+mvn_mag_2021_132 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_162 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_147 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_085 was reduced by 98.720% in 13.92 seconds. 
+mvn_mag_2021_116 was reduced by 99.128% in 13.38 seconds. 
+mvn_mag_2021_175 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_101 was reduced by 98.978% in 13.65 seconds. 
+mvn_mag_2021_195 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_131 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_161 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_146 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_084 was reduced by 98.280% in 14.24 seconds. 
+mvn_mag_2021_115 was reduced by 99.532% in 13.75 seconds. 
+mvn_mag_2021_174 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_100 was reduced by 98.950% in 13.84 seconds. 
+mvn_mag_2021_194 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_130 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_160 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_145 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_202 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_209 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_114 was reduced by 99.293% in 13.44 seconds. 
+mvn_mag_2021_099 was reduced by 98.929% in 13.65 seconds. 
+mvn_mag_2021_193 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_129 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_159 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_144 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_201 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_208 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_223 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_216 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_192 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_230 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_244 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_237 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_200 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_207 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_222 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_215 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_191 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_229 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_243 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_236 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_199 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_221 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_206 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_214 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_190 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_228 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_242 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_235 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_198 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_220 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_205 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_213 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_189 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_227 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_241 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_234 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_197 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_219 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_204 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_212 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_251 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_226 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_240 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_233 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_196 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_218 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_203 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_211 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_225 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_250 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_239 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_232 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_258 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_265 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_217 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_210 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_282 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_281 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_280 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_224 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_279 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_278 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_277 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_273 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_249 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_289 was reduced by 99.569% in 0.42 seconds. 
+mvn_mag_2021_288 was reduced by 99.649% in 0.35 seconds. 
+mvn_mag_2021_287 was reduced by 99.712% in 0.36 seconds. 
+mvn_mag_2021_286 was reduced by 99.760% in 0.36 seconds. 
+mvn_mag_2021_285 was reduced by 99.927% in 0.38 seconds. 
+mvn_mag_2021_284 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_283 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_238 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_272 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_231 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_257 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_264 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_248 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_296 was reduced by 99.295% in 11.70 seconds. 
+mvn_mag_2021_303 was reduced by 99.402% in 11.82 seconds. 
+mvn_mag_2021_271 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_256 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_263 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_247 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_295 was reduced by 99.327% in 11.62 seconds. 
+mvn_mag_2021_294 was reduced by 99.389% in 0.33 seconds. 
+mvn_mag_2021_293 was reduced by 99.404% in 0.41 seconds. 
+mvn_mag_2021_292 was reduced by 99.431% in 0.36 seconds. 
+mvn_mag_2021_270 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_302 was reduced by 99.125% in 12.06 seconds. 
+mvn_mag_2021_291 was reduced by 99.493% in 0.35 seconds. 
+mvn_mag_2021_290 was reduced by 99.537% in 0.36 seconds. 
+mvn_mag_2021_255 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_262 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_246 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_269 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_301 was reduced by 98.882% in 11.29 seconds. 
+mvn_mag_2021_254 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_261 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_245 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_268 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_300 was reduced by 99.462% in 11.04 seconds. 
+mvn_mag_2021_253 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_260 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_304 was reduced by 98.786% in 11.50 seconds. 
+mvn_mag_2021_267 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_299 was reduced by 99.204% in 10.92 seconds. 
+mvn_mag_2021_252 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_259 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_266 had no data that fit criteria, so it will not be saved. 
+mvn_mag_2021_298 was reduced by 98.983% in 9.41 seconds. 
+mvn_mag_2021_297 was reduced by 99.529% in 8.59 seconds. 
+
+Finished running at 21:15.
+IdleTimeout has been reached.
+Parallel pool using the 'local' profile is shutting down.
+>> 
