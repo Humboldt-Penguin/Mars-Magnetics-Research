@@ -6,6 +6,6 @@
 *.qgz
 *.tif
 
-# ignore backup files files
+# ignore backup files
 *.bak
 *.asv
