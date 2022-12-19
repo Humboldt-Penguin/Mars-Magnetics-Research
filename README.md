@@ -9,7 +9,7 @@ Contact: [zain.eris.kamal@rutgers.edu](mailto:zain.eris.kamal@rutgers.edu).
 **Recognition:**
 
 * In Summer 2022, I was awarded a fellowship grant by the NASA New Jersey Space Grant Consortium.
-* In December 2022, I will be giving an oral presentation at the American Geophysical Union's Fall 2022 conference. Abstract citation pending.
+* In December 2022, I gave an oral presentation at the American Geophysical Union's Fall 2022 conference, recording available [here](https://www.youtube.com/watch?v=tJBthUgirSw). Abstract citation available soon. 
 
 ---
 ## Presentations
