@@ -1,5 +1,7 @@
 Thank you for listening to my presentation!
 
+A recording of the talk can be found [here](https://www.youtube.com/watch?v=KXWTkM49EJA).
+
 I'd be more than happy to discuss at [zain.eris.kamal@rutgers.edu](mailto:zain.eris.kamal@rutgers.edu). All questions/criticism/feedback are welcome.
 
 Further resources:
