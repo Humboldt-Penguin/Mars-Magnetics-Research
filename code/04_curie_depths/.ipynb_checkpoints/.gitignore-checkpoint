@@ -1,3 +1,2 @@
 # ignore data folder 
-# (commented out for now since I'm still playing with repo data struct)
-# data/
+data/*
