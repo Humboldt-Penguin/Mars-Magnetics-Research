@@ -21,18 +21,24 @@ restoredefaultpath;
 
 repoPath = getPaths('repo');
 
-% Main scripts (technically not needed because this is where you should
-% always be working from
-addpath(genpath(fullfile(repoPath, "code\01_main_scripts\")));
+% % Main scripts (technically not needed because this is where you should
+% % always be working from
+% addpath(genpath(fullfile(repoPath, "code\01_main_scripts\")));
+% 
+% % Library functions
+% addpath(genpath(fullfile(repoPath, "code\02_libraries\")));
+% 
+% % Inputfile generator scripts
+% addpath(genpath(fullfile(repoPath, "code\03_input_files\")));
+% 
+% % Logs
+% addpath(genpath(fullfile(repoPath, "code\04_logs\")));
 
-% Library functions
-addpath(genpath(fullfile(repoPath, "code\02_libraries\")));
 
-% Inputfile generator scripts
-addpath(genpath(fullfile(repoPath, "code\03_input_files\")));
+% updated for new repo struct
+    addpath(genpath("libraries"));
 
-% Logs
-addpath(genpath(fullfile(repoPath, "code\04_logs\")));
+
 
 clear
 clc

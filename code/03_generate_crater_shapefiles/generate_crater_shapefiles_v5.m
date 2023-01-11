@@ -1,16 +1,16 @@
 clc
 clear
 
-%%% INPUTS (see decription for more details)
 
+%%% INPUTS (see decription for more details)
 
 % topleft: -47.5672,-8.4774
 % bottomright: -44.9715,-11.0998
 
-lonleft = -47.5672;
-lonright = -44.9715; 
-lattop = -8.4774;
-latbottom = -11.0998;
+% lonleft = -47.5672;
+% lonright = -44.9715; 
+% lattop = -8.4774;
+% latbottom = -11.0998;
 
 minAlt = 0;
 maxAlt = 200;
@@ -21,25 +21,68 @@ region_name = 'chaos_regions';
 
 
 % read + process coordinates
-    infolder = "C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\geological_features\chaos_regions";
-    infile = "chaos_region_rectangular_bounds.xlsx";
+
+
+%     infolder = "C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\geological_features\chaos_regions";
+%     infile = "chaos_region_rectangular_bounds.xlsx";
+%     
+%     coords = readtable(fullfile(infolder,infile));
+%     coords.lonleft = zeros(height(coords),1);
+%     coords.lonright = zeros(height(coords),1);
+%     coords.lattop = zeros(height(coords),1);
+%     coords.latbottom = zeros(height(coords),1);
+%     
+%     
+%     for i=1 : height(coords)
+%         topleft = sscanf(coords(i,:).TOP_LEFT{1}, '%f,%f');
+%         bottomright = sscanf(coords(i,:).BOTTOM_RIGHT{1}, '%f,%f');
+%         coords(i,:).lonleft = topleft(1);
+%         coords(i,:).lonright = bottomright(1);
+%         coords(i,:).lattop = topleft(2);
+%         coords(i,:).latbottom = bottomright(2);
+%     end
+
+
+
+
+
+
+
     
-    incoords = readtable(fullfile(infolder,infile));
-    incoords.lonleft = zeros(height(incoords),1);
-    incoords.lonright = zeros(height(incoords),1);
-    incoords.lattop = zeros(height(incoords),1);
-    incoords.latbottom = zeros(height(incoords),1);
+    infolder = "C:\Users\zk117\Documents\00.local_WL-202\Mars_Magnetics\QGIS\230106 jake chaos terrains";
+    infile = "chaos_outlines.shp";
+    
+    chaos_shape = shaperead(fullfile(infolder, infile));
     
     
-    for i=1 : height(incoords)
-        topleft = sscanf(incoords(i,:).TOP_LEFT{1}, '%f,%f');
-        bottomright = sscanf(incoords(i,:).BOTTOM_RIGHT{1}, '%f,%f');
-        incoords(i,:).lonleft = topleft(1);
-        incoords(i,:).lonright = bottomright(1);
-        incoords(i,:).lattop = topleft(2);
-        incoords(i,:).latbottom = bottomright(2);
+    % adjust coords (loosely)
+    for i=1 : height(chaos_shape)
+        for j=1 : length(chaos_shape(i).X)
+            chaos_shape(i).X(j) = chaos_shape(i).X(j)*1.68775322e-5;
+            chaos_shape(i).Y(j) = chaos_shape(i).Y(j)*1.69173162e-5;
+        end
+    end
+    
+%     shapewrite(shapefile,fullfile(infolder, 'chaos_outlines_adjusted'));
+
+
+    lonleft = [];
+    lonright = [];
+    lattop = [];
+    latbottom = [];
+
+    for i=1 : height(chaos_shape)
+%         xrange = range(chaos_shape(i).X);
+%         yrange = range(chaos_shape(i).Y);
+%         pad = 0.5;
+        pad = 1;
+        lonleft = [lonleft;min(chaos_shape(i).X)-pad];
+        lonright = [lonright;max(chaos_shape(i).X)+pad];
+        latbottom = [latbottom;min(chaos_shape(i).Y)-pad];
+        lattop = [lattop;max(chaos_shape(i).Y)+pad];
     end
 
+    coords = table(lonleft, lonright, latbottom, lattop);
 
 
 
@@ -56,6 +99,7 @@ v2 just uses a version of the maven measurements that is already converted to ra
 
 v4 just generates track data for a big rectangle bounded by lon/lat. nno plots or bmag norm though
     
+v5 takes shapefiles for the chaos terrain thing
 
 %}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -127,13 +171,13 @@ fullTimer = tic;
 
         allShapefiles = tic;
 
-        for i=1 : height(incoords)
+        for i=1 : height(coords)
 
             write_shape_timer = tic;
 
-            loncut = mvn_sph.lon > incoords(i,:).lonleft & mvn_sph.lon < incoords(i,:).lonright;
+            loncut = mvn_sph.lon > coords(i,:).lonleft & mvn_sph.lon < coords(i,:).lonright;
             mvn_thisRectangle = mvn_sph(loncut,:); clear loncut
-            latcut = mvn_thisRectangle.lat > incoords(i,:).latbottom & mvn_thisRectangle.lat < incoords(i,:).lattop;
+            latcut = mvn_thisRectangle.lat > coords(i,:).latbottom & mvn_thisRectangle.lat < coords(i,:).lattop;
             mvn_thisRectangle = mvn_thisRectangle(latcut,:); clear latcut
         
             altitude = mvn_thisRectangle.r - 3390;
@@ -144,12 +188,19 @@ fullTimer = tic;
             Bmag = sqrt(mvn_thisRectangle.Blon.^2 + mvn_thisRectangle.Bcola.^2 + mvn_thisRectangle.Br.^2);
             clon = lon2clon(mvn_thisRectangle.lon);
             mvn_thisRectangle = [mvn_thisRectangle, table(Bmag, clon)]; clear Bmag clon
+
+
+            % Isolate tracks that pass through the crater
+                [good_tracks, Bmag_norm] = isolateGoodTracks(mvn_thisRectangle, coords(i,:));
+                mvn_thisRectangle = [mvn_thisRectangle, table(Bmag_norm)]; clear Bmag_norm
+
     
     
             shape_struct = struct...
                 ( ...
                 'Geometry', 'Multipoint', ...
                 'Bmag', num2cell(mvn_thisRectangle.Bmag), ...
+                'Bmag_norm', num2cell(mvn_thisRectangle.Bmag_norm), ...
                 'Br', num2cell(mvn_thisRectangle.Br), ...
                 'Blon', num2cell(mvn_thisRectangle.Blon), ...
                 'Bcola', num2cell(mvn_thisRectangle.Bcola), ...
@@ -160,20 +211,148 @@ fullTimer = tic;
                 );
 
             thisRectangle_title = sprintf( ...
-                '%02d__(%.0f,%.0f)', ...
+                '%03d__(%.0f,%.0f)', ...
                 i, ...
-                (incoords(i,:).lonleft + incoords(i,:).lonright)/2, ...
-                (incoords(i,:).latbottom + incoords(i,:).lattop)/2 ...
+                ((coords(i,:).lonleft + coords(i,:).lonright)/2), ...
+                ((coords(i,:).latbottom + coords(i,:).lattop)/2) ...
             );
 
             folder_2_region = fullfile(folder_1_allshapes, thisRectangle_title);
             [~,~] = mkdir(folder_2_region);
             shapewrite(shape_struct, fullfile(folder_2_region, thisRectangle_title));
+
+
+
+
+
+
+
+
+
+    
+    
+        %{ 
+        Make and save plots
+        %}
+            components_plots = ["Bmag", "Bmag_norm", "altitude", ...
+                          "Br", "Blon", "Bcola"];
+            
+            titles = ["$|B| \ [\rm{nT}]$", "$||B||$", "$\rm{Altitude} \ [\rm{km}]$"...
+                      "$B_r \ [\rm{nT}]$", "$B_\theta \ [\rm{nT}]$", "$B_\phi \ [\rm{nT}]$"];
+    
+            orders = ["No", "Linear", "Quadratic", "Cubic"];
+            trackColors = distinguishable_colors(length(good_tracks));
+    
+            % v1 of making plots
+            for deg = 0:1
+                fig = figure('visible','off');
+                fig.Position = [0,0,1700,700];
+            
+                for comp = 1:6
+                    subplot(2,3,comp);
+                    hold on
+                    box on
+                    xlim('tight');
+                    ylim('padded');
+                    
+    %                 xline(craters.lat(i_crater) - craters.theta(i_crater));
+    %                 xline(craters.lat(i_crater) + craters.theta(i_crater));
+    %                 xline(craters.lat(i_crater) - 1.5*craters.theta(i_crater), '--black');
+    %                 xline(craters.lat(i_crater) + 1.5*craters.theta(i_crater), '--black');
+                    
+                    xlabel('Latitude $[^\circ]$','Interpreter','latex','FontSize',14);
+                    ylabel(titles(comp),'Interpreter','latex','FontSize',14);
+            %             hYLabel = get(gca,'YLabel');
+            %             set(hYLabel,'rotation',0,'VerticalAlignment','middle')
+            
+                    for j=1 : length(good_tracks)
+                        thisTrack = good_tracks{j}; 
+                        B_array = thisTrack.(components_plots(comp));
+                        B_array = smoothdata(B_array, 'sgolay', 200);
+                        if deg > 0 && comp ~= 3
+                            B_array = detrend(B_array, deg);
+                        end
+    
+%                         scatter(thisTrack.lat(~thisTrack.in_crater_150), B_array(~thisTrack.in_crater_150), 1, trackColors(i,:), '.');
+%                         scatter(thisTrack.lat(thisTrack.in_crater_150), B_array(thisTrack.in_crater_150), 50, trackColors(i,:), '.');
+                        scatter(thisTrack.lat, B_array, 1, trackColors(j,:), '.');
+                    end
+                    
+                    hold off
+                end     % end component for loop
+            
+                sgtitle(sprintf('Shapefile #%04d \nCoordinates = (%.1f, %.1f) \n%s Detrending, %.0f Tracks', ...
+                                 i, ...
+                                 ((coords(i,:).lonleft + coords(i,:).lonright)/2), ...
+                                 ((coords(i,:).latbottom + coords(i,:).lattop)/2), ...
+                                 orders(deg+1), length(good_tracks)));
+            
+                thisPlot_title = sprintf('%04d__deg%u.png', i, deg);
+                saveas(fig, fullfile(folder_2_region, thisPlot_title));
+    
+                % option for saving the undetrended plots for individual inspection
+                    if deg == 0
+                        folder_3_plots = fullfile(folder_1_allshapes, '_plots_raw');
+                        [~,~] = mkdir(folder_3_plots);
+                        saveas(fig, fullfile(folder_3_plots, thisPlot_title));
+                    elseif deg == 1
+                        folder_3_plots = fullfile(folder_1_allshapes, '_plots_linearDetrend');
+                        [~,~] = mkdir(folder_3_plots);
+                        saveas(fig, fullfile(folder_3_plots, thisPlot_title));
+                    end
+    
+                close(fig);
+            end     % end degree for loop
+    
+
+
+
+
+
+
+
+
+
     
             verbose(sprintf("\nRectangle shapefile %.0f written in %.2f seconds.", i, toc(write_shape_timer)));
             
         end
     end
+
+
+
+% %%
+%     % Isolate tracks that pass through the crater and apply in_crater flags (converted to function bc costly)
+%         % Addition 7/11/22: also create a Bmag_norm array to write to the shapefile
+%         [good_tracks, Bmag_norm] = isolateGoodTracks(thisCrater, craters(i_crater,:));
+% 
+%     % Add Bmag_norm to crater field
+%         thisCrater = [thisCrater, table(Bmag_norm)];  
+% 
+%     % Quick detour now that we have Bmag_norm: write shapefile
+%         if write_shape
+%             shape_struct = struct...
+%                 ( ...
+%                 'Geometry', 'Multipoint', ...
+%                 'CRATER_ID', craters.id{i_crater}, ...
+%                 'Bmag', num2cell(thisCrater.Bmag), ...
+%                 'Bmag_norm', num2cell(thisCrater.Bmag_norm), ...
+%                 'Br', num2cell(thisCrater.Br), ...
+%                 'Blon', num2cell(thisCrater.Blon), ...
+%                 'Bcola', num2cell(thisCrater.Bcola), ...
+%                 'Altitude', num2cell(thisCrater.altitude), ...
+%                 'Lon', num2cell(thisCrater.lon), ...
+%                 'Clon', num2cell(thisCrater.clon), ...
+%                 'Lat',num2cell(thisCrater.lat) ...
+%                 );
+%             shapewrite(shape_struct, fullfile(folder_2_thisCrater, thisCrater_title));
+%         end
+% 
+% %%
+
+
+
+
 
 
 % Final times
@@ -496,6 +675,10 @@ function [data] = readData(infile, formatSpec)
 end
 
 
+function r = range(I)
+    r = max(I(:))-min(I(:));
+end
+
 %% reading crater data from user-filtered folder of line plots
 
 function [crater_indices] = getUserFilteredIndices(folder)
@@ -613,7 +796,8 @@ end
 
 %% maven track signal analysis
 
-function [good_tracks, Bmag_norm] = isolateGoodTracks(thisCrater, craterMetaData)
+% EDITED FOR V5
+function [good_tracks, Bmag_norm] = isolateGoodTracks(thisCrater, ~)
     
     % Find the index where each track begins by searching for abrupt jumps in lat_deg and altitude
         epsilon_inCrater = 0.05;
@@ -646,48 +830,48 @@ function [good_tracks, Bmag_norm] = isolateGoodTracks(thisCrater, craterMetaData
 
             % Addition 7/11/22: also create a Bmag_norm array to write to the shapefile
                 this_Bmag_norm = thisTrack.Bmag / max(thisTrack.Bmag);
-                thisTrack = [thisTrack, table(this_Bmag_norm, 'VariableNames', "Bmag_norm")]; %#ok<AGROW> 
-                Bmag_norm = [Bmag_norm; this_Bmag_norm]; %#ok<AGROW> 
+                thisTrack = [thisTrack, table(this_Bmag_norm, 'VariableNames', "Bmag_norm")];  
+                Bmag_norm = [Bmag_norm; this_Bmag_norm];  
 
 
     
-            % Loop over all points and check if in crater    
-                in_crater = false(height(thisTrack),1);
-                thisTrack = [thisTrack, table(in_crater)]; clear in_crater; %#ok<AGROW> 
-                epsilon_in_crater = craterMetaData.theta; % * 0.9;
-                for pt=1 : height(thisTrack)
-                    in_lon = abs(craterMetaData.lon - thisTrack.lon(pt)) < epsilon_in_crater;
-                    in_lat = abs(craterMetaData.lat - thisTrack.lat(pt)) < epsilon_in_crater;
-                    if in_lon && in_lat
-                        thisTrack.in_crater(pt) = true;
-                    end
-                end
-                clear epsilon_in_crater in_lon in_lat;
+%             % Loop over all points and check if in crater    
+%                 in_crater = false(height(thisTrack),1);
+%                 thisTrack = [thisTrack, table(in_crater)]; clear in_crater; %#ok<AGROW> 
+%                 epsilon_in_crater = craterMetaData.theta; % * 0.9;
+%                 for pt=1 : height(thisTrack)
+%                     in_lon = abs(craterMetaData.lon - thisTrack.lon(pt)) < epsilon_in_crater;
+%                     in_lat = abs(craterMetaData.lat - thisTrack.lat(pt)) < epsilon_in_crater;
+%                     if in_lon && in_lat
+%                         thisTrack.in_crater(pt) = true;
+%                     end
+%                 end
+%                 clear epsilon_in_crater in_lon in_lat;
 
 
             % If this track has points that pass through the crater, add other flags and append to good_tracks cell
-                if ~all(~thisTrack.in_crater)
-                    in_crater_150 = false(height(thisTrack),1);
-                    in_crater_200 = false(height(thisTrack),1);
-                    epsilon_in_crater_150 = craterMetaData.theta * 1.5;
-                    epsilon_in_crater_200 = craterMetaData.theta * 2.0;
-                    thisTrack = [thisTrack, table(in_crater_150, in_crater_200)]; clear in_crater_150 in_crater_200; %#ok<AGROW> 
+                if true%~all(~thisTrack.in_crater)
+%                     in_crater_150 = false(height(thisTrack),1);
+%                     in_crater_200 = false(height(thisTrack),1);
+%                     epsilon_in_crater_150 = craterMetaData.theta * 1.5;
+%                     epsilon_in_crater_200 = craterMetaData.theta * 2.0;
+%                     thisTrack = [thisTrack, table(in_crater_150, in_crater_200)]; clear in_crater_150 in_crater_200; %#ok<AGROW> 
+% 
+%                     for pt=1 : height(thisTrack)
+%                         in_lon = abs(craterMetaData.lon - thisTrack.lon(pt)) < epsilon_in_crater_150;
+%                         in_lat = abs(craterMetaData.lat - thisTrack.lat(pt)) < epsilon_in_crater_150;
+%                         if in_lon && in_lat
+%                             thisTrack.in_crater_150(pt) = true;
+%                         end
+%                         in_lon = abs(craterMetaData.lon - thisTrack.lon(pt)) < epsilon_in_crater_200;
+%                         in_lat = abs(craterMetaData.lat - thisTrack.lat(pt)) < epsilon_in_crater_200;
+%                         if in_lon && in_lat
+%                             thisTrack.in_crater_200(pt) = true;
+%                         end
+%                     end
+%                     clear epsilon_in_crater_150 epsilon_in_crater_200 in_lon in_lat;
 
-                    for pt=1 : height(thisTrack)
-                        in_lon = abs(craterMetaData.lon - thisTrack.lon(pt)) < epsilon_in_crater_150;
-                        in_lat = abs(craterMetaData.lat - thisTrack.lat(pt)) < epsilon_in_crater_150;
-                        if in_lon && in_lat
-                            thisTrack.in_crater_150(pt) = true;
-                        end
-                        in_lon = abs(craterMetaData.lon - thisTrack.lon(pt)) < epsilon_in_crater_200;
-                        in_lat = abs(craterMetaData.lat - thisTrack.lat(pt)) < epsilon_in_crater_200;
-                        if in_lon && in_lat
-                            thisTrack.in_crater_200(pt) = true;
-                        end
-                    end
-                    clear epsilon_in_crater_150 epsilon_in_crater_200 in_lon in_lat;
-
-                    good_tracks{end+1} = thisTrack; %#ok<AGROW> 
+                    good_tracks{end+1} = thisTrack;  
                 end
         end
 end
