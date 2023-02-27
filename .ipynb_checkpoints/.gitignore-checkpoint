@@ -1,0 +1,11 @@
+# ignore data files (they shouldn't be anywhere, but just in case)
+*.sts
+*.dbf
+*.shp
+*.shx
+*.qgz
+*.tif
+
+# ignore backup files
+*.bak
+*.asv
