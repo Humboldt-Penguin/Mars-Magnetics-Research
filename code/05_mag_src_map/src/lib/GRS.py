@@ -5,11 +5,11 @@ import numpy as np
 class GRS:
     
     nanval = -1e-10
+    path = ''
     
     
-    
-    
-    def __init__(self):
+    def __init__(self, path):
+        self.path = path
         """
         Initialize empty GRS object (no data yet).
         """
@@ -43,13 +43,16 @@ class GRS:
         
         
         
-        path_datafolder = os.path.abspath(
-            os.path.join(
-                os.getcwd(), 
-                os.pardir,   # navigate to src
-                "data/GRS/smoothed"   # adjust smoothed/unsmoothed as needed
-            )
-        )
+        # path_datafolder = os.path.abspath(
+        #     os.path.join(
+        #         os.getcwd(), 
+        #         os.pardir,   # navigate to src
+        #         "data/GRS/smoothed"   # adjust smoothed/unsmoothed as needed
+        #     )
+        # )
+        # print(os.getcwd())
+        
+        path_datafolder = os.path.abspath(os.path.join(self.path_src, "data/GRS/smoothed"))
 
         
         self.data = []
