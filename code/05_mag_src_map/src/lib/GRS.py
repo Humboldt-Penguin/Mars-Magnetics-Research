@@ -9,10 +9,14 @@ class GRS:
     
     
     def __init__(self, path):
-        self.path = path
         """
         Initialize empty GRS object (no data yet).
+        
+        PARAMETERS:
+            path : string
+                Path to GRS folder from root.
         """
+        self.path = path
         return
     
     
@@ -52,7 +56,7 @@ class GRS:
         # )
         # print(os.getcwd())
         
-        path_datafolder = os.path.abspath(os.path.join(self.path_src, "data/GRS/smoothed"))
+        path_datafolder = os.path.abspath(os.path.join(self.path, "smoothed"))
 
         
         self.data = []
@@ -170,12 +174,15 @@ class GRS:
         
         
     
-    def getConcentration(self, lon, lat, elementname, normalized = False):
+    def getConcentration(self, lon, lat, elementname, normalized = True):
         """
         Get the concentration of an element at the desired coordinate. Units in weight percent (Wt%) -- i.e. a 5% concentration would correspond to a return value of 0.05.
         
         PARAMETERS:
             normalized (bool): Determine whether or not to normalize to a volatile-free basis. See the next method "getAdjustedConcentration" for details.
+            
+        RETURN:
+            If atleast two of the nearest pixels are unresolved by GRS, just return the nanval.
         """
 
         
