@@ -1,0 +1,12 @@
+name: mars2
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - numba
+  - jupyterlab
+  - numpy
+  - matplotlib
+  - gdown
+  - scipy
+prefix: /home/lain/software/mambaforge/envs/mars2
