@@ -26,7 +26,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-class CrustalThickness:
+class Crust:
     
     """
     all private variables:
@@ -38,6 +38,10 @@ class CrustalThickness:
         lonrange
         path
     """
+    
+    crustal_density = 2900 # [kg m^-3]
+    # "In Figure 8, we plot the depth of magnetization as a function of crustal thickness. Here we use a crustal thickness model of Wieczorek et al. (2020) which assumes a uniform crustal density of 2,900 kg urn:x-wiley:21699097:media:jgre21714:jgre21714-math-0110 and a minimum crustal thickness of 5 km within the Isidis impact basin."
+
     
     def __init__(self):
         """Initialize empty Crustal Thickness object (no data yet)."""
@@ -86,7 +90,7 @@ class CrustalThickness:
         return
     
     
-    def __getExactVal(self, clon, lat):
+    def __getExactThickness(self, clon, lat):
         # clon = lon2clon(lon)
         lon = clon2lon(clon)
         self.checkCoords(lon,lat)
@@ -96,27 +100,27 @@ class CrustalThickness:
             i = i_lat*self.clonrange.size + i_clon
             return self.dat[i]
         except IndexError:
-            raise Exception('ERROR: interpolation is required to crustal thickness at this value -- use `getVal` instead.')
+            raise Exception('ERROR: interpolation is required to crustal thickness at this value -- use `getThickness` instead.')
 
             
             
             
 
-    def getVal(self, lon, lat):
+    def getThickness(self, lon, lat):
 
         self.checkCoords(lon,lat)    
         clon = lon2clon(lon)
 
 
         if clon in self.clonrange and lat in self.latrange: # clon and lat fall perfectly on grid
-            finalval = self.__getExactVal(clon,lat)
+            finalval = self.__getExactThickness(clon,lat)
             return finalval
         elif clon in self.clonrange and lat not in self.latrange: # perfectly falls on clongitude line, not lat
             # print('e1')
             lattop, latbottom = self.latrange[(np.where(np.abs(self.latrange-lat) < self.spacing))[0]]
 
-            topval = self.__getExactVal(clon, lattop)
-            bottomval = self.__getExactVal(clon, latbottom)
+            topval = self.__getExactThickness(clon, lattop)
+            bottomval = self.__getExactThickness(clon, latbottom)
 
             # topweight = abs(lat-lattop)/spacing
             # bottomweight = 1-topweight
@@ -130,8 +134,8 @@ class CrustalThickness:
             clonleft, clonright = self.clonrange[(np.where(np.abs(self.clonrange-clon) < self.spacing))[0]]
             # lonleft, lonright = clon2lon(clonleft, clonright)
 
-            leftval = self.__getExactVal(clonleft, lat)
-            rightval = self.__getExactVal(clonright, lat)
+            leftval = self.__getExactThickness(clonleft, lat)
+            rightval = self.__getExactThickness(clonright, lat)
 
             # leftweight = abs(clon-clonleft)/spacing
             # rightweight = abs(clon-clonright)/spacing
@@ -146,10 +150,10 @@ class CrustalThickness:
             clonleft, clonright = self.clonrange[(np.where(np.abs(self.clonrange-clon) < self.spacing))[0]]
             # lonleft, lonright = clon2lon(clonleft, clonright)
 
-            topleft = self.__getExactVal(clonleft, lattop)
-            topright = self.__getExactVal(clonright, lattop)
-            bottomleft = self.__getExactVal(clonleft, latbottom)
-            bottomright = self.__getExactVal(clonright, latbottom)
+            topleft = self.__getExactThickness(clonleft, lattop)
+            topright = self.__getExactThickness(clonright, lattop)
+            bottomleft = self.__getExactThickness(clonleft, latbottom)
+            bottomright = self.__getExactThickness(clonright, latbottom)
 
             # leftweight = abs(clon-clonleft)/spacing
             # rightweight = abs(clon-clonright)/spacing
@@ -166,13 +170,32 @@ class CrustalThickness:
 
             finalval = topinterp*topweight + bottominterp*bottomweight
             return finalval
+        
+        
+        
+    def getAvgThickness(self, lon, lat, radius=1):
+        
+        lons = np.linspace(lon-radius,lon+radius,100)
+        lats = np.linspace(lat-radius,lat+radius,100)
+        
+        total = 0
+        
+        for i in lons:
+            for j in lats:
+                total += self.getThickness(i,j)
+        return (total / (lons.shape[0] * lats.shape[0]))
+        
+        
+        
+    def getDensity(self):
+        return self.crustal_density
 
 
     
-    
+
 ###########################
 # General helper functions
-    
+
 def lon2clon(lon):
     return lon % 360
 def clon2lon(clon):

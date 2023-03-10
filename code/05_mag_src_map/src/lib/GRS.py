@@ -375,7 +375,7 @@ class GRS:
     
 ###########################
 # General helper functions
-    
+
 def lon2clon(lon):
     return lon % 360
 def clon2lon(clon):
