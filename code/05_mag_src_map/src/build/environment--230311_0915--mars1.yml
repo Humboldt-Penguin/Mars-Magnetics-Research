@@ -1,0 +1,13 @@
+﻿# Basic environment that suits most analysis purposes, with gdown for my own workflow/classes.
+
+name: mars1
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - matplotlib
+  - scipy
+  - gdown
+  - jupyterlab
+prefix: C:\Users\zk117\AppData\Local\mambaforge\envs\mars1
+

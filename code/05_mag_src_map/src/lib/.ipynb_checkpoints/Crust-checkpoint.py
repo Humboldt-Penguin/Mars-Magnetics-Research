@@ -175,6 +175,8 @@ class Crust:
         
     def getAvgThickness(self, lon, lat, radius=1):
         
+        # lon +/- radius (ie angular)
+        
         lons = np.linspace(lon-radius,lon+radius,100)
         lats = np.linspace(lat-radius,lat+radius,100)
         
