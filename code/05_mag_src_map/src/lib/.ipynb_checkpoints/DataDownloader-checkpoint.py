@@ -31,7 +31,7 @@ class DataDownloader:
             if overwrite:
                 # safety check before removing stuff
                 if ('home' not in path_data):
-                    yn = input("The provided `path_src` parameter doesn't contain \"home\". On Linux systems, this means you might be deleting important directories. If you proceed, `path_src/data/` will be deleted. Make sure you have provided the correct path. \nWould you like to proceed? [y/n] ")
+                    yn = input("The provided `path_src` parameter doesn't contain \"home\". On Linux systems, this means you might be deleting important directories. If you proceed, `path_src/data/` will be deleted. Make sure you have provided the correct path. \n\nWould you like to proceed? [y/n] ")
                     print()
                     if yn != "y": 
                         return
@@ -46,7 +46,7 @@ class DataDownloader:
                 if fullfile.endswith('.zip'):
                     with zipfile.ZipFile(fullfile, 'r') as zip_ref:
                         zip_ref.extractall(path_data)
-                        os.remove(fullfile)
+                    os.remove(fullfile)
         
 
                     
