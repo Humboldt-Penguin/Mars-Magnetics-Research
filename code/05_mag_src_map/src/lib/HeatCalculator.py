@@ -122,7 +122,7 @@ class HeatCalculator:
 
         rho = self.Crust.getDensity() # density of crust [kg m^-3]
 
-        # thickness_crust_m = 40e3 # from random map i found online -- eventually automate this!
+
         thickness_crust_m = self.Crust.getThickness(lon, lat) * 1000
 
 
