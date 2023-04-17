@@ -1,6 +1,6 @@
-**UPDATED** poster as [PDF](https://drive.google.com/file/d/1C7sSvq4qq999xRALC7ST1sVN-cY6qGje/view?usp=sharing) 
+**UPDATED** poster as [PDF](https://drive.google.com/file/d/12Z2AORMAPTOwOEjoZKQOpzfKkdxCtr2r/view?usp=sharing) 
 or 
-[PNG](https://drive.google.com/file/d/12kt_YMyyJPUZ7K1j3Rpv3XaHkcxBnfDb/view?usp=sharing) 
+[PNG](https://drive.google.com/file/d/1GRAQHdSpsGJ5u4HB3xaLgZfsk3A7llHQ/view?usp=sharing) 
 .
 
 # --IN SHORT--
