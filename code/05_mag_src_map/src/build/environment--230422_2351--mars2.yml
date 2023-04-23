@@ -1,0 +1,14 @@
+﻿# base tools + pandas for Craters.py (crater database management)
+
+name: mars2
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - matplotlib
+  - scipy
+  - gdown
+  - jupyterlab
+  - pandas
+prefix: C:\Users\Eris\mambaforge\envs\mars2
+

@@ -1,0 +1,15 @@
+﻿# cdflib for SWIA data
+
+name: mars3
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - matplotlib
+  - scipy
+  - gdown
+  - jupyterlab
+  - pandas
+  - cdflib
+prefix: C:\Users\Eris\mambaforge\envs\mars3
+

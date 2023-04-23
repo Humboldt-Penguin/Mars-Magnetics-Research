@@ -1,0 +1,14 @@
+﻿# base mambaforge
+
+name: base
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - mamba==1.4.1
+  - conda==23.1.0
+  - pip
+  - setuptools=65
+  - miniforge_console_shortcut=1
+prefix: C:\Users\Eris\mambaforge
+
