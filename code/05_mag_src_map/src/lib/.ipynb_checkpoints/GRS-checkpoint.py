@@ -17,33 +17,28 @@ from lib.DataDownloader import DataDownloader as dd
 
 class GRS:
     """
-    A class that allows you to: 
+    Class allows you to:
         (1) Download GRS data, and 
         (2) Get elemental concetrations at exact coordinates by linearly interpolating between the four nearest points. 
             - Both exact concentration and volatile-adusted (normalized to an H20 and Si free basis) are available.
-            
-            
-    Written by Zain Eris Kamal (zain.eris.kamal@rutgers.edu).
-    Full repository available here: https://github.com/Humboldt-Penguin/Mars-Magnetics-Research
+    
+    See README in downloaded folder to find more information on the data itself.
     """
     
     
     
     
-    
     nanval = -1e-10
-    path__datahome = ''
+    path__datahome = None
     gdrive_url = r"https://drive.google.com/drive/folders/17ukcBhiLvy4fVUT10YvSxf25Et2Ovgah?usp=sharing"
-    data = []
+    data = None
     
     
     
     
     def __init__(self) -> None:
         """
-        DESCRIPTION:
-        ------------
-            Initialize empty GRS object (no data yet).
+        Initialize empty GRS object (no data yet).
         """
         return
     
@@ -60,8 +55,8 @@ class GRS:
         
         PARAMETERS:
         ------------
-            path : string
-                Path from root to the directory within which the GRS data folder either (1) already exists, or (2) will be downloaded.
+            path__datathome : str
+                Path from root to the directory within which the data folder either (1) already exists, or (2) will be downloaded.
             overwrite : bool
                 If true and data folder already exists, delete the data folder and download again. Else skip the download and inform the user. 
             verbose : bool

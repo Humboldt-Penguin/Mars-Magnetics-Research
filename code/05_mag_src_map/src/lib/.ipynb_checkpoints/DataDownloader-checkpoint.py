@@ -1,3 +1,8 @@
+"""
+Written by Zain Eris Kamal (zain.eris.kamal@rutgers.edu).
+Full repository available here: https://github.com/Humboldt-Penguin/Mars-Magnetics-Research
+"""
+
 import os
 import gdown
 import zipfile

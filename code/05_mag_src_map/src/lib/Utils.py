@@ -24,6 +24,29 @@ class Utils:
         return os.path.abspath(os.path.join(*args))
     
     
+    
+    
+    
+    def print_dict(d: dict, indent: int = 0) -> None:
+        """
+        DESCRIPTION:
+        ------------
+            Cleaner way to print a dictionary.
+        
+        PARAMETERS:
+        ------------
+            d : dict
+            indent : int
+                
+        """
+        for key, value in d.items():
+            print('\t' * indent + str(key))
+            if isinstance(value, dict):
+                pretty(value, indent+1)
+            else:
+                print('\t' * (indent+1) + str(value))
+        return
+    
 
 
     

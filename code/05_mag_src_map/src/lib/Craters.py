@@ -1,33 +1,110 @@
+"""
+Written by Zain Eris Kamal (zain.eris.kamal@rutgers.edu).
+Full repository available here: https://github.com/Humboldt-Penguin/Mars-Magnetics-Research
+"""
+
 import pandas as pd
 
+from lib.Utils import Utils as utils
+from lib.DataDownloader import DataDownloader as dd
+
 class Craters:
+    """
+    Class allows you to download and manage crater data.
     
-    def __init__(self):
+    See README in downloaded folder to find more information on the data itself.
+    """
+    
+    
+    
+    gdrive_url = r"https://drive.google.com/drive/folders/1BcPbvBUJPO74O2MlZ-jRwKpV_VrCTKTy?usp=sharing"    
+    path__datahome = None
+    craters_df = None
+    minDiam = None
+    maxDiam = None
+    
+    
+    
+    
+    def __init__(self) -> None:
+        """
+        Initialize empty GRS object (no data yet).
+        """
         return
     
     
-    def loadData(self, path, minDiam=0, maxDiam=1500, extraInfo=True):
-        self.path = path
+    
+
+    
+    
+    
+    
+    def downloadData(self, path__datahome: str, overwrite: bool = False, verbose: bool = False) -> None:
+        """
+        DESCRIPTION:
+        ------------
+            Downloads and unzips data to `self.path__datahome` if it doesn't already exist there. If it already exists, overwrite if `overwrite==True`, else do nothing.
+        
+        PARAMETERS:
+        ------------
+            path__datahome : str
+                Path from root to the directory within which the data folder either (1) already exists, or (2) will be downloaded.
+            overwrite : bool
+                If true and data folder already exists, delete the data folder and download again. Else skip the download and inform the user. 
+            verbose : bool
+                If true, print contents of unzipped data folder. Else do nothing. 
+        """
+        
+        self.path__datahome = path__datahome
+        dd.download_latest(path__datahome=self.path__datahome, data_name='craters', url=self.gdrive_url, overwrite=overwrite, verbose=verbose)
+        return
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    def loadData(self, minDiam: float = 0, maxDiam: float = 1500, extraInfo: bool = True) -> None:
+        """
+        DESCRIPTION:
+        ------------
+            Read crater data from spreadsheet into `self.craters_df`. Format is a pandas dataframe.
+        
+        PARAMETERS:
+        ------------
+            minDiam : float
+                Minimum diameter (km) of craters loaded into dataframe.
+            maxDiam : float
+                Maximum diameter (km) of craters loaded into the dataframe.
+            extraInfo : bool
+                If true, add information from `crater_names_ages.csv` to `self.craters_df`.
+        """
+        
+        
+        
         self.minDiam = minDiam
         self.maxDiam = maxDiam
         
         # read
-        self.craters_df = pd.read_csv(path, usecols=[0,1,2,5])
+        self.craters_df = pd.read_csv(utils.getPath(self.path__datahome, 'craters', 'Catalog_Mars_Release_2020_1kmPlus_FullMorphData.csv'), usecols=[0,1,2,5])
         # rename cols
         # self.craters_df.rename(columns={'CRATER_ID':'id','LAT_CIRC_IMG':'lat','LON_CIRC_IMG':'clon','DIAM_CIRC_IMG':'diam'}, inplace=True)
         self.craters_df.columns = ['id', 'lat', 'clon', 'diam']
         # diameter cut
         self.craters_df = self.craters_df[(self.craters_df['diam'] >= minDiam) & (self.craters_df['diam'] <= maxDiam)].sort_values(by=['diam'])
         # add lon
-        self.craters_df['lon'] = self.clon2lon(self.craters_df['clon'])
-        # swap clon and lon
+        self.craters_df['lon'] = utils.clon2lon(self.craters_df['clon'])
+        # swap clon and lon (more convenient display)
         self.craters_df = self.craters_df.iloc[:, [0,4,1,3,2]]
         self.craters_df.columns = ['id', 'lon', 'lat', 'diam', 'clon']
         
         
         # add names, age, and age_error
         if extraInfo:            
-            fn = self.getPath(path, '..', 'crater_names_ages.csv')
+            fn = utils.getPath(self.path__datahome, 'craters', 'crater_names_ages.csv')
             extra_df = pd.read_csv(fn)
             
             self.craters_df = self.craters_df.merge(extra_df, how='left', on='id')
@@ -39,15 +116,17 @@ class Craters:
         return
     
     
-    def getData(self):
+    
+    
+    def getData(self) -> pd.DataFrame:
         return self.craters_df
     
     
-    def getByName(self,name):
+    def getByName(self, name: str) -> dict:
         return self.craters_df.loc[self.craters_df['name'] == name].iloc[0].to_dict()
     
     
-    def km2theta(self,km):
+    def km2theta(self, km: float) -> float:
         """
         Converts a crater's diameter from kilometers to degrees. 
 
@@ -62,27 +141,48 @@ class Craters:
         return theta
     
     
-    def theta2km(self,theta):
+    def theta2km(self, theta: float) -> float:
         km = (theta+0.123)/0.0185
         return km
     
     
-#############################################
-
-    def lon2clon(self, lon):
-        return lon % 360
-    def clon2lon(self, clon):
-        return ((clon-180) % 360) - 180
+###########################
+# General helper functions
 
 
-    def lat2cola(self, lat):
-        return lat % 180
-    def cola2lat(self, cola):
-        return ((cola-90) % 180) - 90
+'''
+These were moved to the Utils.py class
+
+def lon2clon(lon: float) -> float:
+    """
+    Converts longitude value in range [-180,180] to cyclical longitude (aka colongitude) in range [180,360]U[0,180], in degrees.
+    
+    Using longitude [-180,180] puts Arabia Terra in the middle.
+    Using cyclical longitude [0,360] puts Olympus Mons in the middle.
+    
+    """
+    return lon % 360
 
 
-    def getPath(self, *args):
-        """Join all arguments into a single path. Use 'current' as a stand in for path to current file."""
-        import os
-        args = [os.getcwd() if arg == 'current' else arg for arg in args]
-        return os.path.abspath(os.path.join(*args))
+def clon2lon(clon: float) -> float:
+    """
+    Converts cyclical longitude (aka colongitude) in range [0,360] to longitude in range [0,180]U[-180,0].
+    
+    Using longitude [-180,180] puts Arabia Terra in the middle.
+    Using cyclical longitude [0,360] puts Olympus Mons in the middle.
+    """
+    return ((clon-180) % 360) - 180
+
+
+def lat2cola(lat: float) -> float:
+    """
+    Converts latitude value in range [-90,90] to cyclical latitude (aka colatitude) in range [0,180], in degrees.    
+    """
+    return lat % 180
+
+def cola2lat(cola: float) -> float:
+    """
+    Converts cyclical latitude (aka colatitude) in range [0,180] to latitude value in range [-90,90], in degrees.    
+    """
+    return ((cola-90) % 180) - 90
+'''
