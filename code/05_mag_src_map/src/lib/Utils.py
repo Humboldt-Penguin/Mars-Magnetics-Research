@@ -1,38 +1,68 @@
+import os
+
+
 class Utils:
     
-    verbose = False
-    
-    def __init__(self, verbose):
-        self.verbose = verbose
-        return
+    #--------------------------------------------------------------------------------------
+    # System
+    #--------------------------------------------------------------------------------------
 
-    
-    ###############################################
-    ## Dealing with coordinates
-    ###############################################
-
-    def lon2clon(self, lon):
-        return lon % 360
-    def clon2lon(self, clon):
-        return ((clon-180) % 360) - 180
-
-
-    def lat2cola(self, lat):
-        return lat % 180
-    def cola2lat(self, cola):
-        return ((cola-90) % 180) - 90
-
-
-    
-    ###############################################
-    ## System paths
-    ###############################################
-
-    def getPath(self, *args):
-        """Join all arguments into a single path. Use 'current' as a stand in for path to current file."""
-        import os
+    def getPath(*args):
+        """
+        DESCRIPTION:
+        ------------
+            Join all arguments into a single path specific to your system. 
+                - Use 'current' to get the directory this file (the one calling this function) is in. 
+                - Use '..' to get the path to parent directory. 
+                
+        USAGE:
+        ------------
+            Example: If you're running a script/notebook in `/src/main/`, you can get the path to `/src/data/foo.txt` with:
+                `utils.getPath('current', '..', 'data', 'foo.txt')`            
+        """
         args = [os.getcwd() if arg == 'current' else arg for arg in args]
         return os.path.abspath(os.path.join(*args))
     
     
+
+
+    
+    #--------------------------------------------------------------------------------------
+    # Coordinates
+    #--------------------------------------------------------------------------------------
+    
+    
+    def lon2clon(lon: float) -> float:
+        """
+        Converts longitude value in range [-180,180] to cyclical longitude (aka colongitude) in range [180,360]U[0,180], in degrees.
+
+        Using longitude [-180,180] puts Arabia Terra in the middle.
+        Using cyclical longitude [0,360] puts Olympus Mons in the middle.
+
+        """
+        return lon % 360
+
+
+    def clon2lon(clon: float) -> float:
+        """
+        Converts cyclical longitude (aka colongitude) in range [0,360] to longitude in range [0,180]U[-180,0].
+
+        Using longitude [-180,180] puts Arabia Terra in the middle.
+        Using cyclical longitude [0,360] puts Olympus Mons in the middle.
+        """
+        return ((clon-180) % 360) - 180
+
+
+    def lat2cola(lat: float) -> float:
+        """
+        Converts latitude value in range [-90,90] to cyclical latitude (aka colatitude) in range [0,180], in degrees.    
+        """
+        return lat % 180
+
+    def cola2lat(cola: float) -> float:
+        """
+        Converts cyclical latitude (aka colatitude) in range [0,180] to latitude value in range [-90,90], in degrees.    
+        """
+        return ((cola-90) % 180) - 90
+
 

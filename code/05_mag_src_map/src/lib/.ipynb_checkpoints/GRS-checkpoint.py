@@ -1,72 +1,102 @@
-import os
+"""
+Written by Zain Eris Kamal (zain.eris.kamal@rutgers.edu).
+Full repository available here: https://github.com/Humboldt-Penguin/Mars-Magnetics-Research
+"""
+
+
 import matplotlib.pyplot as plt
 import numpy as np
 
+import os
+
+from lib.Utils import Utils as utils
+from lib.DataDownloader import DataDownloader as dd
+
+
+
+
 class GRS:
+    """
+    A class that allows you to: 
+        (1) Download GRS data, and 
+        (2) Get elemental concetrations at exact coordinates by linearly interpolating between the four nearest points. 
+            - Both exact concentration and volatile-adusted (normalized to an H20 and Si free basis) are available.
+            
+            
+    Written by Zain Eris Kamal (zain.eris.kamal@rutgers.edu).
+    Full repository available here: https://github.com/Humboldt-Penguin/Mars-Magnetics-Research
+    """
+    
+    
+    
+    
     
     nanval = -1e-10
-    path = ''
+    path__datahome = ''
+    gdrive_url = r"https://drive.google.com/drive/folders/17ukcBhiLvy4fVUT10YvSxf25Et2Ovgah?usp=sharing"
+    data = []
     
     
-    def __init__(self, path):
+    
+    
+    def __init__(self) -> None:
         """
-        Initialize empty GRS object (no data yet).
-        
-        PARAMETERS:
-            path : string
-                Path to GRS folder from root.
+        DESCRIPTION:
+        ------------
+            Initialize empty GRS object (no data yet).
         """
-        self.path = path
         return
     
     
     
     
-    def loadData(self):
+    
+    
+    def downloadData(self, path__datahome: str, overwrite: bool = False, verbose: bool = False) -> None:
         """
-        Load GRS data for all elements from data files. 
+        DESCRIPTION:
+        ------------
+            Downloads and unzips data to `self.path__datahome` if it doesn't already exist there. If it already exists, overwrite if `overwrite==True`, else do nothing.
         
-        Data downloaded from `getdata.sh` script; see `GRS/README.txt` for descriptions of data products.
-        
-        Assumes the following file layout:
-            .
-            └── src/
-                ├── data/
-                │   └── GRS/
-                │       ├── smoothed/
-                │       └── unsmoothed/
-                ├── main/
-                │   └── main.py
-                ├── lib/
-                │   ├── GRS.py
-                │   └── __init__.py
-                └── getdata.sh
-
-        [tree diagram made with tree.nathanfriend.io/]
+        PARAMETERS:
+        ------------
+            path : string
+                Path from root to the directory within which the GRS data folder either (1) already exists, or (2) will be downloaded.
+            overwrite : bool
+                If true and data folder already exists, delete the data folder and download again. Else skip the download and inform the user. 
+            verbose : bool
+                If true, print contents of unzipped data folder. Else do nothing. 
         """
         
+        self.path__datahome = path__datahome
+        dd.download_latest(path__datahome=self.path__datahome, data_name='GRS', url=self.gdrive_url, overwrite=overwrite, verbose=verbose)
+        return
+    
+    
+    
+    
+    
+    
+    def loadData(self) -> None:
+        """
+        DESCRIPTION:
+        ------------
+            Read GRS data from files into `self.data`. Format is a 2-dimensional array, where each entry a dictionary with keys for longitude, colongitude, latitude, colatitude, and concentrations for each of the seven elements.
+            
+            We use smoothed 5x5 data, but unsmoothed data is available at a higher resolution. Presumably this only requires changing the `path__datahome_data` variable, but this is not tested.
+        """
         
         
-        # path_datafolder = os.path.abspath(
-        #     os.path.join(
-        #         os.getcwd(), 
-        #         os.pardir,   # navigate to src
-        #         "data/GRS/smoothed"   # adjust smoothed/unsmoothed as needed
-        #     )
-        # )
-        # print(os.getcwd())
-        
-        path_datafolder = os.path.abspath(os.path.join(self.path, "smoothed"))
-
+        path__datahome_data = utils.getPath(self.path__datahome, 'GRS', 'smoothed') # os.path.abspath(os.path.join(self.path, "smoothed"))
         
         self.data = []
               
-        for datafilename in (os.listdir(path_datafolder)):            
+        for datafilename in (os.listdir(path__datahome_data)):            
             if ".tab" in datafilename:
                 # print(datafilename)
 
                 # read file
-                datafile = open(os.path.abspath(os.path.join(path_datafolder, datafilename)), 'r')
+                datafile = open(os.path.abspath(os.path.join(path__datahome_data, datafilename)), 'r')
                 rawdata = datafile.readlines()
                 datafile.close()
 
@@ -79,8 +109,8 @@ class GRS:
                         rawdataline = rawdataline.split()
                         thislat = float(rawdataline[0])
                         thisclon = float(rawdataline[1])
-                        thiscola = lat2cola(thislat)
-                        thislon = clon2lon(thisclon)
+                        thiscola = utils.lat2cola(thislat)
+                        thislon = utils.clon2lon(thisclon)
                         # thisconc = rawdataline[2]
                         if thislat != prevlat and prevlat != None:
                             self.data.append(thisline)
@@ -110,10 +140,6 @@ class GRS:
         for k in range(len(self.data)):
             self.data[k] = self.data[k][i:] + self.data[k][:i]
         return
-    
-    
-    
-    
     
     
     # def fixUnits(self):
@@ -147,11 +173,25 @@ class GRS:
 
 
 
+    
+    
+    
+    
+    
+    
+    
 
 
-    def visualize(self, elementname):
+    def visualize(self, elementname: str) -> None:
         """
-        Plot the GRS concentration map for a certain element. For reference, Olympus Mons is on the left.
+        DESCRIPTION:
+        ------------
+            Plot the GRS global concentration map for a certain element. For reference, Olympus Mons is on the left.
+            
+        PARAMETERS:
+        ------------
+            elementname : str
+                Element for which you want to make a global concentration map. Options are 'cl', 'fe', 'h2o', 'k', 'kvsth', 'si', and 'th'.
         """
 
         test = []
@@ -173,24 +213,45 @@ class GRS:
         
         
         
+        
+        
+        
+        
+        
+        
+        
     
-    def getConcentration(self, lon, lat, elementname, normalized = True):
+    def getConcentration(self, lon: float, lat: float, elementname: str, normalized: bool = True) -> float:
         """
-        Get the concentration of an element at the desired coordinate. Units in weight percent (Wt%) -- i.e. a 5% concentration would correspond to a return value of 0.05.
+        DESCRIPTION:
+        ------------
+            Get the surface concentration of an element at the desired coordinate. Units in weight percent (Wt%) -- i.e. a 5% concentration would correspond to a return value of 0.05.
         
         PARAMETERS:
-            normalized (bool): Determine whether or not to normalize to a volatile-free basis. See the next method "getAdjustedConcentration" for details.
+        ------------
+            lon : float
+                Longitude in range [-180, 180] (lon=0 cuts through Arabia Terra).
+            lat : float
+                Latitude in range [-90, 90].
+            elementname : str
+                Element for which you want to make a global concentration map. Options are 'cl', 'fe', 'h2o', 'k', 'kvsth', 'si', and 'th'.
+            normalized : bool 
+                Determine whether or not to normalize to a volatile-free basis. See the next method "getAdjustedConcentration" for details.
             
         RETURN:
-            If atleast two of the nearest pixels are unresolved by GRS, just return the nanval.
+        ------------
+            float
+                Surface concentration of an element at the desired coordinate, using bilinear interpolation if that coordinate is not precisely defined by the data
+                    - Units in weight percent (Wt%) -- i.e. a 5% concentration would correspond to a return value of 0.05.
+                    - If atleast two of the nearest pixels are unresolved by GRS, just return the nanval.
         """
 
         
         if normalized:
             return self.__getAdjustedConcentration(lon, lat, elementname)
         else:
-            clon = lon2clon(lon)
-            cola = lat2cola(lat)
+            clon = utils.lon2clon(lon)
+            cola = utils.lat2cola(lat)
 
             ## get lon/clon/lat/cola lists for easy searching
             
@@ -198,14 +259,14 @@ class GRS:
             for i in range(len(self.data[0])):
                 lons.append(self.data[0][i]["lon"])
             # print(lons)
-            clons = [lon2clon(lon) for lon in lons]
+            clons = [utils.lon2clon(lon) for lon in lons]
             # print(clons)
             
             lats = []
             for i in range(len(self.data)):
                 lats.append(self.data[i][0]["lat"])
             # print(lats)
-            colas = [lat2cola(lat) for lat in lats]
+            colas = [utils.lat2cola(lat) for lat in lats]
             # print(colas)
 
             ## get indexes and values for four nearest pixels
@@ -252,10 +313,10 @@ class GRS:
 
             ## testing
 
-            # print(f"{lat_bottom} {lon2clon(lon_left)} {bottom_left}")
-            # print(f"{lat_bottom} {lon2clon(lon_right)} {bottom_right}")
-            # print(f"{lat_top} {lon2clon(lon_left)} {top_left}")
-            # print(f"{lat_top} {lon2clon(lon_right)} {top_right}")
+            # print(f"{lat_bottom} {utils.lon2clon(lon_left)} {bottom_left}")
+            # print(f"{lat_bottom} {utils.lon2clon(lon_right)} {bottom_right}")
+            # print(f"{lat_top} {utils.lon2clon(lon_left)} {top_left}")
+            # print(f"{lat_top} {utils.lon2clon(lon_right)} {top_right}")
             # print()
             # print(lon_left)
             # print(lon_right)
@@ -282,10 +343,10 @@ class GRS:
 
             ## bilinear interpolation
 
-            clon_left = lon2clon(lon_left)
-            clon_right = lon2clon(lon_right)
-            cola_bottom = lat2cola(lat_bottom)
-            cola_top = lat2cola(lat_top)
+            clon_left = utils.lon2clon(lon_left)
+            clon_right = utils.lon2clon(lon_right)
+            cola_bottom = utils.lat2cola(lat_bottom)
+            cola_top = utils.lat2cola(lat_top)
 
 
             if abs(i_lon_right - i_lon_left) == 1: # somewhere in the middle
@@ -325,9 +386,14 @@ class GRS:
             # return [londist, latdist]
         
         
-    def __getAdjustedConcentration(self, lon, lat, elementname):
+        
+        
+        
+        
+        
+    def __getAdjustedConcentration(self, lon: float, lat: float, elementname: str) -> float:
         """
-        Helper method for "getConcentration"
+        Helper method for "getConcentration" which returns an elemental concentration after normalizing out volatiles at that coordinate.
         
         "Groundwater production from geothermal heating on early Mars and implication for early martian habitability"
             Ojha et al. 2020
@@ -364,24 +430,60 @@ class GRS:
     
     
     
-    def getNanVal(self):
+    
+    
+    
+    
+    def getNanVal(self) -> float:
         """
-        Get value used for coordinates where GRS doesn't provide data.
+        Return value used for coordinates where GRS doesn't provide data.
         """
         return self.nanval
 
     
     
     
+    
+    
+    
+    
 ###########################
 # General helper functions
 
-def lon2clon(lon):
+
+'''
+These were moved to the Utils.py class
+
+def lon2clon(lon: float) -> float:
+    """
+    Converts longitude value in range [-180,180] to cyclical longitude (aka colongitude) in range [180,360]U[0,180], in degrees.
+    
+    Using longitude [-180,180] puts Arabia Terra in the middle.
+    Using cyclical longitude [0,360] puts Olympus Mons in the middle.
+    
+    """
     return lon % 360
-def clon2lon(clon):
+
+
+def clon2lon(clon: float) -> float:
+    """
+    Converts cyclical longitude (aka colongitude) in range [0,360] to longitude in range [0,180]U[-180,0].
+    
+    Using longitude [-180,180] puts Arabia Terra in the middle.
+    Using cyclical longitude [0,360] puts Olympus Mons in the middle.
+    """
     return ((clon-180) % 360) - 180
 
-def lat2cola(lat):
+
+def lat2cola(lat: float) -> float:
+    """
+    Converts latitude value in range [-90,90] to cyclical latitude (aka colatitude) in range [0,180], in degrees.    
+    """
     return lat % 180
-def cola2lat(cola):
+
+def cola2lat(cola: float) -> float:
+    """
+    Converts cyclical latitude (aka colatitude) in range [0,180] to latitude value in range [-90,90], in degrees.    
+    """
     return ((cola-90) % 180) - 90
+'''
