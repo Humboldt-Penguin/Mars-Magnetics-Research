@@ -1,20 +1,45 @@
+"""
+Written by Zain Eris Kamal (zain.eris.kamal@rutgers.edu).
+Full repository available here: https://github.com/Humboldt-Penguin/Mars-Magnetics-Research
+"""
+
+
 import math
 import numpy as np
 
 class HeatCalculator:
     
-    def __init__(self, GRS=None, Crust=None):
+    """
+    Implicit private instance variables
+        GRS : GRS
+            Defined by GRS.py
+        Crust : Crust
+            Defined by Crust.py
+    """
+    
+    
+    
+    def __init__(self, GRS: GRS, Crust: Crust) -> None:
         self.GRS = GRS
         self.Crust = Crust
         return
     
-    def setGRS(self, GRS):
-        self.GRS = GRS
-        return
+#     def setGRS(self, GRS):
+#         self.GRS = GRS
+#         return
     
-    def setCrust(self, Crust):
-        self.Crust = Crust
-        return
+#     def setCrust(self, Crust):
+#         self.Crust = Crust
+#         return
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     def calc_H(self, lon, lat, t, volatile_adjusted=True):
@@ -22,8 +47,7 @@ class HeatCalculator:
         Calculate heat production rate in lithosphere [W/kg?] at a specific coordinate/time due to decay of radiogenic heat producing elements (U238, U235, Th232, K40).
 
         PARAMETERS:
-            XXX GRS : GRS type object
-                XXX Contains elemental abundances from GRS orbiter.
+        -----------
             lon, lat : float
                 Coordinates at which to calculate H. These are used to find GRS data.
             time : float
@@ -33,10 +57,12 @@ class HeatCalculator:
                 Determine whether or not to normalize GRS radiogenic HPE concentrations to a volatile-free basis. See the next method "getAdjustedConcentration" in the GRS.py class for details.
 
         RETURN:
+        -----------
             H : float
                 Heat production rate in lithosphere [W/kg?] at a specific coordinate/time due to decay of radiogenic heat producing elements (U238, U235, Th232, K40).
 
-        METHODOLOGIES:
+        METHODS:
+        -----------
             - Hahn et al 2011: Martian surface production and crustal heat flow from Mars Odyssey Gamma-Ray spectrometry
             - Turcotte and Schubert 2001: Geodynamics (textbook)    
         """
@@ -79,13 +105,18 @@ class HeatCalculator:
     
     
     
+    
+    
+    
+    
+    
+    
     def calc_CurieDepths(self, lon, lat, t, q_b_mW, curie_temps, volatile_adjusted=True):
         """
         Calculate curie depths [km] at a specific coordinate/time due to decay of radiogenic heat producing elements (U238, U235, Th232, K40). Assume surface temperature is 0 Celsius.
 
         PARAMETERS:
-            XXX thisGRS : GRS type object
-                XXX Contains elemental abundances from GRS orbiter.
+        -----------
             lon, lat : float
                 Coordinates at which to calculate H. These are used to find GRS data.
             time : float
@@ -100,11 +131,13 @@ class HeatCalculator:
                 Determine whether or not to normalize GRS radiogenic HPE concentrations to a volatile-free basis. See the next method "getAdjustedConcentration" in the GRS.py class for details.
 
         RETURN:
+        -----------
             curie_depths : 1D float array
                 Return the depth below the surface at which temperature due to HPE decay reaches the curie points specified as input. 
                 The input `curie_temps` will correspond element-wise with the output `curie_depths`, i.e. we ensure len(curie_temps) == len(curie_depths).
 
-        METHODOLOGIES:
+        METHODS:
+        -----------
             - Hahn et al 2011: Martian surface production and crustal heat flow from Mars Odyssey Gamma-Ray spectrometry
             - Turcotte and Schubert 2001: Geodynamics (textbook)    
         """
@@ -180,6 +213,14 @@ class HeatCalculator:
 
 
         return curie_depths
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

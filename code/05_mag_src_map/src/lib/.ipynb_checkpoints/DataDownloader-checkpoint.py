@@ -16,14 +16,15 @@ class DataDownloader:
     def download_latest(path__datahome: str, data_name: str, url: str, overwrite: bool = False, verbose: bool = False) -> None:
         """
         DESCRIPTION:
+        ------------
             - Given a Google Drive folder containing a single zip file of data -- download, extract, and delete the zipfile.
             - Best practice: Structure Google Drive data folders like this:
                 .
                 └── 230430_data/ ---------------------------- overarching folder; set "anyone with the link can view" so it filters down to all children. 
                     ├── GRS/ -------------------------------- hard link this in data README. 
-                    │   ├── latest/ ------------------------- hard link this in module/class that interfaces with dataset (which is then passed to this function as `url`). 
+                    │   ├── latest/ ------------------------- hard link this in module/class that interfaces with dataset (which is then passed to this function as `url`). if you ever update a dataset, simply drag outdated version from "latest/" to parent folder, and upload new zipfile to "latest/"; the hardlink to "latest/" ensures we get whatever's in that folder, i.e. the most up-to-date version.
                     │   │   └── GRS_v3.zip ------------------ zipfile of dataset; note that zipfilename is "GRS_v3.zip", but unzipped version is just "GRS/". 
-                    │   ├── GRS_v1.zip ---------------------- if you ever update a dataset, simply drag old copy from "latest/" to parent folder; the hardlink to "latest/" ensures we get whatever's in that folder.
+                    │   ├── GRS_v1.zip ---------------------- older version of dataset, kept for records.
                     │   └── GRS_v2.zip
                     ├── crustal_thickness/
                     │   ├── latest/
@@ -33,6 +34,7 @@ class DataDownloader:
         
         
         PARAMETERS:
+        ------------
             path__datahome : str
                 Full path to directory where we want the data we're downloading to reside.
             data_name : str

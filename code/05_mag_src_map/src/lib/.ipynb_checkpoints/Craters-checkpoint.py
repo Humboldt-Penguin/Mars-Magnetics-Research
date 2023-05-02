@@ -15,13 +15,18 @@ class Craters:
     See README in downloaded folder to find more information on the data itself.
     """
     
-    
+    """
+    implicit private instance variables:
+        path__datahome
+        craters_df
+        minDiam
+        maxDiam
+    """
     
     gdrive_url = r"https://drive.google.com/drive/folders/1BcPbvBUJPO74O2MlZ-jRwKpV_VrCTKTy?usp=sharing"    
-    path__datahome = None
-    craters_df = None
-    minDiam = None
-    maxDiam = None
+
+    
+
     
     
     

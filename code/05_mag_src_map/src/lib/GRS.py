@@ -28,10 +28,20 @@ class GRS:
     
     
     
+
+    """
+    implicit private instance variables:
+        path__datahome
+        data
+    """
+    
+    
     nanval = -1e-10
-    path__datahome = None
     gdrive_url = r"https://drive.google.com/drive/folders/17ukcBhiLvy4fVUT10YvSxf25Et2Ovgah?usp=sharing"
-    data = None
+    
+    
+    
+    
     
     
     

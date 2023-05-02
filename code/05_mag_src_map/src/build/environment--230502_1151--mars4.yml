@@ -1,0 +1,16 @@
+﻿# base + mars2 (pandas) + vpython for 3D plots
+
+name: mars4
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - matplotlib
+  - scipy
+  - gdown
+  - jupyterlab
+  - pandas
+  - vpython
+  - jupyterlab-vpython
+prefix: C:\Users\Eris\mambaforge\envs\mars4
+
