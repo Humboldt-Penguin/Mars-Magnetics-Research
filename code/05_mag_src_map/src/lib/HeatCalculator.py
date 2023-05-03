@@ -7,31 +7,64 @@ Full repository available here: https://github.com/Humboldt-Penguin/Mars-Magneti
 import math
 import numpy as np
 
+
+
+from lib.GRS import GRS as GRS_class
+from lib.Crust import Crust as Crust_class
+
+
+
+
+
+
+
 class HeatCalculator:
     
     """
-    Implicit private instance variables
+    private instance variables:
+    
+    implicit:
+    ---------
         GRS : GRS
             Defined by GRS.py
         Crust : Crust
             Defined by Crust.py
+        path__datahome : str
+            Path from root to the directory within which the data folder either (1) already exists, or (2) will be downloaded.
+            
+            
+    explicit:
+    ---------
     """
     
     
     
-    def __init__(self, GRS: GRS, Crust: Crust) -> None:
-        self.GRS = GRS
-        self.Crust = Crust
-        return
     
-#     def setGRS(self, GRS):
+    
+    
+    
+#     def __init__(self, GRS: GRS, Crust: Crust) -> None:
+#         """Initialize Heat Calculator object with the datasets necessary to do computations."""
 #         self.GRS = GRS
-#         return
-    
-#     def setCrust(self, Crust):
 #         self.Crust = Crust
 #         return
     
+# #     def setGRS(self, GRS):
+# #         self.GRS = GRS
+# #         return
+    
+# #     def setCrust(self, Crust):
+# #         self.Crust = Crust
+# #         return
+    
+    
+    
+    
+    
+    
+    def __init__(self):
+        """Initialize empty HeatCalculator object (no data yet)."""
+        return
     
     
     
@@ -42,7 +75,50 @@ class HeatCalculator:
     
     
     
-    def calc_H(self, lon, lat, t, volatile_adjusted=True):
+    def download_load_Data(self, path__datahome: str, overwrite: bool = False, verbose: bool = False) -> None:
+        """
+        DESCRIPTION:
+        ------------
+            - Downloads and unzips data to `self.path__datahome` if it doesn't already exist there. If it already exists, overwrite if `overwrite==True`, else do nothing.
+            - Load data into GRS and Crust objects.
+        
+        PARAMETERS:
+        ------------
+            path__datahome : str
+                Path from root to the directory within which the data folder either (1) already exists, or (2) will be downloaded.
+            overwrite : bool
+                If true and data folder already exists, delete the data folder and download again. Else skip the download and inform the user. 
+            verbose : bool
+                If true, print contents of unzipped data folder. Else do nothing. 
+        """
+        self.path__datahome = path__datahome
+        
+        self.GRS = GRS_class()
+        self.GRS.downloadData(self.path__datahome, overwrite=overwrite, verbose=verbose)
+        self.GRS.loadData()
+        
+        self.Crust = Crust_class()
+        self.Crust.downloadData(self.path__datahome, overwrite=overwrite, verbose=verbose)
+        self.Crust.loadData(spacing=0.1)
+    
+    
+    
+    
+    
+
+    
+    
+    def GRS_getNanVal(self) -> float:
+        return self.GRS.getNanVal()
+    
+    
+    
+    
+    
+    
+    
+    
+    def calc_H(self, lon: float, lat: float, t: float, volatile_adjusted: bool = True) -> float:
         """
         Calculate heat production rate in lithosphere [W/kg?] at a specific coordinate/time due to decay of radiogenic heat producing elements (U238, U235, Th232, K40).
 
@@ -111,9 +187,9 @@ class HeatCalculator:
     
     
     
-    def calc_CurieDepths(self, lon, lat, t, q_b_mW, curie_temps, volatile_adjusted=True):
+    def calc_CurieDepths(self, lon: float, lat: float, t: float, q_b_mW: float, curie_temps: list, volatile_adjusted: bool = True) -> list:
         """
-        Calculate curie depths [km] at a specific coordinate/time due to decay of radiogenic heat producing elements (U238, U235, Th232, K40). Assume surface temperature is 0 Celsius.
+        Calculate curie depth [km] at a specific coordinate/time due to decay of radiogenic heat producing elements (U238, U235, Th232, K40). Assume surface temperature is 0 Celsius.
 
         PARAMETERS:
         -----------

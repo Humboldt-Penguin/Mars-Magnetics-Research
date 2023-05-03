@@ -37,11 +37,11 @@ class Crust:
     ---------
         path__datahome : str
             Path from root to the directory within which the data folder either (1) already exists, or (2) will be downloaded.
-        dat : np.ndarray
+        dat : 1D float array (np.ndarray)
             1D array representation of 2D data read from .npy file representing crustal thickness data.
         spacing : float
             Desired grid spacing in degrees. Ex: spacing=0.5 means crustal thickness is exactly defined at 0, 0.5, 1, 1.5, etc.
-        latrange, clonrange, lonrange : np.ndarray
+        latrange, clonrange, lonrange : 1D float array (np.ndarray)
             Longitude/latitude values for which crustal thickness values are exactly defined by the dataset. I.e., if lonrange and latrange define a grid, then crustal thickness values are exactly defined at the intersection of these grid lines.
             
             
