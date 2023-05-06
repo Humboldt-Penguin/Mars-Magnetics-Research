@@ -28,10 +28,20 @@ class GRS:
     
     
     
+
+    """
+    implicit private instance variables:
+        path__datahome
+        data
+    """
+    
+    
     nanval = -1e-10
-    path__datahome = None
     gdrive_url = r"https://drive.google.com/drive/folders/17ukcBhiLvy4fVUT10YvSxf25Et2Ovgah?usp=sharing"
-    data = None
+    
+    
+    
+    
     
     
     
@@ -199,7 +209,7 @@ class GRS:
             test.append(newline)
         
         fig, ax = plt.subplots(1,1,figsize=(7,5))
-        im = ax.imshow(test[::-1], cmap="jet")
+        im = ax.imshow(test[::-1], cmap='viridis')
         # ax.invert_yaxis()
         cax = fig.add_axes([ax.get_position().x1+0.02,ax.get_position().y0,0.02,ax.get_position().height])
         plt.colorbar(im, cax=cax)

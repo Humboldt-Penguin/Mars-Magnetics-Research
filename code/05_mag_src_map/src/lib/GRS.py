@@ -209,7 +209,7 @@ class GRS:
             test.append(newline)
         
         fig, ax = plt.subplots(1,1,figsize=(7,5))
-        im = ax.imshow(test[::-1], cmap="jet")
+        im = ax.imshow(test[::-1], cmap='viridis')
         # ax.invert_yaxis()
         cax = fig.add_axes([ax.get_position().x1+0.02,ax.get_position().y0,0.02,ax.get_position().height])
         plt.colorbar(im, cax=cax)
