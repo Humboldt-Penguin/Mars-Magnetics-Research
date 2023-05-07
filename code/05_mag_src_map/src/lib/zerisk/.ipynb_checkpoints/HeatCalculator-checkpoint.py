@@ -9,8 +9,8 @@ import numpy as np
 
 
 
-from lib.GRS import GRS as GRS_class
-from lib.Crust import Crust as Crust_class
+import zerisk.GRS
+import zerisk.Crust
 
 
 
@@ -93,11 +93,11 @@ class HeatCalculator:
         """
         self.path__datahome = path__datahome
         
-        self.GRS = GRS_class()
+        self.GRS = zerisk.GRS.GRS()
         self.GRS.downloadData(self.path__datahome, overwrite=overwrite, verbose=verbose)
         self.GRS.loadData()
         
-        self.Crust = Crust_class()
+        self.Crust = zerisk.Crust.Crust()
         self.Crust.downloadData(self.path__datahome, overwrite=overwrite, verbose=verbose)
         self.Crust.loadData(spacing=0.1)
     

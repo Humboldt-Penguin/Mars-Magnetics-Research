@@ -5,8 +5,8 @@ Full repository available here: https://github.com/Humboldt-Penguin/Mars-Magneti
 
 import pandas as pd
 
-from lib.Utils import Utils as utils
-from lib.DataDownloader import DataDownloader as dd
+import zerisk.Utils as utils
+import zerisk.DataDownloader as dd
 
 class Craters:
     """

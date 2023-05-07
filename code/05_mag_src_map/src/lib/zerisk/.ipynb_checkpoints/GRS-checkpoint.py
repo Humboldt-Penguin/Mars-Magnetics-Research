@@ -9,8 +9,8 @@ import numpy as np
 
 import os
 
-from lib.Utils import Utils as utils
-from lib.DataDownloader import DataDownloader as dd
+import zerisk.Utils as utils
+import zerisk.DataDownloader as dd
 
 
 
