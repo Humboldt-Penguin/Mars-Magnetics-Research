@@ -10,5 +10,4 @@ dependencies:
   - pip
   - setuptools=65
   - miniforge_console_shortcut=1
-prefix: C:\Users\Eris\mambaforge
 

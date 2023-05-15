@@ -10,5 +10,4 @@ dependencies:
   - gdown
   - jupyterlab
   - pandas
-prefix: C:\Users\Eris\mambaforge\envs\mars2
 

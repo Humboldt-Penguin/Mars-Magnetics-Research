@@ -11,5 +11,4 @@ dependencies:
   - jupyterlab
   - pandas
   - cdflib
-prefix: C:\Users\Eris\mambaforge\envs\mars3
 
