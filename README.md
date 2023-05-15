@@ -31,13 +31,14 @@ But on that second point, why is such a small crater (167 km diameter) one of th
 
 ## Presentations:
 
-* In review: Manuscript in Aresty Undergraduate Research Journal.
-  * Manuscript ([pdf](docs/manuscripts/Constraining%20the%20Formation%20Time%20and%20Depth%20of%20Magnetic%20Sources%20within%20the%20Martian%20Crust%20(Version%201%2C%201-29-23).pdf))
+* Manuscript in review.
+  * Google Drive ([pdf](docs/manuscripts/Constraining%20the%20Formation%20Time%20and%20Depth%20of%20Magnetic%20Sources%20within%20the%20Martian%20Crust%20(Version%201%2C%201-29-23).pdf))
 
 * April 2023: World Congress for Undergraduate Research, oral presentation.
+	* Recording ([Youtube](https://www.youtube.com/watch?v=kg8xhp6VA84))
 * March 2023: Lunar and Planetary Sciences Conference, poster presentation.
-  * Landing page ([GitHub](/docs/conferences/23-03_LPSC)); Poster ([pdf](https://drive.google.com/file/d/1C7sSvq4qq999xRALC7ST1sVN-cY6qGje/view?usp=sharing), [png](https://drive.google.com/file/d/12kt_YMyyJPUZ7K1j3Rpv3XaHkcxBnfDb/view?usp=sharing)).
+	* Landing page ([GitHub](/docs/conferences/23-03_LPSC)); Poster ([pdf](https://drive.google.com/file/d/1C7sSvq4qq999xRALC7ST1sVN-cY6qGje/view?usp=sharing), [png](https://drive.google.com/file/d/12kt_YMyyJPUZ7K1j3Rpv3XaHkcxBnfDb/view?usp=sharing)).
 * December 2022: American Geophysical Union Fall 2022 conference, oral presentation.
-  * Recording ([YouTube](https://www.youtube.com/watch?v=tJBthUgirSw)); Abstract citation ([page](https://agu.confex.com/agu/fm22/meetingapp.cgi/Paper/1192272)); Slides + more info ([page](https://github.com/Humboldt-Penguin/Mars-Magnetics-Research/blob/main/docs/AGU22/AGU22.md))
+	* Recording ([YouTube](https://www.youtube.com/watch?v=tJBthUgirSw)); Abstract citation ([page](https://agu.confex.com/agu/fm22/meetingapp.cgi/Paper/1192272)); Slides + more info ([page](https://github.com/Humboldt-Penguin/Mars-Magnetics-Research/blob/main/docs/AGU22/AGU22.md))
 * Summer 2022: NASA New Jersey Space Grant Consortium, Fellowship Grant.
-  * Poster ([pdf](/docs/nasa_fellowship/ZainKamal__Impact-Induced_Demagnetization_of_Martian_Crust.pdf), [png](/docs/nasa_fellowship/ZainKamal__Impact-Induced_Demagnetization_of_Martian_Crust.png)); writeup ([pdf](/docs/nasa_fellowship/220815_NJSGC_Summer_Fellowship_Final_Report_--_Impact-Induced_Demagnetization_in_Martian_Crust_with_High-Resolution_MAVEN_Data.pdf)).
+	* Poster ([pdf](/docs/nasa_fellowship/ZainKamal__Impact-Induced_Demagnetization_of_Martian_Crust.pdf), [png](/docs/nasa_fellowship/ZainKamal__Impact-Induced_Demagnetization_of_Martian_Crust.png)); writeup ([pdf](/docs/nasa_fellowship/220815_NJSGC_Summer_Fellowship_Final_Report_--_Impact-Induced_Demagnetization_in_Martian_Crust_with_High-Resolution_MAVEN_Data.pdf)).
