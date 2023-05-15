@@ -6,7 +6,9 @@ Replicating one of these environments requires a [mamba](https://mamba.readthedo
 
 	- Note: If you would like to change the default environment name (e.g. "mars4"), add the `-n [envname]` flag as such: `conda env create -n [envname] --file [name of YAML file]`
 
-2. Navigate command line to `src/lib/` directory. Run `pip install -e .`
+2. Activate the newly installed environment.
+
+3. Navigate command line to `src/lib/` directory. Run `pip install -e .`
 
 	- Note: The `-e` flag means changes to lib modules will go into effect immediately without needing to reinstall with pip.
 
