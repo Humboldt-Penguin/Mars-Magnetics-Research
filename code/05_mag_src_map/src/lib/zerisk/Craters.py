@@ -130,6 +130,10 @@ class Craters:
     def getByName(self, name: str) -> dict:
         return self.craters_df.loc[self.craters_df['name'] == name].iloc[0].to_dict()
     
+    def getByID(self, id: str) -> dict:
+        return self.craters_df.loc[self.craters_df['id'] == id].iloc[0].to_dict()
+        
+    
     
     def km2theta(self, km: float) -> float:
         """
