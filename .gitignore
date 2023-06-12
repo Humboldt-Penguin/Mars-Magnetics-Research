@@ -6,6 +6,6 @@
 *.qgz
 *.tif
 
-# ignore backup files
+# ignore MATLAB backup files
 *.bak
 *.asv

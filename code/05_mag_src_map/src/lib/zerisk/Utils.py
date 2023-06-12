@@ -42,7 +42,7 @@ def print_dict(d: dict, indent: int = 0) -> None:
     for key, value in d.items():
         print('\t' * indent + str(key))
         if isinstance(value, dict):
-            pretty(value, indent+1)
+            print_dict(value, indent+1)
         else:
             print('\t' * (indent+1) + str(value))
     return
