@@ -99,7 +99,7 @@ class HeatCalculator:
         
         self.Crust = zerisk.Crust.Crust()
         self.Crust.downloadData(self.path__datahome, overwrite=overwrite, verbose=verbose)
-        self.Crust.loadData(spacing=0.1)
+        self.Crust.loadData(ref_interior_model_int=0)
     
     
     

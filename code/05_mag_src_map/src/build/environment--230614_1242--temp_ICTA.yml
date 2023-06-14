@@ -1,0 +1,9 @@
+﻿# Used to run make-grids.py in Mark Weiczorek's Insight Crustal Thickness Archive (generate crustal thickness dataset)
+
+name: temp_ICTA
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - pyshtools
+

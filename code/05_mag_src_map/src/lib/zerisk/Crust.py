@@ -55,6 +55,8 @@ class Crust:
             From Gong & Wieczorek: "In Figure 8, we plot the depth of magnetization as a function of crustal thickness. Here we use a crustal thickness model of Wieczorek et al. (2020) which assumes a uniform crustal density of 2,900 kg and a minimum crustal thickness of 5 km within the Isidis impact basin."
         dict_ref_interior_model : dict
             When running `make-grids.py` from Wieczorek's code, you are first prompted to choose a "reference interior model" from a list of 16 options, each of which is assigned an integer. This int -> str map is included in this dictionary for the user to specify when loading data. Note that not all options will be available for certain input parameters
+        ref_interior_model_int : int
+            See `dict_ref_interior_model` variable for more information. This is the reference interior model used for the current crustal thickness dataset.
     """
     
     
@@ -86,8 +88,16 @@ class Crust:
     }
 
     invalid_ref_interior_model = [8,10,11,12,13,14,15] # see postscript in `crustal_thickness/README.txt` "SOURCE" section
-    
-    
+
+
+
+    ref_interior_model_int = None
+
+    def getRefInteriorModelName_int(self) -> int:
+        return self.ref_interior_model_int
+
+    def getRefInteriorModelName_str(self) -> str:
+        return self.dict_ref_interior_model[self.ref_interior_model_int]
     
     
     
@@ -159,21 +169,37 @@ class Crust:
         self.latrange = np.around(np.arange(90,-90-self.spacing,-self.spacing), decimals=3)
         self.clonrange = np.around(np.arange(0,360+self.spacing,self.spacing), decimals=3)
         self.lonrange = utils.clon2lon(self.clonrange)
-        
-        
 
-        if ref_interior_model_int != None:
-            if ref_interior_model_int in self.invalid_ref_interior_model:
-                raise Exception("Crustal thickness data does not exist for this reference interior model. Either change parameters or manually generate the data using Wieczorek's script and my reduction script. See `crustal_thickness/README.txt` for more information.")
-            ref_interior_model_str = self.dict_ref_interior_model[ref_interior_model_int]
-        
-        if ref_interior_model_str == None:
+
+
+
+        ## this looks complicated but it just makes sure you provde atleast one of the optional arguments, then populates `self.ref_interior_model_int` based on which you provide, then ensures it's valid
+        if (ref_interior_model_int == None and ref_interior_model_str == None) or (ref_interior_model_int != None and ref_interior_model_str != None):
             raise Exception('Please provide either an integer or explicit name of a reference interior model.')
+        elif ref_interior_model_int != None:
+            self.ref_interior_model_int = ref_interior_model_int
+        elif ref_interior_model_str != None:
+            def get_key_by_value(dictionary, value):
+                for key, val in dictionary.items():
+                    if val == value:
+                        return key
+                return None
+            self.ref_interior_model_int = get_key_by_value(self.dict_ref_interior_model, ref_interior_model_str)
 
-        # Mars-thick-EH45TcoldCrust1-30-2900-2900__shortened__grid=0.1.npy
+
+        if self.ref_interior_model_int in self.invalid_ref_interior_model:
+            raise Exception("Crustal thickness data can not be generated for this set of reference interior model and parameters. Either change parameters or manually generate the data using Wieczorek's script and my reduction script. See `crustal_thickness/README.txt` for more information.")
+        
+        
+            
+
+
+
+
+        ## Mars-thick-EH45TcoldCrust1-30-2900-2900__shortened__grid=0.1.npy
         filename = (
             'Mars-thick-' + 
-            ref_interior_model_str + 
+            self.getRefInteriorModelName_str() + 
             '-30-2900-2900__shortened__grid=' + 
             str(self.spacing) + 
             '.npy'

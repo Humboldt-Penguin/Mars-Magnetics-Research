@@ -1,0 +1,13 @@
+﻿# plain jupyter for vscode
+
+name: mars5
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - matplotlib
+  - scipy
+  - gdown
+  - jupyter
+  - pandas
+
