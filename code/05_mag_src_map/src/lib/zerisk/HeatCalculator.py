@@ -40,25 +40,7 @@ class HeatCalculator:
     
     
     
-    
-    
-    
-#     def __init__(self, GRS: GRS, Crust: Crust) -> None:
-#         """Initialize Heat Calculator object with the datasets necessary to do computations."""
-#         self.GRS = GRS
-#         self.Crust = Crust
-#         return
-    
-# #     def setGRS(self, GRS):
-# #         self.GRS = GRS
-# #         return
-    
-# #     def setCrust(self, Crust):
-# #         self.Crust = Crust
-# #         return
-    
-    
-    
+
     
     
     

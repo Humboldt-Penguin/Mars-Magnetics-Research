@@ -1,6 +1,6 @@
 ## Install
 
-Replicating one of these environments requires a [mamba](https://mamba.readthedocs.io/en/latest/installation.html#fresh-install) (recommended for better speed and less bloat) or conda installation. All instances of `conda`/`mamba` are interchangeable.
+Replicating one of these environments requires a conda or [mamba](https://mamba.readthedocs.io/en/latest/installation.html#fresh-install) (recommended for better speed and less bloat) installation. We reference `conda` in the commands below because it's more common, but you can replace `conda` with `mamba` to achieve the same effects.
 
 1. Navigate command line to `src/build/` directory. Run `conda env create --file [name of YAML file]`.
 
@@ -26,7 +26,7 @@ This explains the purpose/context for packages. Custon environments can be creat
 - Basic requirements:
 	- `numpy`, `matplotlib`, `scipy` -- Ubiquitous data science libraries.
 	- `gdown` -- Downloading datasets from Google Drive.
-	- `pandas` -- Managing crater database (see lib/zerisk/Craters.py).
+	- `pandas` -- Managing crater database (see `lib/zerisk/Craters.py`). Also used in `Crust.py`.
 - Notebooks (choose one):
 	- `jupyterlab` -- Notebooks in browser.
 	- `jupyter` -- Notebooks in VSCode.
