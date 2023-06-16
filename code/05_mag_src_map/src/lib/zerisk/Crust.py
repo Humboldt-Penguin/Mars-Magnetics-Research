@@ -252,7 +252,7 @@ class Crust:
 
 
         for file in files:
-            if 'README' in file: continue
+            if 'Mars-thick' not in file or '.npy' not in file: continue
 
 
             dat['filename'].append(file)
@@ -260,7 +260,7 @@ class Crust:
             a = file[ findnth(file,'-',1)+1 : findnth(file,'-',2) ]
             dat['Reference interior model (str)'].append(a)
 
-            b = int(get_key_by_value(self.dict_ref_interior_model, a))
+            b = get_key_by_value(self.dict_ref_interior_model, a)
             dat['Reference interior model (int)'].append(b)
             
             c = int(file[ findnth(file,'-',2)+1 : findnth(file,'-',3) ])
