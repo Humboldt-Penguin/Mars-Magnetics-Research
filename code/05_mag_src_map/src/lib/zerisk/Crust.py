@@ -315,7 +315,7 @@ class Crust:
         if index!=None and filename!=None:
             raise Exception('Please provide either an index or a filename, not both.')
         elif index!=None:
-            row = df.iloc[index]
+            row = df.iloc[[index]]
         elif filename!=None:
             row = df.loc[df['filename'] == filename]
         else:
