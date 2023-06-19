@@ -16,14 +16,14 @@ import zerisk.DataDownloader as dd
 
 
 class GRS:
-    """
+    '''
     Class allows you to:
         (1) Download GRS data, and 
         (2) Get elemental concetrations at exact coordinates by linearly interpolating between the four nearest points. 
             - Both exact concentration and volatile-adusted (normalized to an H20 and Si free basis) are available.
     
     See README in downloaded folder to find more information on the data itself.
-    """
+    '''
     
     
     

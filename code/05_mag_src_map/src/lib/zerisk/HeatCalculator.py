@@ -18,7 +18,76 @@ import zerisk.Crust
 
 
 
+
+
+
+
+
+
 class HeatCalculator:
+
+
+
+
+
+
+
+
+    ######################################################################
+    ''' constant class variables '''
+
+
+    HPE = {
+        "U238": {
+            "isotopic_frac": 0.9928, # natural abundance of this isotope relative to all isotopes of this element
+            "heat_release_const": 9.46e-5, # net energy per unit mass [W/kg]
+            "half_life": 4.47e9
+        },
+        "U235": {
+            "isotopic_frac": 0.0071,
+            "heat_release_const": 5.69e-4,
+            "half_life": 7.04e8
+        },
+        "Th232": {
+            "isotopic_frac": 1.00,
+            "heat_release_const": 2.64e-5,
+            "half_life": 1.40e10
+        },
+        "K40": {
+            "isotopic_frac": 1.191e-4,
+            "heat_release_const": 2.92e-5,
+            "half_life": 1.25e9
+        }
+    }
+    # Constants from:
+    #     - "Amagmantic Hydrothermal Systems on Mars from Radiogenic Heat", by Ojha et al. 2021,
+    #     - "Geodynamics", by Turcotte & Schubert 2014.
+
+
+
+
+
+
+
+
+    ######################################################################
+    ''' instance class variables '''
+    # (if you're catching an AttributeError relating to one of these variables, it likely hasn't been assigned yet with something like `self.var=val``)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     """
     private instance variables:
@@ -77,12 +146,19 @@ class HeatCalculator:
         
         self.GRS = zerisk.GRS.GRS()
         self.GRS.downloadData(self.path__datahome, overwrite=overwrite, verbose=verbose)
-        self.GRS.loadData()
         
         self.Crust = zerisk.Crust.Crust()
         self.Crust.downloadData(self.path__datahome, overwrite=overwrite, verbose=verbose)
-        self.Crust.loadData(ref_interior_model_int=0)
-    
+
+
+
+
+
+    def loadData_crust(self, index:int = None, filename:str = None) -> None:
+        self.Crust.loadData(index=index, filename=filename)
+
+    def loadData_GRS(self) -> None:
+        self.GRS.loadData()
     
     
     
@@ -126,7 +202,7 @@ class HeatCalculator:
         """
 
 
-        thisHPE = HPE
+        thisHPE = self.HPE # duplicated for modification control
 
         # get concentrations of each element (these coordinates, current day)
         for element in thisHPE:
@@ -334,34 +410,3 @@ class HeatCalculator:
         # temps_C = vfunc_calc_T(depths_m)
 
         return (depths_km, temps_C)
-    
-    
-
-
-#######################################################################################################################################
-
-HPE = {
-    # Constants from:
-    #     - "Amagmantic Hydrothermal Systems on Mars from Radiogenic Heat", by Ojha et al. 2021,
-    #     - "Geodynamics", by Turcotte & Schubert 2014.
-    "U238": {
-        "isotopic_frac": 0.9928, # natural abundance of this isotope relative to all isotopes of this element
-        "heat_release_const": 9.46e-5, # net energy per unit mass [W/kg]
-        "half_life": 4.47e9
-    },
-    "U235": {
-        "isotopic_frac": 0.0071,
-        "heat_release_const": 5.69e-4,
-        "half_life": 7.04e8
-    },
-    "Th232": {
-        "isotopic_frac": 1.00,
-        "heat_release_const": 2.64e-5,
-        "half_life": 1.40e10
-    },
-    "K40": {
-        "isotopic_frac": 1.191e-4,
-        "heat_release_const": 2.92e-5,
-        "half_life": 1.25e9
-    }
-}

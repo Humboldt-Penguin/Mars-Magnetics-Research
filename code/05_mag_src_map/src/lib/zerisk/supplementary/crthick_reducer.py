@@ -2,9 +2,32 @@
 Created by Zain Eris Kamal (zain.eris.kamal@rutgers.edu) on 06/15/23.
 https://github.com/Humboldt-Penguin/Mars-Magnetics-Research/tree/main/code
 
-Purpose: Automatically generate and reduce many crustal thickness models made by Mark Weiczorek's ["InSight Crustal Thickness Archive"](https://zenodo.org/record/6477509).
+Purpose: Automatically generate and reduce many crustal thickness models made by Mark Weiczorek's ["InSight Crustal Thickness Archive"](https://zenodo.org/record/6477509). 
 
 If you want to change the parameters for datasets generated, go to the section titled "run `make-grids.py` with various inputs".
+
+
+
+
+From README of data folder:
+
+    Each row in the data produced by Weiczorek's script is formatted: <latitude, longitude, value, density>. Latitude ranges from 90 -> -90 and longitude ranges from 0 -> 360, both inclusive, both spaced by the value specified when running the script (see grid value in filename). 
+
+    Due to this repetitive pattern, we can significantly optimize storage of data files. 
+        - We remove latitude/longitude values and instead index the file mathematically using the regular grid spacing. 
+        - We also remove density models, although there is no replacement for now. 
+            - (likely solution would be to first keep the original values and see how much space that adds; if that's too much, then use the dichotomy data file to check if a given lon/lat is north or south of the dichotomy by finding the two dichotomy points with closest longitude value, drawing a line between them to find latitude of dichotomy at exact longitude of desired point, then comparing to desired point [with an optimization that the point is definitely south/north of dichotomy if both reference points are complete above/below it, in which case you don't need to draw a line]). 
+        - Results are saved to a numpy array binary which can be loaded with `np.load`.
+
+    This optimization is accomplished by the script `lib/zerisk/supplementary/crthick_reducer.py`. 
+        1. Download and decompress Wieczorek's "InSight-Crustal-Thickness-Archive.tar.gz" script as described in "SOURCE". 
+        2. Create a new conda/mamba environment with numpy and pyshtools (`conda create -n ICTA numpy pyshtools`, `conda activate ICTA`). 
+            - See `build/README.md` for more information about conda vs mamba. 
+        3. Copy `lib/zerisk/supplementary/crthick_reducer.py` into the `InSight-Crustal-Thickness-Archive` directory and run `python crthick_reducer.py`. 
+            - File header describes how to change what set of models are generated. 
+            - Each model takes 1-2 min on my system, although many fail to generate (see postscript of SOURCE).
+
+                    
 """
 
 

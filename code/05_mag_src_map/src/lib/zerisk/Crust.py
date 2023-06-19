@@ -17,13 +17,13 @@ import zerisk.DataDownloader as dd
 
 
 class Crust:
-    '''
+    """
     Class allows you to:
         (1) Download crustal thickness generated from "InSight Crustal Thickness Archive" code by Mark A. Wieczorek (https://zenodo.org/record/6477509) (with some alterations, see README for more information).
         (2) Get crustal thickness values at exact coordinates by linearly interpolating between the four nearest points. 
     
     See README in downloaded folder to find more information on the data itself.
-    '''
+    """
     
     
 
