@@ -296,7 +296,7 @@ class Crust:
         """
         DESCRIPTION:
         ------------
-            Load crustal thickness data into numpy array (option 1/2 for loading data).
+            Load crustal thickness data into numpy array.
 
             Intended use: User would like to work with a subset of crustal thickness models according to some criteria, e.g. uniform crustal density. They call `getAvailableDatasets`, do programmatic filtering to find a set of indices, then loop through these indices. In each iteration, they call this function to load the respective crustal thickness modle and then carry out the desired analysis.
 
