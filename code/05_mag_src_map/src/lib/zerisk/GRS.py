@@ -1,13 +1,15 @@
 """
-Written by Zain Eris Kamal (zain.eris.kamal@rutgers.edu).
-Full repository available here: https://github.com/Humboldt-Penguin/Mars-Magnetics-Research
+Written by Zain Kamal (zain.eris.kamal@rutgers.edu) on 06/19/2023.
+https://github.com/Humboldt-Penguin/Mars-Magnetics-Research/tree/main/code
 """
 
+
 import os
+import pickle
 
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.interpolate import RegularGridInterpolator
+# from scipy.interpolate import RegularGridInterpolator
 
 import zerisk.Utils as utils
 import zerisk.DataDownloader as dd
@@ -17,22 +19,15 @@ import zerisk.DataDownloader as dd
 
 class GRS:
     """
-    Class allows you to:
-        (1) Download GRS data, and 
-        (2) Get elemental concetrations at exact coordinates by linearly interpolating between the four nearest points. 
-            - Both exact concentration and volatile-adusted (normalized to an H20 and Si free basis) are available.
+    Class allows you to get elemental concetrations at exact coordinates by linearly interpolating between the four nearest points. Both exact concentration and volatile-adusted (normalized to an H20 and Si free basis) are available.
     
     See README in downloaded folder to find more information on the data itself.
     """
     
 
 
-
-
-
-
-    ######################################################################
-    ''' constant class variables '''
+    ############################################################################################################################################
+    """ constant class variables """
 
     nanval: float = -1e10
     # Value given to pixels where data is not defined (i.e. "NOT_APPLICABLE_CONSTANT"). In the data, this is 9999.999 (see lbl file).
@@ -49,29 +44,19 @@ class GRS:
 
 
 
-    gdrive_url: str = r"https://drive.google.com/drive/folders/17ukcBhiLvy4fVUT10YvSxf25Et2Ovgah?usp=sharing"
-    # URL from which latest dataset is downloaded using `DataDownloader.py`.
-
-    
 
 
 
 
-
-
-
-
-
-
-
-    ######################################################################
-    ''' instance class variables '''
+    ############################################################################################################################################
+    """ instance class variables """
     # (if you're catching an AttributeError relating to one of these variables, it likely hasn't been assigned yet with something like `self.var=val``)
 
 
 
-    path__datahome: str
+    path__pickledDataHome: str
     # Path from root to the directory within which the data folder either (1) already exists, or (2) will be downloaded.
+    # e.g. '...\src\data\2_interim\pickled\'
 
 
     meta_dat: dict
@@ -92,17 +77,8 @@ class GRS:
 
 
 
-
-
-
-
-
-
-
-    ######################################################################
-    ''' main body '''
-    
-    
+    ############################################################################################################################################
+    """ functions: initialize/load """
     
     
     
@@ -114,36 +90,10 @@ class GRS:
     
     
     
-    
-    
-    
-    def downloadData(self, path__datahome: str, overwrite: bool = False, verbose: bool = False) -> None:
-        """
-        DESCRIPTION:
-        ------------
-            Downloads and unzips data to `self.path__datahome` if it doesn't already exist there. If it already exists, overwrite if `overwrite==True`, else do nothing.
-        
-        PARAMETERS:
-        ------------
-            path__datathome : str
-                Path from root to the directory within which the data folder either (1) already exists, or (2) will be downloaded.
-            overwrite : bool
-                If true and data folder already exists, delete the data folder and download again. Else skip the download and inform the user. 
-            verbose : bool
-                If true, print contents of unzipped data folder. Else do nothing. 
-        """
-        
-        self.path__datahome = path__datahome
-        dd.download_latest(path__datahome=self.path__datahome, data_name='GRS', url=self.gdrive_url, overwrite=overwrite, verbose=verbose)
-        return
-    
-
-
 
     
     
-    
-    def loadData(self) -> None:
+    def loadData(self, path__pickledDataHome: str = utils.getPath('current')) -> None:
         """
         DESCRIPTION:
         ------------
@@ -156,81 +106,28 @@ class GRS:
                     - 'sigma' = The error associated with the concentration measurement. 
                     - 'sigma_cfs' = The error associated with the concentration measurement. This error includes the errors associated with the correction factors applied to the concentration data if applicable. 
 
-            Calling `meta_dat` as such gives a `scipy.interpolate._rgi.RegularGridInterpolator` object, which is a function that takes some [clon,lat] list and returns the linear interpolation of the original dataset to that coordinate.
+            Calling `meta_dat[element_name][quantity]` as such gives a `scipy.interpolate._rgi.RegularGridInterpolator` object, which is a function that takes some [clon,lat] list and returns the linear interpolation of the original dataset to that coordinate.
+
+
+            NOTE: This version of `GRS.py` loads a pickled version of `meta_dat`. See '\src\data\2_interim\pickled' for more information. 
 
         """
-        self.meta_dat = {}
 
-        path_folder = utils.getPath(self.path__datahome, 'GRS', 'smoothed')
+        self.path__pickledDataHome = path__pickledDataHome
 
-        files = os.listdir(path_folder)
-
-        for filename in files:
-            if '.tab' not in filename: continue
-
-
-
-            '''initialize entry in `meta_dat`'''
-            element_name = filename[:filename.index('_')]
-            self.meta_dat[element_name] = {}
-
-
-
-            '''import data from files to np.ndarrays'''
-            dat = np.loadtxt(utils.getPath(path_folder,filename))
-            
-            dat = np.where(dat == 9999.999, self.getNanVal(), dat)
-
-            lat_range = np.unique(dat[:, 0])
-            clon_range = np.unique(dat[:, 1])
-            # lon_range = utils.clon2lon(clon_range)
-
-            concentration = dat[:, 2].reshape(lat_range.shape[0], clon_range.shape[0]).T
-            sigma = dat[:, 3].reshape(lat_range.shape[0], clon_range.shape[0]).T
-            sigma_cfs = dat[:, 4].reshape(lat_range.shape[0], clon_range.shape[0]).T
-            # NOTE on concentration/sigma/sigma_cfs indexing -- for index (i,j), `i` is longitude from left [0] to right [-1], `j` is latitude from bottom [0] to top [-1]
-
-
-
-            '''processing/corrections'''
-            if element_name == 'th':
-                correction=0.000001 # correct ppm to concentration out of 1
-            else:
-                correction=0.01 # correct weight percent to concentration out of 1
-
-            concentration = np.where(concentration != self.getNanVal(), concentration*correction, concentration)
-            sigma = np.where(sigma != self.getNanVal(), sigma*correction, sigma)
-            sigma_cfs = np.where(sigma_cfs != self.getNanVal(), sigma_cfs*correction, sigma_cfs)
+        path_datafile = utils.getPath(self.path__pickledDataHome, 'GRS', 'GRS.pkl')
+        
+        with open(path_datafile, "rb") as file:
+            self.meta_dat = pickle.load(file)
 
 
 
 
-            '''edge case: interpolation model does not work for edges where the map "wraps around" (i.e. lon bounds), so we duplicate one extra column on each edge of data/clon_range'''
-            spacing = (360-clon_range[-1]) + (clon_range[0]-0)
-            clon_range = np.array([clon_range[0]-spacing, *clon_range, clon_range[-1]+spacing])
-
-            left_edge = concentration[0, :]
-            right_edge = concentration[-1, :]
-            concentration = np.array([right_edge, *concentration, left_edge])
-
-            left_edge = sigma[0, :]
-            right_edge = sigma[-1, :]
-            sigma = np.array([right_edge, *sigma, left_edge])
-
-            left_edge = sigma_cfs[0, :]
-            right_edge = sigma_cfs[-1, :]
-            sigma_cfs = np.array([right_edge, *sigma_cfs, left_edge])
 
 
 
-            '''declare interpolation function'''
-            self.meta_dat[element_name]['concentration'] = RegularGridInterpolator((clon_range, lat_range), concentration)
-            self.meta_dat[element_name]['sigma'] = RegularGridInterpolator((clon_range, lat_range), sigma)
-            self.meta_dat[element_name]['sigma_cfs'] = RegularGridInterpolator((clon_range, lat_range), sigma_cfs)
-
-
-
-
+    ############################################################################################################################################
+    """ functions: accessing """
 
 
 
@@ -256,11 +153,13 @@ class GRS:
 
             return raw/(1-sum_volatile_concentration)
 
+
             
     def getSigma(self, lon: float, lat: float, element_name: str) -> float:
         clon = utils.lon2clon(lon)
         return self.meta_dat[element_name]['sigma']([clon,lat])[0]
             
+
     
     def getSigmaCFS(self, lon: float, lat: float, element_name: str) -> float:
         clon = utils.lon2clon(lon)
@@ -270,6 +169,10 @@ class GRS:
 
 
 
+
+
+    ############################################################################################################################################
+    """ functions: plotting """
 
 
 
