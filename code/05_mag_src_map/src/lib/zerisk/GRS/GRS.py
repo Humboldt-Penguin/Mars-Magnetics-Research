@@ -54,11 +54,6 @@ class GRS:
 
 
 
-    path__pickledDataHome: str
-    # Path from root to the directory within which the data folder either (1) already exists, or (2) will be downloaded.
-    # e.g. '...\src\data\2_interim\pickled\'
-
-
     meta_dat: dict
     '''
     `meta_dat` is formatted as `meta_dat[element_name][quantity]`, where
@@ -82,22 +77,11 @@ class GRS:
     
     
     
-    def __init__(self) -> None:
-        """
-        Initialize empty GRS object (no data yet).
-        """
-        return
-    
-    
-    
-
-    
-    
-    def loadData(self, path__pickledDataHome: str = utils.getPath('current')) -> None:
+    def __init__(self, path_datafile: str = None) -> None:
         """
         DESCRIPTION:
         ------------
-            Load crustal thickness data into `meta_dat` (dict). 
+            Load GRS data into `meta_dat` (dict). 
 
             `meta_dat` is formatted as `meta_dat[element_name][quantity]`, where
                 - `element_name` is from ['cl','fe','h2o','k','kvsth','si','th']
@@ -109,13 +93,19 @@ class GRS:
             Calling `meta_dat[element_name][quantity]` as such gives a `scipy.interpolate._rgi.RegularGridInterpolator` object, which is a function that takes some [clon,lat] list and returns the linear interpolation of the original dataset to that coordinate.
 
 
-            NOTE: This version of `GRS.py` loads a pickled version of `meta_dat`. See '\src\data\2_interim\pickled' for more information. 
+            NOTE: This version of `GRS.py` loads a pickled version of `meta_dat`. See 'GRS/data/grs_pickler.ipynb' for more information. 
+
+            
+        PARAMETERS:
+        ------------
+            path__datafile : str (optional)
+                Path from root to a pickled GRS data file (must be structured as described above). This option is provided in case the user wants to load a different/customized version of the data. If not provided, the default data file will be loaded.
 
         """
 
-        self.path__pickledDataHome = path__pickledDataHome
-
-        path_datafile = utils.getPath(self.path__pickledDataHome, 'GRS', 'GRS.pkl')
+        if path_datafile is None:
+            path_thisdir = os.path.dirname(__file__)
+            path_datafile = utils.getPath(path_thisdir, 'data', 'GRS_meta_dat.pkl')
         
         with open(path_datafile, "rb") as file:
             self.meta_dat = pickle.load(file)
